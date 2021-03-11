@@ -4,7 +4,7 @@ import { StyleSheet, SafeAreaView, ImageBackground } from "react-native";
 import { DefaultTheme, Provider as PaperProvider } from "react-native-paper";
 
 import { Navbar } from "./components";
-import { Deck } from "./modules/deck";
+import { Deck } from "./modules/lessons";
 
 const theme = {
   ...DefaultTheme,

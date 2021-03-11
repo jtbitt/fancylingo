@@ -1,10 +1,15 @@
 import React, { useState } from "react";
 import { StyleSheet, View } from "react-native";
-import { Card, Button, Title } from "react-native-paper";
+import { Card, Button, Title, ProgressBar, Colors } from "react-native-paper";
 
 export const FlashCard = () => {
   return (
     <View style={styles.container}>
+      {/* <ProgressBar
+        progress={0.5}
+        color={Colors.green800}
+        style={{ flex: 1, height: 20 }}
+      /> */}
       <Card style={styles.card}>
         <Card.Cover style={styles.image} source={require("./demo-image.png")} />
         <Card.Content style={styles.content}>
