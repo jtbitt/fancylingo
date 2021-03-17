@@ -4,6 +4,7 @@ import { StyleSheet, SafeAreaView, ImageBackground } from "react-native";
 import { DefaultTheme, Provider as PaperProvider } from "react-native-paper";
 
 import { Navbar } from "./components";
+import { Login } from "./modules/auth";
 import { Deck } from "./modules/lessons";
 
 const theme = {
@@ -20,12 +21,13 @@ export default function App() {
   return (
     <PaperProvider theme={theme}>
       <SafeAreaView style={styles.container}>
-        <Navbar />
+        {/* <Navbar /> */}
         <ImageBackground
           source={require("./assets/background.png")}
           style={styles.background}
         >
-          <Deck />
+          <Login />
+          {/* <Deck /> */}
         </ImageBackground>
       </SafeAreaView>
     </PaperProvider>
