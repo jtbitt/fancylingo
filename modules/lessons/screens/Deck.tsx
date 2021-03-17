@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import { StyleSheet, SafeAreaView } from "react-native";
+import { StyleSheet, View } from "react-native";
 
 import { FlashCard } from "../components/FlashCard";
 
 export const Deck = () => {
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <FlashCard />
-    </SafeAreaView>
+    </View>
   );
 };
 
