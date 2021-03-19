@@ -11,7 +11,10 @@ export const FlashCard = () => {
         style={{ flex: 1, height: 20 }}
       /> */}
       <Card style={styles.card}>
-        <Card.Cover style={styles.image} source={require("./demo-image.png")} />
+        <Card.Cover
+          style={styles.image}
+          source={require("../assets/demo-image.png")}
+        />
         <Card.Content style={styles.content}>
           <Title style={styles.title}>¿Qué es esto?</Title>
         </Card.Content>
