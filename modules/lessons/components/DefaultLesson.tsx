@@ -12,8 +12,6 @@ interface IDefaultLessonProps {
 }
 
 export const DefaultLesson = ({ lesson }: IDefaultLessonProps) => {
-  // use util function to get correct status message and color for status icon
-
   return (
     <View style={styles.card}>
       <Image style={styles.cover} source={getDeckImage(lesson.image)} />
@@ -23,7 +21,7 @@ export const DefaultLesson = ({ lesson }: IDefaultLessonProps) => {
           message={lesson.status}
           color={getStatusColor(lesson.status)}
         />
-        <Play />
+        <Play size={40} />
       </View>
     </View>
   );

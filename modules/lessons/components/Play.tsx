@@ -1,15 +1,19 @@
 import React, { useState } from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, TouchableOpacity } from "react-native";
 import { Avatar } from "react-native-paper";
 
-export const Play = () => {
+interface IDefaultPlayProps {
+  style?: any;
+  size: number;
+  onPress: () => void;
+}
+
+export const Play = ({ style, size, onPress }: IDefaultPlayProps) => {
   return (
-    <Avatar.Icon size={40} icon="play" color="white" style={styles.play} />
+    <TouchableOpacity onPress={() => onPress()}>
+      <Avatar.Icon size={size} icon="play" color="white" style={style} />
+    </TouchableOpacity>
   );
 };
 
-const styles = StyleSheet.create({
-  play: {
-    marginRight: 15,
-  },
-});
+const styles = StyleSheet.create({});

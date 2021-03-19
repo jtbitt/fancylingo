@@ -12,8 +12,6 @@ interface ILessonOptionProps {
 }
 
 export const LessonOption = ({ lesson }: ILessonOptionProps) => {
-  // use util function to get correct status message and color for status icon
-
   return (
     <View style={styles.lesson}>
       <Image style={styles.image} source={getDeckImage(lesson.image)} />
