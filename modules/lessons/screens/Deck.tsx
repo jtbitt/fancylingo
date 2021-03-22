@@ -3,8 +3,23 @@ import { StyleSheet, View } from "react-native";
 import { ProgressBar, Colors } from "react-native-paper";
 
 import { FlashCard } from "../components/FlashCard";
+import { cards } from "../interfaces/lesson.interface";
+
+interface IDefaultDeckProps {
+  deckId: number;
+}
 
 export const Deck = () => {
+  const [currentCard, setCurrentCard] = useState(0);
+
+  const onAnswerChosen = () => {
+    setCurrentCard(currentCard + 1);
+  };
+
+  const card = (
+    <FlashCard card={cards[currentCard]} onAnswer={onAnswerChosen} />
+  );
+
   return (
     <View style={styles.container}>
       <ProgressBar
@@ -12,7 +27,7 @@ export const Deck = () => {
         progress={0.5}
         color={Colors.red800}
       />
-      <FlashCard onAnswer={() => console.log("card answered")} />
+      {card}
     </View>
   );
 };

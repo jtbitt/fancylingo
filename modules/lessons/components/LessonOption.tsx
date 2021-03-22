@@ -22,7 +22,11 @@ export const LessonOption = ({ lesson }: ILessonOptionProps) => {
           color={getStatusColor(lesson.status)}
         />
       </View>
-      <Play />
+      <Play
+        style={styles.play}
+        size={40}
+        onPress={() => console.log("enter lesson")}
+      />
     </View>
   );
 };
@@ -47,5 +51,8 @@ const styles = StyleSheet.create({
     width: 140,
     borderRadius: 15,
     marginRight: 20,
+  },
+  play: {
+    marginRight: 15,
   },
 });

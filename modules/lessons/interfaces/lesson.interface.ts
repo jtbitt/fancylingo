@@ -5,6 +5,14 @@ export interface Lesson {
   image: string;
 }
 
+export interface Card {
+  id: number;
+  word: string;
+  ipa: string;
+  image: string;
+  audio: string;
+}
+
 export const defaultLesson = {
   id: 0,
   name: "Saludos",
@@ -54,5 +62,43 @@ export const lessons = [
     name: "Spanish Slang",
     status: "Premium",
     image: "SpanishSlang",
+  },
+];
+
+export const cards = [
+  {
+    id: 0,
+    word: "Avión",
+    ipa: "[***IPA***]",
+    image: "Avion",
+    audio: "",
+  },
+  {
+    id: 1,
+    word: "Pasarela",
+    ipa: "[***IPA***]",
+    image: "Pasarela",
+    audio: "",
+  },
+  {
+    id: 2,
+    word: "Pasajero",
+    ipa: "[***IPA***]",
+    image: "Pasajero",
+    audio: "",
+  },
+  {
+    id: 3,
+    word: "Ala",
+    ipa: "[***IPA***]",
+    image: "Ala",
+    audio: "",
+  },
+  {
+    id: 4,
+    word: "Escaleras",
+    ipa: "[***IPA***]",
+    image: "Escaleras",
+    audio: "",
   },
 ];

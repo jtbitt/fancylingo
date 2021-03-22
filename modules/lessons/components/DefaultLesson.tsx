@@ -18,10 +18,15 @@ export const DefaultLesson = ({ lesson }: IDefaultLessonProps) => {
       <View style={styles.content}>
         <Text style={styles.title}>{lesson.name}</Text>
         <StatusIcon
+          style={styles.statusIcon}
           message={lesson.status}
           color={getStatusColor(lesson.status)}
         />
-        <Play size={40} />
+        <Play
+          style={styles.play}
+          size={40}
+          onPress={() => console.log("enter lesson")}
+        />
       </View>
     </View>
   );
@@ -49,5 +54,11 @@ const styles = StyleSheet.create({
     fontSize: 25,
     marginRight: 25,
     fontWeight: "500",
+  },
+  statusIcon: {
+    marginRight: "auto",
+  },
+  play: {
+    marginRight: 15,
   },
 });

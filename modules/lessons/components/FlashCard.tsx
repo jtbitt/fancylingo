@@ -9,40 +9,44 @@ import {
 } from "react-native-paper";
 
 import { Play } from "./Play";
+import { Card } from "../interfaces/lesson.interface";
+import { getCardImage } from "../utils/getCardImage";
 
 interface IDefaultFlashCardProps {
+  card: Card;
   onAnswer: (answer: boolean) => void;
 }
 
-export const FlashCard = ({ onAnswer }: IDefaultFlashCardProps) => {
+export const FlashCard = ({ card, onAnswer }: IDefaultFlashCardProps) => {
   const [frontChecked, setFrontChecked] = useState(false);
 
   const onFrontChecked = () => {
     setFrontChecked(true);
   };
 
-  const onAnswerSelected = (correct: boolean) => {
+  const onAnswerSelected = (answer: boolean) => {
+    onAnswer(answer);
     setFrontChecked(false);
-    // onAnswer(correct);
   };
 
-  const onPlayAudio = () => {};
+  const onPlayAudio = () => {
+    // play audio from s3
+  };
 
-  const onBookmark = () => {};
+  const onBookmark = () => {
+    // save the card to review later
+  };
 
   return (
     <View>
       <View style={styles.card}>
-        <Image
-          style={styles.image}
-          source={require("../assets/demo-image.png")}
-        />
+        <Image style={styles.image} source={getCardImage(card.image)} />
         <View style={styles.content}>
           {!frontChecked && <Title style={styles.title}>¿Qué es esto?</Title>}
           {frontChecked && (
             <View style={styles.backInfo}>
-              <Title style={styles.title}>Pasajero</Title>
-              <Subheading style={styles.ipa}>[***IPA***]</Subheading>
+              <Title style={styles.title}>{card.word}</Title>
+              <Subheading style={styles.ipa}>{card.ipa}</Subheading>
               <View style={styles.cardOptions}>
                 <Play size={35} onPress={onPlayAudio} />
                 <IconButton
@@ -99,6 +103,7 @@ const styles = StyleSheet.create({
   image: {
     height: 350,
     width: "100%",
+    borderRadius: 15,
   },
   content: {
     backgroundColor: "rgba(255,255,255,0.48)",

@@ -27,9 +27,9 @@ export default function App() {
           style={styles.background}
         >
           {/* <Login /> */}
-          <Deck />
+          {/* <Deck /> */}
           {/* <Welcome /> */}
-          {/* <Home /> */}
+          <Home />
         </ImageBackground>
       </SafeAreaView>
     </PaperProvider>
