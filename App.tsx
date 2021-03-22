@@ -6,6 +6,7 @@ import { DefaultTheme, Provider as PaperProvider } from "react-native-paper";
 import { Navbar } from "./components";
 import { Login, Welcome } from "./modules/auth";
 import { Home, Lesson, Congrats } from "./modules/lessons";
+import { Store } from "./modules/shopping";
 
 const theme = {
   ...DefaultTheme,
@@ -30,7 +31,8 @@ export default function App() {
           {/* <Welcome /> */}
           {/* <Home /> */}
           {/* <Lesson /> */}
-          <Congrats />
+          {/* <Congrats /> */}
+          <Store />
         </ImageBackground>
       </SafeAreaView>
     </PaperProvider>
