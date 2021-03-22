@@ -101,6 +101,7 @@ const styles = StyleSheet.create({
     borderRadius: 15,
   },
   image: {
+    resizeMode: "cover",
     height: 350,
     width: "100%",
     borderRadius: 15,

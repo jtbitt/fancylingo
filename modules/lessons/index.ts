@@ -1,2 +1,3 @@
 export { Home } from "./screens/Home";
-export { Deck } from "./screens/Deck";
+export { Lesson } from "./screens/Lesson";
+export { Congrats } from "./screens/Congrats";

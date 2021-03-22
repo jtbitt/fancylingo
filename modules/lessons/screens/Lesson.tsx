@@ -9,11 +9,12 @@ interface IDefaultDeckProps {
   deckId: number;
 }
 
-export const Deck = () => {
+export const Lesson = () => {
   const [currentCard, setCurrentCard] = useState(0);
 
   const onAnswerChosen = () => {
     setCurrentCard(currentCard + 1);
+    // record stuff for algorithm
   };
 
   const card = (

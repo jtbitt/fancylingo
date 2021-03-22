@@ -5,7 +5,7 @@ import { DefaultTheme, Provider as PaperProvider } from "react-native-paper";
 
 import { Navbar } from "./components";
 import { Login, Welcome } from "./modules/auth";
-import { Home, Deck } from "./modules/lessons";
+import { Home, Lesson, Congrats } from "./modules/lessons";
 
 const theme = {
   ...DefaultTheme,
@@ -27,9 +27,10 @@ export default function App() {
           style={styles.background}
         >
           {/* <Login /> */}
-          {/* <Deck /> */}
           {/* <Welcome /> */}
-          <Home />
+          {/* <Home /> */}
+          {/* <Lesson /> */}
+          <Congrats />
         </ImageBackground>
       </SafeAreaView>
     </PaperProvider>
