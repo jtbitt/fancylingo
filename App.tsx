@@ -2,6 +2,9 @@ import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { StyleSheet, SafeAreaView, ImageBackground } from "react-native";
 import { DefaultTheme, Provider as PaperProvider } from "react-native-paper";
+import * as firebase from "firebase";
+import { firebaseConfig } from "./config/keys";
+import { registration, signInWithGoogle, getLessons } from "./api/firebase";
 
 import { Navbar } from "./components";
 import { Login, Welcome } from "./modules/auth";
@@ -19,6 +22,10 @@ const theme = {
 };
 
 export default function App() {
+  if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+  }
+
   return (
     <PaperProvider theme={theme}>
       <SafeAreaView style={styles.container}>
@@ -29,10 +36,10 @@ export default function App() {
         >
           {/* <Login /> */}
           {/* <Welcome /> */}
-          {/* <Home /> */}
+          <Home />
           {/* <Lesson /> */}
           {/* <Congrats /> */}
-          <Store />
+          {/* <Store /> */}
         </ImageBackground>
       </SafeAreaView>
     </PaperProvider>

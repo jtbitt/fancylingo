@@ -8,7 +8,7 @@ import { getDeckImage } from "../utils/getDeckImage";
 import { getStatusColor } from "../utils/getStatusColor";
 
 interface IDefaultLessonProps {
-  lesson: Lesson;
+  lesson: any;
 }
 
 export const DefaultLesson = ({ lesson }: IDefaultLessonProps) => {
