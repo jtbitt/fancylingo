@@ -1,9 +1,9 @@
 const statusColors = {
-  "Completado": "#54FCD4",
-  "En progreso": "#A0149E",
-  "Empezar": "#FF8D8B",
-  "Premium": "#FFE881"
+  0: "#54FCD4", // completed
+  1: "#A0149E", // In progress
+  2: "#FF8D8B", // Purchased but not started
+  3: "#FFE881" // Need to purchase
 };
 
-export const getStatusColor = (status: string) => statusColors[status];
+export const getStatusColor = (status: number) => statusColors[status];
   

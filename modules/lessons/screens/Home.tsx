@@ -7,12 +7,10 @@ import "firebase/firestore";
 import { DefaultLesson } from "../components/DefaultLesson";
 import { LessonAlert } from "../components/LessonAlert";
 import { LessonOption } from "../components/LessonOption";
-import { defaultLesson, lessons } from "../interfaces/lesson.interface";
-import { Checkbox } from "react-native-paper";
 
 export const Home = () => {
   const [lessons, loading, error] = useCollectionDataOnce(
-    firebase.firestore().collection("decks").orderBy("id")
+    firebase.firestore().collection("lessons").orderBy("id")
   );
 
   return (

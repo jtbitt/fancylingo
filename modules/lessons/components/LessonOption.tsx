@@ -5,6 +5,7 @@ import { StatusIcon } from "./StatusIcon";
 import { Play } from "./Play";
 import { Lesson } from "../interfaces/lesson.interface";
 import { getDeckImage } from "../utils/getDeckImage";
+import { getStatusMessage } from "../utils/getStatusMessage";
 import { getStatusColor } from "../utils/getStatusColor";
 
 interface ILessonOptionProps {
@@ -18,8 +19,8 @@ export const LessonOption = ({ lesson }: ILessonOptionProps) => {
       <View style={styles.lessonInfo}>
         <Text style={styles.lessonTitle}>{lesson.name}</Text>
         <StatusIcon
-          message={lesson.status}
-          color={getStatusColor(lesson.status)}
+          message={getStatusMessage(lesson.users.jay)}
+          color={getStatusColor(lesson.users.jay)}
         />
       </View>
       <Play
