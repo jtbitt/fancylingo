@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 import { StyleSheet, View, Text } from "react-native";
 import { ProgressBar, Colors } from "react-native-paper";
-import { useDocumentDataOnce } from "react-firebase-hooks/firestore";
-import * as firebase from "firebase";
-import "firebase/firestore";
 
 import { FlashCard } from "../components/FlashCard";
 
@@ -12,12 +9,12 @@ interface IDefaultDeckProps {
 }
 
 export const Lesson = () => {
-  const [cards, loading, error] = useDocumentDataOnce(
-    firebase.firestore().doc("decks/colombian_slang"),
-    {
-      transform: (deck: any) => deck.cards,
-    }
-  );
+  // const [cards, loading, error] = useDocumentDataOnce(
+  //   firebase.firestore().doc("decks/colombian_slang"),
+  //   {
+  //     transform: (deck: any) => deck.cards,
+  //   }
+  // );
   const [currentCard, setCurrentCard] = useState(0);
 
   const onAnswerChosen = () => {
@@ -25,22 +22,22 @@ export const Lesson = () => {
     // record stuff for algorithm
   };
 
-  return (
-    <View style={styles.container}>
-      {error && <Text>Error: {JSON.stringify(error)}</Text>}
-      {loading && <Text>Collection: Loading...</Text>}
-      {cards && (
-        <View>
-          <ProgressBar
-            style={styles.progress}
-            progress={0.5}
-            color={Colors.red800}
-          />
-          <FlashCard card={cards[currentCard]} onAnswer={onAnswerChosen} />
-        </View>
-      )}
-    </View>
-  );
+  // return (
+  //   <View style={styles.container}>
+  //     {error && <Text>Error: {JSON.stringify(error)}</Text>}
+  //     {loading && <Text>Collection: Loading...</Text>}
+  //     {cards && (
+  //       <View>
+  //         <ProgressBar
+  //           style={styles.progress}
+  //           progress={0.5}
+  //           color={Colors.red800}
+  //         />
+  //         <FlashCard card={cards[currentCard]} onAnswer={onAnswerChosen} />
+  //       </View>
+  //     )}
+  //   </View>
+  // );
 };
 
 const styles = StyleSheet.create({
