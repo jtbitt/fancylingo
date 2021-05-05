@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { StyleSheet, View, Image } from "react-native";
 import { Button, HelperText, TextInput } from "react-native-paper";
 
+import { signInWithGoogle, signInWithFacebook } from "../../../api/firebase";
+
 export const Login = () => {
   const [text, setText] = useState("");
 
@@ -16,7 +18,7 @@ export const Login = () => {
             labelStyle={styles.buttonText}
             icon="facebook"
             mode="contained"
-            onPress={() => console.log("Pressed")}
+            onPress={() => signInWithFacebook()}
           >
             FACEBOOK
           </Button>
@@ -26,7 +28,7 @@ export const Login = () => {
             labelStyle={styles.buttonText}
             icon="google"
             mode="contained"
-            onPress={() => console.log("Pressed")}
+            onPress={() => signInWithGoogle()}
           >
             GOOGLE
           </Button>

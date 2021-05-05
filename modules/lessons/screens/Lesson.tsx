@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { StyleSheet, View, Text } from "react-native";
 import { ProgressBar, Colors } from "react-native-paper";
+import { useQuery } from "@apollo/react-hooks";
 
+import { getLessons } from "../../../api/graphql";
 import { FlashCard } from "../components/FlashCard";
 
 interface IDefaultDeckProps {
@@ -15,6 +17,7 @@ export const Lesson = () => {
   //     transform: (deck: any) => deck.cards,
   //   }
   // );
+  const { data, error, loading } = useQuery(getLessons);
   const [currentCard, setCurrentCard] = useState(0);
 
   const onAnswerChosen = () => {

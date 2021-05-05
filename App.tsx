@@ -7,10 +7,12 @@ import {
   ActivityIndicator,
   Colors,
 } from "react-native-paper";
+import * as firebase from "firebase";
 import { ApolloProvider } from "react-apollo";
 import { makeApolloClient } from "./api";
 
-import { hasuraConfig } from "./config/keys";
+import { firebaseConfig, hasuraConfig } from "./config/keys";
+import { registration, signInWithGoogle, getLessons } from "./api/firebase";
 import { Navbar } from "./components";
 import { Login, Welcome } from "./modules/auth";
 import { Home, Lesson, Congrats } from "./modules/lessons";
@@ -27,36 +29,41 @@ const theme = {
 };
 
 export default function App() {
-  const [client, setClient] = useState<any>();
-
-  useEffect(() => {
-    const client = makeApolloClient(hasuraConfig);
-    setClient(client);
-  }, []);
-
-  if (!client) {
-    return <ActivityIndicator animating={true} color={Colors.red800} />;
+  if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+    // registration("timmy@gmail.com", "welcome1", "Tims", "Timmy");
   }
 
+  // const [client, setClient] = useState<any>();
+
+  // useEffect(() => {
+  //   const client = makeApolloClient(hasuraConfig);
+  //   setClient(client);
+  // }, []);
+
+  // if (!client) {
+  //   return <ActivityIndicator animating={true} color={Colors.red800} />;
+  // }
+
   return (
-    <ApolloProvider client={client}>
-      <PaperProvider theme={theme}>
-        <SafeAreaView style={styles.container}>
-          <Navbar color={theme.colors.accent} />
-          <ImageBackground
-            source={require("./assets/background.png")}
-            style={styles.background}
-          >
-            {/* <Login /> */}
-            {/* <Welcome /> */}
-            {/* <Home /> */}
-            {/* <Lesson /> */}
-            {/* <Congrats /> */}
-            {/* <Store /> */}
-          </ImageBackground>
-        </SafeAreaView>
-      </PaperProvider>
-    </ApolloProvider>
+    // <ApolloProvider client={client}>
+    <PaperProvider theme={theme}>
+      <SafeAreaView style={styles.container}>
+        <Navbar color={theme.colors.accent} />
+        <ImageBackground
+          source={require("./assets/background.png")}
+          style={styles.background}
+        >
+          <Login />
+          {/* <Welcome /> */}
+          {/* <Home /> */}
+          {/* <Lesson /> */}
+          {/* <Congrats /> */}
+          {/* <Store /> */}
+        </ImageBackground>
+      </SafeAreaView>
+    </PaperProvider>
+    // </ApolloProvider>
   );
 }
 

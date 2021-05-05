@@ -1,7 +1,11 @@
 import * as firebase from "firebase";
 import "firebase/firestore";
 import { Alert } from "react-native";
-import { lessons } from "../modules/lessons/interfaces/lesson.interface";
+import * as Facebook from "expo-facebook";
+import * as Google from "expo-google-app-auth";
+import * as GoogleSignIn from "expo-google-sign-in";
+
+import { keys } from "../config/keys";
 
 export const registration = async (email: string, password: string, lastName: string, firstName: string) => {
   try {
@@ -29,47 +33,42 @@ export const signIn = async (email: string, password: string) => {
 };
 
 export const signInWithGoogle = async () => {
-  const provider = new firebase.auth.GoogleAuthProvider();
-  firebase
-    .auth()
-    .signInWithRedirect(provider)
-    .getRedirectResult()
-    .then((result) => {
-      console.log(result);
-      if (result.credential) {
-        const credential = result.credential;
-        const token = credential.accessToken;
-      }
-      const user = result.user;
-    })
-    .catch((error) => {
-      console.log(error);
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      const email = error.email;
-      const credential = error.credential;
+  try {
+    const result = await Google.logInAsync({
+      androidClientId: keys.ANDROID_CLIENT_ID,
+      iosClientId: keys.IOS_CLIENT_ID,
+      behavior: 'web',
+      scopes: ['profile', 'email']
     });
+    
+    if (result.type  === 'success') {
+      await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
+      const credential = firebase.auth.GoogleAuthProvider.credential(result.idToken, result.accessToken);
+      const googleProfileData = await firebase.auth().signInWithCredential(credential);
+    }
+  } catch ({ message }) {
+    alert('login: Error:' + message);
+  }
 };
 
 export const signInWithFacebook = async () => {
-  const provider = new firebase.auth.FacebookAuthProvider();
-  firebase
-    .auth()
-    .signInWithRedirect(provider)
-    .getRedirectResult()
-    .then((result) => {
-      if (result.credential) {
-        const credential = result.credential;
-        const token = credential.accessToken;
-      }
-      const user = result.user;
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      const email = error.email;
-      const credential = error.credential;
+  try {
+    await Facebook.initializeAsync(keys.FACEBOOK_APP_ID);
+
+    const result = await Facebook.logInWithReadPermissionsAsync({
+      permissions: ['public_profile'],
     });
+
+    if (result.type === 'success') {
+      await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
+      const credential = firebase.auth.FacebookAuthProvider.credential(result.token);
+      const facebookProfileData = await firebase.auth().signInWithCredential(credential);
+      console.log(result);
+      console.log(facebookProfileData);
+    }
+  } catch ({ message }) {
+    alert(`Facebook Login Error: ${message}`);
+  }
 };
 
 export const loggingOut = async () => {
