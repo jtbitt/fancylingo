@@ -1,5 +1,7 @@
-import * as firebase from "firebase";
-import "firebase/firestore";
+import firebase from "firebase/app";
+import "firebase/auth";
+import "firebase/functions";
+
 import { Alert } from "react-native";
 import * as Facebook from "expo-facebook";
 import * as Google from "expo-google-app-auth";
@@ -11,14 +13,6 @@ export const registration = async (email: string, password: string, lastName: st
   try {
     await firebase.auth().createUserWithEmailAndPassword(email, password);
     const currentUser = firebase.auth().currentUser;
-    console.log(currentUser);
-
-    const db = firebase.firestore();
-    db.collection("users").doc(currentUser.uid).set({
-      email: currentUser.email,
-      lastName: lastName,
-      firstName: firstName,
-    });
   } catch (err) {
     Alert.alert("There is something wrong!!!!", err.message);
   }
@@ -47,6 +41,7 @@ export const signInWithGoogle = async () => {
       const googleProfileData = await firebase.auth().signInWithCredential(credential);
     }
   } catch ({ message }) {
+    console.log(message);
     alert('login: Error:' + message);
   }
 };
@@ -56,7 +51,7 @@ export const signInWithFacebook = async () => {
     await Facebook.initializeAsync(keys.FACEBOOK_APP_ID);
 
     const result = await Facebook.logInWithReadPermissionsAsync({
-      permissions: ['public_profile'],
+      permissions: ['public_profile', 'email']
     });
 
     if (result.type === 'success') {
@@ -67,6 +62,7 @@ export const signInWithFacebook = async () => {
       console.log(facebookProfileData);
     }
   } catch ({ message }) {
+    console.log(message);
     alert(`Facebook Login Error: ${message}`);
   }
 };
