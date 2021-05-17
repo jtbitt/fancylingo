@@ -7,7 +7,7 @@ import * as Facebook from "expo-facebook";
 import * as Google from "expo-google-app-auth";
 import * as GoogleSignIn from "expo-google-sign-in";
 
-import { keys } from "../config/keys";
+import { keys } from "../../config/keys";
 
 export const registration = async (email: string, password: string, lastName: string, firstName: string) => {
   try {
@@ -58,8 +58,6 @@ export const signInWithFacebook = async () => {
       await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
       const credential = firebase.auth.FacebookAuthProvider.credential(result.token);
       const facebookProfileData = await firebase.auth().signInWithCredential(credential);
-      console.log(result);
-      console.log(facebookProfileData);
     }
   } catch ({ message }) {
     console.log(message);

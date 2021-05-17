@@ -2,13 +2,13 @@ import React from "react";
 import { StyleSheet, Text, View, ScrollView } from "react-native";
 import { useQuery } from "@apollo/react-hooks";
 
-import { getLessons } from "../../../api/graphql";
+import { GET_LESSONS } from "../../../api/graphql";
 import { DefaultLesson } from "../components/DefaultLesson";
 import { LessonAlert } from "../components/LessonAlert";
 import { LessonOption } from "../components/LessonOption";
 
 export const Home = () => {
-  const { data, error, loading } = useQuery(getLessons);
+  const { data, error, loading } = useQuery(GET_LESSONS);
   // const [lessons, loading, error] = useCollectionDataOnce(
   //   firebase.firestore().collection("lessons").orderBy("id")
   // );
