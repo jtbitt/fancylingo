@@ -1,4 +1,4 @@
-import { gql, useMutation } from '@apollo/client';
+import { gql, useQuery } from '@apollo/client';
 
 export const CREATE_USER = gql`
   mutation($userId: String!, $name: String!, $email: String!){
@@ -17,12 +17,12 @@ export const CREATE_USER = gql`
 
 export const GET_LESSONS = gql`
   query {
-    lessons {
+    lessons ( order_by: {lesson_id: asc} ) {
       lesson_id
       name
       description
       image_url
       price
-    }
+    },
   }
 `;

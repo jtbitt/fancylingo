@@ -9,8 +9,8 @@ import { LessonAlert } from "../components/LessonAlert";
 import { LessonOption } from "../components/LessonOption";
 
 export const Home = () => {
-  const { data, error, loading } = useQuery(GET_LESSONS);
-  const Tab = createBottomTabNavigator();
+  const { loading, error, data } = useQuery(GET_LESSONS);
+  // const Tab = createBottomTabNavigator();
 
   if (error) {
     return <Text>Error: {JSON.stringify(error)}</Text>;
@@ -23,19 +23,19 @@ export const Home = () => {
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.scroll}>
-        {/* <View>
-          <DefaultLesson lesson={data[0]} />
+        <View>
+          <DefaultLesson lesson={data.lessons[0]} />
           <LessonAlert message="-50% discount - Premium lessons!" />
-          {data.map((lesson: any, i: number) =>
+          {data.lessons.map((lesson: any, i: number) =>
             i > 0 ? <LessonOption lesson={lesson} key={i} /> : null
           )}
-        </View> */}
+        </View>
       </ScrollView>
-      <Tab.Navigator>
+      {/* <Tab.Navigator>
         <Tab.Screen name="Settings" component={Home} />
         <Tab.Screen name="Home" component={Home} />
         <Tab.Screen name="Search" component={Home} />
-      </Tab.Navigator>
+      </Tab.Navigator> */}
     </View>
   );
 };
@@ -45,6 +45,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   scroll: {
-    paddingHorizontal: "5%",
+    paddingHorizontal: "2.5%",
   },
 });

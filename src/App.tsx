@@ -1,26 +1,16 @@
-import { StatusBar } from "expo-status-bar";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, SafeAreaView, ImageBackground } from "react-native";
-import {
-  DefaultTheme,
-  Provider as PaperProvider,
-  ActivityIndicator,
-  Colors,
-} from "react-native-paper";
 import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/functions";
 import { ApolloProvider } from "@apollo/client/react";
 import { makeApolloClient } from "./api";
-import { useMutation } from "@apollo/client";
 import * as SecureStore from "expo-secure-store";
 import { createStackNavigator } from "@react-navigation/stack";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import { firebaseConfig } from "../config/keys";
 import { getEnvVars } from "../environment";
 import { CREATE_USER } from "./api/graphql";
-import { registration, signInWithGoogle, getLessons } from "./api/firebase";
 import { Navbar } from "./components";
 import { Login, Welcome } from "./modules/auth";
 import { Home, Lesson, Congrats } from "./modules/lessons";
@@ -31,7 +21,6 @@ export default function App() {
   const [client, setClient] = useState<any>(makeApolloClient());
   const env = getEnvVars();
   const Stack = createStackNavigator();
-  const Tab = createBottomTabNavigator();
 
   useEffect(() => {
     const tokenSync = async () => {
@@ -54,7 +43,6 @@ export default function App() {
           idTokenResult.claims["https://hasura.io/jwt/claims"];
 
         if (hasuraClaim) {
-          console.log(token);
           // save token
           await SecureStore.setItemAsync("token", token);
           // set token
@@ -96,10 +84,14 @@ export default function App() {
 
   if (!token) {
     return (
-      <Stack.Navigator headerMode="none">
-        <Stack.Screen name="Login" component={Login} />
-        {/* <Stack.Screen name="Signup" component={Signup} /> */}
-      </Stack.Navigator>
+      <SafeAreaView style={styles.container}>
+        <ImageBackground
+          source={require("../assets/background.png")}
+          style={styles.background}
+        >
+          <Login />
+        </ImageBackground>
+      </SafeAreaView>
     );
   }
 

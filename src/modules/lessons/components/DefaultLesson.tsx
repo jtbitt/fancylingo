@@ -15,13 +15,13 @@ interface IDefaultLessonProps {
 export const DefaultLesson = ({ lesson }: IDefaultLessonProps) => {
   return (
     <View style={styles.card}>
-      <Image style={styles.cover} source={getDeckImage(lesson.image)} />
+      <Image style={styles.cover} source={getDeckImage(lesson.image_url)} />
       <View style={styles.content}>
         <Text style={styles.title}>{lesson.name}</Text>
         <StatusIcon
           style={styles.statusIcon}
-          message={getStatusMessage(lesson.users.jay)}
-          color={getStatusColor(lesson.users.jay)}
+          message={getStatusMessage(0)}
+          color={getStatusColor(0)}
         />
         <Play
           style={styles.play}

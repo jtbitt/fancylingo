@@ -15,13 +15,10 @@ interface ILessonOptionProps {
 export const LessonOption = ({ lesson }: ILessonOptionProps) => {
   return (
     <View style={styles.lesson}>
-      <Image style={styles.image} source={getDeckImage(lesson.image)} />
+      <Image style={styles.image} source={getDeckImage(lesson.image_url)} />
       <View style={styles.lessonInfo}>
         <Text style={styles.lessonTitle}>{lesson.name}</Text>
-        <StatusIcon
-          message={getStatusMessage(lesson.users.jay)}
-          color={getStatusColor(lesson.users.jay)}
-        />
+        <StatusIcon message={getStatusMessage(0)} color={getStatusColor(0)} />
       </View>
       <Play
         style={styles.play}
@@ -44,7 +41,7 @@ const styles = StyleSheet.create({
     marginRight: "auto",
   },
   lessonTitle: {
-    fontSize: 22,
+    fontSize: 20,
     marginBottom: 10,
   },
   image: {
