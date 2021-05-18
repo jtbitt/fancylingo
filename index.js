@@ -25,7 +25,7 @@ export default function Root() {
   return (
     <NavigationContainer>
       <PaperProvider theme={theme}>
-        <App />
+        <App colors={theme.colors} />
       </PaperProvider>
     </NavigationContainer>
   );

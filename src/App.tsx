@@ -7,20 +7,23 @@ import { ApolloProvider } from "@apollo/client/react";
 import { makeApolloClient } from "./api";
 import * as SecureStore from "expo-secure-store";
 import { createStackNavigator } from "@react-navigation/stack";
+import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import { firebaseConfig } from "../config/keys";
 import { getEnvVars } from "../environment";
 import { CREATE_USER } from "./api/graphql";
 import { Navbar } from "./components";
 import { Login, Welcome } from "./modules/auth";
-import { Home, Lesson, Congrats } from "./modules/lessons";
+import { HomeScreen } from "./modules/lessons";
 import { Store } from "./modules/shopping";
 
-export default function App() {
+export default function App({ colors }: any) {
   const [token, setToken] = useState<any>();
   const [client, setClient] = useState<any>(makeApolloClient());
   const env = getEnvVars();
   const Stack = createStackNavigator();
+  const Tab = createMaterialBottomTabNavigator();
 
   useEffect(() => {
     const tokenSync = async () => {
@@ -99,12 +102,59 @@ export default function App() {
     return (
       <ApolloProvider client={client}>
         <SafeAreaView style={styles.container}>
-          {/* <Navbar color={theme.colors.accent} /> */}
+          {/* <Navbar color={colors.accent} /> */}
           <ImageBackground
             source={require("../assets/background.png")}
             style={styles.background}
           >
-            <Home />
+            <Tab.Navigator
+              barStyle={{
+                backgroundColor: colors.accent,
+                height: 60,
+              }}
+              activeColor={colors.primary}
+              inactiveColor={"black"}
+            >
+              <Tab.Screen
+                name="Settings"
+                options={{
+                  tabBarIcon: ({ color }) => (
+                    <MaterialCommunityIcons
+                      name="account"
+                      color={color}
+                      size={26}
+                    />
+                  ),
+                }}
+                component={HomeScreen}
+              />
+              <Tab.Screen
+                name="Home"
+                options={{
+                  tabBarIcon: ({ color }) => (
+                    <MaterialCommunityIcons
+                      name="home"
+                      color={color}
+                      size={26}
+                    />
+                  ),
+                }}
+                component={HomeScreen}
+              />
+              <Tab.Screen
+                name="Search"
+                options={{
+                  tabBarIcon: ({ color }) => (
+                    <MaterialCommunityIcons
+                      name="card-search-outline"
+                      color={color}
+                      size={26}
+                    />
+                  ),
+                }}
+                component={HomeScreen}
+              />
+            </Tab.Navigator>
           </ImageBackground>
         </SafeAreaView>
       </ApolloProvider>

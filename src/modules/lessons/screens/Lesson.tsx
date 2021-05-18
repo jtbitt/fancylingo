@@ -3,7 +3,7 @@ import { StyleSheet, View, Text } from "react-native";
 import { ProgressBar, Colors } from "react-native-paper";
 import { useQuery } from "@apollo/react-hooks";
 
-import { getLessons } from "../../../api/graphql";
+import { GET_LESSONS } from "../../../api/graphql";
 import { FlashCard } from "../components/FlashCard";
 
 interface IDefaultDeckProps {
@@ -17,7 +17,7 @@ export const Lesson = () => {
   //     transform: (deck: any) => deck.cards,
   //   }
   // );
-  const { data, error, loading } = useQuery(getLessons);
+  const { data, error, loading } = useQuery(GET_LESSONS);
   const [currentCard, setCurrentCard] = useState(0);
 
   const onAnswerChosen = () => {
@@ -25,22 +25,23 @@ export const Lesson = () => {
     // record stuff for algorithm
   };
 
-  // return (
-  //   <View style={styles.container}>
-  //     {error && <Text>Error: {JSON.stringify(error)}</Text>}
-  //     {loading && <Text>Collection: Loading...</Text>}
-  //     {cards && (
-  //       <View>
-  //         <ProgressBar
-  //           style={styles.progress}
-  //           progress={0.5}
-  //           color={Colors.red800}
-  //         />
-  //         <FlashCard card={cards[currentCard]} onAnswer={onAnswerChosen} />
-  //       </View>
-  //     )}
-  //   </View>
-  // );
+  return (
+    <View></View>
+    // <View style={styles.container}>
+    //   {error && <Text>Error: {JSON.stringify(error)}</Text>}
+    //   {loading && <Text>Collection: Loading...</Text>}
+    //   {cards && (
+    //     <View>
+    //       <ProgressBar
+    //         style={styles.progress}
+    //         progress={0.5}
+    //         color={Colors.red800}
+    //       />
+    //       <FlashCard card={cards[currentCard]} onAnswer={onAnswerChosen} />
+    //     </View>
+    //   )}
+    // </View>
+  );
 };
 
 const styles = StyleSheet.create({
