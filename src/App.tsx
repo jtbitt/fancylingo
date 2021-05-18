@@ -14,6 +14,8 @@ import { ApolloProvider } from "@apollo/client/react";
 import { makeApolloClient } from "./api";
 import { useMutation } from "@apollo/client";
 import * as SecureStore from "expo-secure-store";
+import { createStackNavigator } from "@react-navigation/stack";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import { firebaseConfig } from "../config/keys";
 import { getEnvVars } from "../environment";
@@ -24,19 +26,19 @@ import { Login, Welcome } from "./modules/auth";
 import { Home, Lesson, Congrats } from "./modules/lessons";
 import { Store } from "./modules/shopping";
 
-const theme = {
-  ...DefaultTheme,
-  roundness: 2,
-  colors: {
-    ...DefaultTheme.colors,
-    primary: "#fc5a5e",
-    accent: "#ffe881",
-  },
-};
-
 export default function App() {
+  const [token, setToken] = useState<any>();
   const [client, setClient] = useState<any>(makeApolloClient());
   const env = getEnvVars();
+  const Stack = createStackNavigator();
+  const Tab = createBottomTabNavigator();
+
+  useEffect(() => {
+    const tokenSync = async () => {
+      const token = await SecureStore.getItemAsync("token");
+      setToken(token);
+    };
+  }, []);
 
   if (!firebase.apps.length) {
     firebase.initializeApp(firebaseConfig);
@@ -52,7 +54,11 @@ export default function App() {
           idTokenResult.claims["https://hasura.io/jwt/claims"];
 
         if (hasuraClaim) {
-          // set auth state
+          console.log(token);
+          // save token
+          await SecureStore.setItemAsync("token", token);
+          // set token
+          setToken(token);
         } else {
           const endpoint =
             "http://localhost:5001/fancylingo-310003/us-central1/refreshToken";
@@ -63,8 +69,9 @@ export default function App() {
             const token = await user.getIdToken(true);
             // save token
             await SecureStore.setItemAsync("token", token);
-            // set client with jwt
-            setClient(makeApolloClient(token));
+            // set token
+            setToken(token);
+            // add user to DB
             const adminClient = makeApolloClient();
             adminClient
               .mutate({
@@ -87,30 +94,30 @@ export default function App() {
     });
   }
 
-  // if (!client) {
-  //   return <ActivityIndicator animating={true} color={Colors.red800} />;
-  // }
+  if (!token) {
+    return (
+      <Stack.Navigator headerMode="none">
+        <Stack.Screen name="Login" component={Login} />
+        {/* <Stack.Screen name="Signup" component={Signup} /> */}
+      </Stack.Navigator>
+    );
+  }
 
-  return (
-    <ApolloProvider client={client}>
-      <PaperProvider theme={theme}>
+  if (token) {
+    return (
+      <ApolloProvider client={client}>
         <SafeAreaView style={styles.container}>
           {/* <Navbar color={theme.colors.accent} /> */}
           <ImageBackground
             source={require("../assets/background.png")}
             style={styles.background}
           >
-            <Login />
-            {/* <Welcome /> */}
-            {/* <Home /> */}
-            {/* <Lesson /> */}
-            {/* <Congrats /> */}
-            {/* <Store /> */}
+            <Home />
           </ImageBackground>
         </SafeAreaView>
-      </PaperProvider>
-    </ApolloProvider>
-  );
+      </ApolloProvider>
+    );
+  }
 }
 
 const styles = StyleSheet.create({

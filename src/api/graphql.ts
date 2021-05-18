@@ -17,10 +17,12 @@ export const CREATE_USER = gql`
 
 export const GET_LESSONS = gql`
   query {
-    lessons (
-      order_by: {
-        created_at: desc
-      }
-    ) 
+    lessons {
+      lesson_id
+      name
+      description
+      image_url
+      price
+    }
   }
 `;

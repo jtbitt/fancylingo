@@ -1,6 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, View, ScrollView } from "react-native";
-import { useQuery } from "@apollo/react-hooks";
+import { useQuery } from "@apollo/client";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import { GET_LESSONS } from "../../../api/graphql";
 import { DefaultLesson } from "../components/DefaultLesson";
@@ -9,9 +10,7 @@ import { LessonOption } from "../components/LessonOption";
 
 export const Home = () => {
   const { data, error, loading } = useQuery(GET_LESSONS);
-  // const [lessons, loading, error] = useCollectionDataOnce(
-  //   firebase.firestore().collection("lessons").orderBy("id")
-  // );
+  const Tab = createBottomTabNavigator();
 
   if (error) {
     return <Text>Error: {JSON.stringify(error)}</Text>;
@@ -24,14 +23,19 @@ export const Home = () => {
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.scroll}>
-        <View>
+        {/* <View>
           <DefaultLesson lesson={data[0]} />
           <LessonAlert message="-50% discount - Premium lessons!" />
           {data.map((lesson: any, i: number) =>
             i > 0 ? <LessonOption lesson={lesson} key={i} /> : null
           )}
-        </View>
+        </View> */}
       </ScrollView>
+      <Tab.Navigator>
+        <Tab.Screen name="Settings" component={Home} />
+        <Tab.Screen name="Home" component={Home} />
+        <Tab.Screen name="Search" component={Home} />
+      </Tab.Navigator>
     </View>
   );
 };
