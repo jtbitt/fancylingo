@@ -20,7 +20,7 @@ export const HomeScreen = () => {
           headerTintColor: "#3D3C3C",
         }}
       >
-        <Stack.Screen name="Bienvenido Jay!" component={LessonList} />
+        <Stack.Screen name="LessonList" component={LessonList} />
         <Stack.Screen name="Lesson" component={Lesson} />
         <Stack.Screen name="Congrats" component={Congrats} />
       </Stack.Navigator>

@@ -13,7 +13,7 @@ export const Congrats = ({ navigation }: any) => {
         style={styles.button}
         labelStyle={[styles.buttonText, { color: "white" }]}
         mode="contained"
-        onPress={() => console.log("Pressed")}
+        onPress={() => navigation.navigate("LessonList")}
       >
         NEXT LESSON
       </Button>
@@ -21,7 +21,7 @@ export const Congrats = ({ navigation }: any) => {
         style={styles.button}
         labelStyle={styles.buttonText}
         mode="text"
-        onPress={() => console.log("Pressed")}
+        onPress={() => navigation.navigate("LessonList")}
       >
         HOME
       </Button>
