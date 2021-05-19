@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { StyleSheet, View, Image } from "react-native";
 import { Title, Text, Button } from "react-native-paper";
 
-export const Congrats = () => {
+export const Congrats = ({ navigation }: any) => {
   return (
     <View style={styles.container}>
       <Title style={styles.title}>¡Felicitaciones!</Title>
@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     fontWeight: "500",
   },
   image: {
-    height: 300,
+    height: 250,
     resizeMode: "contain",
     marginTop: 30,
     marginBottom: 5,

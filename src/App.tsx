@@ -13,7 +13,6 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { firebaseConfig } from "../config/keys";
 import { getEnvVars } from "../environment";
 import { CREATE_USER } from "./api/graphql";
-import { Navbar } from "./components";
 import { Login, Welcome } from "./modules/auth";
 import { HomeScreen } from "./modules/lessons";
 import { Store } from "./modules/shopping";
@@ -88,12 +87,7 @@ export default function App({ colors }: any) {
   if (!token) {
     return (
       <SafeAreaView style={styles.container}>
-        <ImageBackground
-          source={require("../assets/background.png")}
-          style={styles.background}
-        >
-          <Login />
-        </ImageBackground>
+        <Login />
       </SafeAreaView>
     );
   }
@@ -102,60 +96,50 @@ export default function App({ colors }: any) {
     return (
       <ApolloProvider client={client}>
         <SafeAreaView style={styles.container}>
-          {/* <Navbar color={colors.accent} /> */}
-          <ImageBackground
-            source={require("../assets/background.png")}
-            style={styles.background}
+          <Tab.Navigator
+            barStyle={{
+              backgroundColor: colors.accent,
+              height: 60,
+            }}
+            activeColor={colors.primary}
+            inactiveColor={"black"}
           >
-            <Tab.Navigator
-              barStyle={{
-                backgroundColor: colors.accent,
-                height: 60,
+            <Tab.Screen
+              name="Settings"
+              options={{
+                tabBarIcon: ({ color }) => (
+                  <MaterialCommunityIcons
+                    name="account"
+                    color={color}
+                    size={26}
+                  />
+                ),
               }}
-              activeColor={colors.primary}
-              inactiveColor={"black"}
-            >
-              <Tab.Screen
-                name="Settings"
-                options={{
-                  tabBarIcon: ({ color }) => (
-                    <MaterialCommunityIcons
-                      name="account"
-                      color={color}
-                      size={26}
-                    />
-                  ),
-                }}
-                component={HomeScreen}
-              />
-              <Tab.Screen
-                name="Home"
-                options={{
-                  tabBarIcon: ({ color }) => (
-                    <MaterialCommunityIcons
-                      name="home"
-                      color={color}
-                      size={26}
-                    />
-                  ),
-                }}
-                component={HomeScreen}
-              />
-              <Tab.Screen
-                name="Search"
-                options={{
-                  tabBarIcon: ({ color }) => (
-                    <MaterialCommunityIcons
-                      name="card-search-outline"
-                      color={color}
-                      size={26}
-                    />
-                  ),
-                }}
-                component={HomeScreen}
-              />
-            </Tab.Navigator>
-          </ImageBackground>
+              component={HomeScreen}
+            />
+            <Tab.Screen
+              name="Home"
+              options={{
+                tabBarIcon: ({ color }) => (
+                  <MaterialCommunityIcons name="home" color={color} size={26} />
+                ),
+              }}
+              component={HomeScreen}
+            />
+            <Tab.Screen
+              name="Search"
+              options={{
+                tabBarIcon: ({ color }) => (
+                  <MaterialCommunityIcons
+                    name="card-search-outline"
+                    color={color}
+                    size={26}
+                  />
+                ),
+              }}
+              component={HomeScreen}
+            />
+          </Tab.Navigator>
         </SafeAreaView>
       </ApolloProvider>
     );
@@ -165,9 +149,5 @@ export default function App({ colors }: any) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  background: {
-    flex: 1,
-    resizeMode: "cover",
   },
 });

@@ -12,7 +12,6 @@ import { GET_LESSONS } from "../../../api/graphql";
 import { DefaultLesson } from "../components/DefaultLesson";
 import { LessonAlert } from "../components/LessonAlert";
 import { LessonOption } from "../components/LessonOption";
-import { Lesson } from "../screens/Lesson";
 
 export const LessonList = ({ navigation }: any) => {
   const { loading, error, data } = useQuery(GET_LESSONS);

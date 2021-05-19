@@ -26,3 +26,15 @@ export const GET_LESSONS = gql`
     },
   }
 `;
+
+export const GET_DECK = gql`
+  query {
+    cards ( order_by: {card_id: asc} ) {
+      card_id
+      word
+      ipa
+      image_url
+      audio_url
+    },
+  }
+`;

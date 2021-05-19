@@ -40,7 +40,7 @@ export const FlashCard = ({ card, onAnswer }: IDefaultFlashCardProps) => {
   return (
     <View>
       <View style={styles.card}>
-        <Image style={styles.image} source={getCardImage(card.image)} />
+        <Image style={styles.image} source={getCardImage(card.image_url)} />
         <View style={styles.content}>
           {!frontChecked && <Title style={styles.title}>¿Qué es esto?</Title>}
           {frontChecked && (
@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
   },
   image: {
     resizeMode: "cover",
-    height: 350,
+    height: 275,
     width: "100%",
     borderRadius: 15,
   },

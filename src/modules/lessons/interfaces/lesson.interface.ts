@@ -9,6 +9,6 @@ export interface Card {
   id: number;
   word: string;
   ipa: string;
-  image: string;
-  audio: string;
+  image_url: string;
+  audio_url: string;
 }

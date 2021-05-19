@@ -1,46 +1,46 @@
 import React, { useState } from "react";
 import { StyleSheet, View, Text } from "react-native";
-import { ProgressBar, Colors } from "react-native-paper";
+import { ProgressBar, Colors, ActivityIndicator } from "react-native-paper";
 import { useQuery } from "@apollo/react-hooks";
 
-import { GET_LESSONS } from "../../../api/graphql";
+import { GET_DECK } from "../../../api/graphql";
 import { FlashCard } from "../components/FlashCard";
 
 interface IDefaultDeckProps {
   deckId: number;
 }
 
-export const Lesson = () => {
-  // const [cards, loading, error] = useDocumentDataOnce(
-  //   firebase.firestore().doc("decks/colombian_slang"),
-  //   {
-  //     transform: (deck: any) => deck.cards,
-  //   }
-  // );
-  const { data, error, loading } = useQuery(GET_LESSONS);
+export const Lesson = ({ navigation }: any) => {
+  const { loading, error, data } = useQuery(GET_DECK);
   const [currentCard, setCurrentCard] = useState(0);
 
   const onAnswerChosen = () => {
-    setCurrentCard(currentCard + 1);
-    // record stuff for algorithm
+    if (currentCard === data.cards.length - 1) {
+      navigation.navigate("Congrats");
+    } else {
+      setCurrentCard(currentCard + 1);
+    }
   };
 
+  if (error) {
+    return <Text>Error: {JSON.stringify(error)}</Text>;
+  }
+
+  if (loading) {
+    return <ActivityIndicator animating={true} color={Colors.red800} />;
+  }
+
   return (
-    <View></View>
-    // <View style={styles.container}>
-    //   {error && <Text>Error: {JSON.stringify(error)}</Text>}
-    //   {loading && <Text>Collection: Loading...</Text>}
-    //   {cards && (
-    //     <View>
-    //       <ProgressBar
-    //         style={styles.progress}
-    //         progress={0.5}
-    //         color={Colors.red800}
-    //       />
-    //       <FlashCard card={cards[currentCard]} onAnswer={onAnswerChosen} />
-    //     </View>
-    //   )}
-    // </View>
+    <View style={styles.container}>
+      <View>
+        <ProgressBar
+          style={styles.progress}
+          progress={0.5}
+          color={Colors.red800}
+        />
+        <FlashCard card={data.cards[currentCard]} onAnswer={onAnswerChosen} />
+      </View>
+    </View>
   );
 };
 
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingVertical: "10%",
-    paddingHorizontal: "7.5%",
+    paddingHorizontal: "5%",
     justifyContent: "center",
   },
   progress: {
