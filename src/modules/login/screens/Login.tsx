@@ -7,6 +7,8 @@ import { signInWithGoogle, signInWithFacebook } from "../../../api/firebase";
 export const Login = () => {
   const [text, setText] = useState("");
 
+  console.log("hi");
+
   return (
     <View style={styles.container}>
       <View style={styles.topContainer}>

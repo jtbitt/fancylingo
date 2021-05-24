@@ -13,7 +13,14 @@ import { DefaultLesson } from "../components/DefaultLesson";
 import { LessonAlert } from "../components/LessonAlert";
 import { LessonOption } from "../components/LessonOption";
 
+// lessons -> 0...1000
+// user_lessons -> free lessons / premium lesson - user_id lesson_id score
+// user_decks -> user_id 1 deck_id 1 is_unlocked
+// user_decks -> user_id 1 deck_id 2
+
 export const LessonList = ({ navigation }: any) => {
+  // const [ user] = useAuth
+  // const { loading, error, data } = useQuery(GET_LESSONS, {variables: {uid: user.uid}});
   const { loading, error, data } = useQuery(GET_LESSONS);
   const Stack = createStackNavigator();
 
