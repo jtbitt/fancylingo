@@ -40,7 +40,7 @@ export const AuthProvider = ({ children }: any) => {
         if (hasuraClaim) {
           // save token
           await SecureStore.setItemAsync("token", token);
-          // set token
+          // set uid and token
           setAuthUser({ uid: user.uid, token: token });
         } else {
           const endpoint =
@@ -52,7 +52,7 @@ export const AuthProvider = ({ children }: any) => {
             const token = await user.getIdToken(true);
             // save token
             await SecureStore.setItemAsync("token", token);
-            // set token
+            // set uid and token
             setAuthUser({ uid: user.uid, token: token });
           } else {
             return response.json().then((e) => {
