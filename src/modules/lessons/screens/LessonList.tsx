@@ -41,7 +41,10 @@ export const LessonList = ({ navigation }: any) => {
               })
             }
           />
-          <LessonAlert message="-50% discount - Premium lessons!" />
+          <LessonAlert
+            message="-50% discount - Premium lessons!"
+            onPress={() => navigation.navigate("Store")}
+          />
           {data.user_lessons.map((lesson: any, i: number) =>
             i > 0 ? (
               <LessonOption

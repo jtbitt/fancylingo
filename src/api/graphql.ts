@@ -23,6 +23,7 @@ export const GET_LESSONS = gql`
         lesson_id
         name
         description
+        sales_description
         image_url
         price
       }

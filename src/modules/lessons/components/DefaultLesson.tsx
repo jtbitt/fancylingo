@@ -19,7 +19,6 @@ export const DefaultLesson = ({
   onPress,
   status,
 }: IDefaultLessonProps) => {
-  console.log(lesson);
   return (
     <View style={styles.card}>
       <Image style={styles.cover} source={getDeckImage(lesson.image_url)} />

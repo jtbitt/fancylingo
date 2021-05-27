@@ -32,7 +32,6 @@ export const AuthProvider = ({ children }: any) => {
     // Sync user
     firebase.auth().onAuthStateChanged(async (user: any) => {
       if (user) {
-        console.log(user);
         const token = await user.getIdToken();
         const idTokenResult = await user.getIdTokenResult();
         const hasuraClaim =

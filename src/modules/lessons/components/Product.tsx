@@ -2,22 +2,22 @@ import React, { useState } from "react";
 import { StyleSheet, View, Image } from "react-native";
 import { Title, Subheading, Text } from "react-native-paper";
 
-import { ProductInfo } from "../interfaces/product.interface";
-import { getProductImage } from "../utils/getProductImage";
+// import { ProductInfo } from "../interfaces/product.interface";
+import { getDeckImage } from "../utils/getDeckImage";
 
 interface IDefaultProductProps {
-  product: ProductInfo;
+  product: any;
   onPress: () => void;
 }
 
 export const Product = ({ product, onPress }: IDefaultProductProps) => {
   return (
     <View style={styles.card}>
-      <Image style={styles.image} source={getProductImage(product.image)} />
+      <Image style={styles.image} source={getDeckImage(product.image_url)} />
       <View style={styles.content}>
         <Title style={styles.title}>{product.name}</Title>
         <Subheading style={styles.description}>
-          {product.description}
+          {product.sales_description}
         </Subheading>
         <Text style={styles.price}>{product.price}</Text>
       </View>

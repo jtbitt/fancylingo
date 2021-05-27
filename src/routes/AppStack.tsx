@@ -2,7 +2,7 @@ import React from "react";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-import { HomeScreen } from "../modules/lessons";
+import { LessonStack } from "../modules/lessons/routes/LessonStack";
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -23,7 +23,7 @@ export const AppStack = () => {
             <MaterialCommunityIcons name="account" color={color} size={26} />
           ),
         }}
-        component={HomeScreen}
+        component={LessonStack}
       />
       <Tab.Screen
         name="Home"
@@ -32,7 +32,7 @@ export const AppStack = () => {
             <MaterialCommunityIcons name="home" color={color} size={26} />
           ),
         }}
-        component={HomeScreen}
+        component={LessonStack}
       />
       <Tab.Screen
         name="Search"
@@ -45,7 +45,7 @@ export const AppStack = () => {
             />
           ),
         }}
-        component={HomeScreen}
+        component={LessonStack}
       />
     </Tab.Navigator>
   );
