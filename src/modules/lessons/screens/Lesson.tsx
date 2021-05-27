@@ -10,12 +10,15 @@ interface IDefaultDeckProps {
   deckId: number;
 }
 
-export const Lesson = ({ navigation }: any) => {
-  const { loading, error, data } = useQuery(GET_DECK);
+export const Lesson = ({ route, navigation }: any) => {
+  const { lessonId } = route.params;
+  const { loading, error, data } = useQuery(GET_DECK, {
+    variables: { lessonId: 1 },
+  });
   const [currentCard, setCurrentCard] = useState(0);
 
   const onAnswerChosen = () => {
-    if (currentCard === data.cards.length - 1) {
+    if (currentCard === data.lesson_cards.length - 1) {
       navigation.navigate("Congrats");
     } else {
       setCurrentCard(currentCard + 1);
@@ -38,7 +41,10 @@ export const Lesson = ({ navigation }: any) => {
           progress={0.5}
           color={Colors.red800}
         />
-        <FlashCard card={data.cards[currentCard]} onAnswer={onAnswerChosen} />
+        <FlashCard
+          card={data.lesson_cards[currentCard].card}
+          onAnswer={onAnswerChosen}
+        />
       </View>
     </View>
   );

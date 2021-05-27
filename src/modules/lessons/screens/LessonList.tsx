@@ -1,13 +1,9 @@
 import React from "react";
 import { StyleSheet, Text, View, ScrollView } from "react-native";
 import { useQuery } from "@apollo/client";
-import {
-  ActivityIndicator,
-  Colors,
-  BottomNavigation,
-} from "react-native-paper";
-import { createStackNavigator } from "@react-navigation/stack";
+import { ActivityIndicator, Colors } from "react-native-paper";
 
+import { useAuth } from "../../../contexts/Auth";
 import { GET_LESSONS } from "../../../api/graphql";
 import { DefaultLesson } from "../components/DefaultLesson";
 import { LessonAlert } from "../components/LessonAlert";
@@ -19,11 +15,10 @@ import { LessonOption } from "../components/LessonOption";
 // user_decks -> user_id 1 deck_id 2
 
 export const LessonList = ({ navigation }: any) => {
-  // const [ user] = useAuth
+  const { uid } = useAuth();
   const { loading, error, data } = useQuery(GET_LESSONS, {
-    variables: { uid: "hEyjPnqpsQh6awELf4mzd7UwJCAT" },
+    variables: { uid: uid },
   });
-  const Stack = createStackNavigator();
 
   if (error) {
     return <Text>Error: {JSON.stringify(error)}</Text>;
@@ -33,8 +28,6 @@ export const LessonList = ({ navigation }: any) => {
     return <ActivityIndicator animating={true} color={Colors.red800} />;
   }
 
-  console.log(data.user_lesson);
-
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.scroll}>
@@ -42,6 +35,11 @@ export const LessonList = ({ navigation }: any) => {
           <DefaultLesson
             lesson={data.user_lessons[0].lesson}
             status={data.user_lessons[0].status}
+            onPress={() =>
+              navigation.navigate("Lesson", {
+                lessonId: data.user_lessons[0].lesson.lesson_id,
+              })
+            }
           />
           <LessonAlert message="-50% discount - Premium lessons!" />
           {data.user_lessons.map((lesson: any, i: number) =>
@@ -50,7 +48,11 @@ export const LessonList = ({ navigation }: any) => {
                 lesson={lesson.lesson}
                 status={lesson.status}
                 key={i}
-                onPress={() => navigation.navigate("Lesson")}
+                onPress={() =>
+                  navigation.navigate("Lesson", {
+                    lessonId: lesson.lesson.lesson_id,
+                  })
+                }
               />
             ) : null
           )}

@@ -31,13 +31,15 @@ export const GET_LESSONS = gql`
 `;
 
 export const GET_DECK = gql`
-  query {
-    cards ( order_by: {card_id: asc} ) {
+  query ($lessonId: Int!) {
+    lesson_cards (order_by: {card_position: asc}, where: {lesson_id: {_eq: $lessonId}} ) {
       card_id
-      word
-      ipa
-      image_url
-      audio_url
+      card {
+        word
+        ipa
+        image_url
+        audio_url
+      }
     },
   }
 `;

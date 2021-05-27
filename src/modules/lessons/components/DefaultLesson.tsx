@@ -11,9 +11,14 @@ import { getStatusColor } from "../utils/getStatusColor";
 interface IDefaultLessonProps {
   lesson: any;
   status: number;
+  onPress: () => void;
 }
 
-export const DefaultLesson = ({ lesson, status }: IDefaultLessonProps) => {
+export const DefaultLesson = ({
+  lesson,
+  onPress,
+  status,
+}: IDefaultLessonProps) => {
   console.log(lesson);
   return (
     <View style={styles.card}>
@@ -25,11 +30,7 @@ export const DefaultLesson = ({ lesson, status }: IDefaultLessonProps) => {
           message={getStatusMessage(status)}
           color={getStatusColor(status)}
         />
-        <Play
-          style={styles.play}
-          size={40}
-          onPress={() => console.log("enter lesson")}
-        />
+        <Play style={styles.play} size={40} onPress={onPress} />
       </View>
     </View>
   );
