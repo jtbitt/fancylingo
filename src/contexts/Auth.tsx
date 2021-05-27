@@ -32,6 +32,7 @@ export const AuthProvider = ({ children }: any) => {
     // Sync user
     firebase.auth().onAuthStateChanged(async (user: any) => {
       if (user) {
+        console.log(user);
         const token = await user.getIdToken();
         const idTokenResult = await user.getIdTokenResult();
         const hasuraClaim =
@@ -42,6 +43,7 @@ export const AuthProvider = ({ children }: any) => {
           await SecureStore.setItemAsync("token", token);
           // set uid and token
           setAuthUser({ uid: user.uid, token: token });
+          setLoading(false);
         } else {
           const endpoint =
             "http://localhost:5001/fancylingo-310003/us-central1/refreshToken";
@@ -54,6 +56,7 @@ export const AuthProvider = ({ children }: any) => {
             await SecureStore.setItemAsync("token", token);
             // set uid and token
             setAuthUser({ uid: user.uid, token: token });
+            setLoading(false);
           } else {
             return response.json().then((e) => {
               throw e;

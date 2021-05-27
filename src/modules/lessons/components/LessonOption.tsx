@@ -10,16 +10,24 @@ import { getStatusColor } from "../utils/getStatusColor";
 
 interface ILessonOptionProps {
   lesson: any;
+  status: number;
   onPress: () => void;
 }
 
-export const LessonOption = ({ lesson, onPress }: ILessonOptionProps) => {
+export const LessonOption = ({
+  lesson,
+  status,
+  onPress,
+}: ILessonOptionProps) => {
   return (
     <View style={styles.lesson}>
       <Image style={styles.image} source={getDeckImage(lesson.image_url)} />
       <View style={styles.lessonInfo}>
         <Text style={styles.lessonTitle}>{lesson.name}</Text>
-        <StatusIcon message={getStatusMessage(0)} color={getStatusColor(0)} />
+        <StatusIcon
+          message={getStatusMessage(status)}
+          color={getStatusColor(status)}
+        />
       </View>
       <Play style={styles.play} size={40} onPress={onPress} />
     </View>

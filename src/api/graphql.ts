@@ -16,14 +16,17 @@ export const CREATE_USER = gql`
 `
 
 export const GET_LESSONS = gql`
-  query {
-    lessons ( order_by: {lesson_id: asc} ) {
-      lesson_id
-      name
-      description
-      image_url
-      price
-    },
+  query ($uid: String!) {
+    user_lessons(order_by: {lesson_id: asc}, where: {user_id: {_eq: $uid}}){
+      status
+      lesson {
+        lesson_id
+        name
+        description
+        image_url
+        price
+      }
+    }
   }
 `;
 

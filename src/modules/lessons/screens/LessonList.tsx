@@ -20,8 +20,9 @@ import { LessonOption } from "../components/LessonOption";
 
 export const LessonList = ({ navigation }: any) => {
   // const [ user] = useAuth
-  // const { loading, error, data } = useQuery(GET_LESSONS, {variables: {uid: user.uid}});
-  const { loading, error, data } = useQuery(GET_LESSONS);
+  const { loading, error, data } = useQuery(GET_LESSONS, {
+    variables: { uid: "hEyjPnqpsQh6awELf4mzd7UwJCAT" },
+  });
   const Stack = createStackNavigator();
 
   if (error) {
@@ -32,16 +33,22 @@ export const LessonList = ({ navigation }: any) => {
     return <ActivityIndicator animating={true} color={Colors.red800} />;
   }
 
+  console.log(data.user_lesson);
+
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.scroll}>
         <View>
-          <DefaultLesson lesson={data.lessons[0]} />
+          <DefaultLesson
+            lesson={data.user_lessons[0].lesson}
+            status={data.user_lessons[0].status}
+          />
           <LessonAlert message="-50% discount - Premium lessons!" />
-          {data.lessons.map((lesson: any, i: number) =>
+          {data.user_lessons.map((lesson: any, i: number) =>
             i > 0 ? (
               <LessonOption
-                lesson={lesson}
+                lesson={lesson.lesson}
+                status={lesson.status}
                 key={i}
                 onPress={() => navigation.navigate("Lesson")}
               />

@@ -10,9 +10,11 @@ import { getStatusColor } from "../utils/getStatusColor";
 
 interface IDefaultLessonProps {
   lesson: any;
+  status: number;
 }
 
-export const DefaultLesson = ({ lesson }: IDefaultLessonProps) => {
+export const DefaultLesson = ({ lesson, status }: IDefaultLessonProps) => {
+  console.log(lesson);
   return (
     <View style={styles.card}>
       <Image style={styles.cover} source={getDeckImage(lesson.image_url)} />
@@ -20,8 +22,8 @@ export const DefaultLesson = ({ lesson }: IDefaultLessonProps) => {
         <Text style={styles.title}>{lesson.name}</Text>
         <StatusIcon
           style={styles.statusIcon}
-          message={getStatusMessage(0)}
-          color={getStatusColor(0)}
+          message={getStatusMessage(status)}
+          color={getStatusColor(status)}
         />
         <Play
           style={styles.play}

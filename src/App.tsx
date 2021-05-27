@@ -39,7 +39,9 @@ export const App = () => {
         style={styles.background}
       >
         <AuthProvider>
-          <Router theme={theme} />
+          <SafeAreaView style={styles.container}>
+            <Router theme={theme} />
+          </SafeAreaView>
         </AuthProvider>
       </ImageBackground>
     </PaperProvider>
