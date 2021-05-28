@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { StyleSheet, ScrollView, View, Text } from "react-native";
 import { Title } from "react-native-paper";
 import { useQuery } from "@apollo/client";
@@ -7,6 +7,7 @@ import { ActivityIndicator, Colors } from "react-native-paper";
 import { useAuth } from "../../../contexts/Auth";
 import { GET_LESSONS } from "../../../api/graphql";
 import { Product } from "../components/Product";
+import { Subscription } from "../components/Subscription";
 
 export const Store = ({ navigation }: any) => {
   const { uid } = useAuth();
@@ -34,16 +35,17 @@ export const Store = ({ navigation }: any) => {
           />
         ))}
       </ScrollView>
+      <Subscription onPress={() => console.log("cool")} />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     alignItems: "center",
+    justifyContent: "center",
   },
   title: {
-    marginVertical: 10,
+    paddingVertical: 15,
   },
 });

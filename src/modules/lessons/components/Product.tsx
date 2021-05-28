@@ -27,13 +27,12 @@ export const Product = ({ product, onPress }: IDefaultProductProps) => {
 
 const styles = StyleSheet.create({
   card: {
-    flex: 1,
-    width: 300,
+    width: 250,
     borderRadius: 15,
     marginLeft: 35,
   },
   image: {
-    height: 200,
+    height: 165,
     width: "100%",
     borderRadius: 15,
   },
