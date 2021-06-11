@@ -20,47 +20,54 @@ export const AuthProvider = ({ children }: any) => {
   const [authUser, setAuthUser] = useState<AuthUser>({ uid: "", token: "" });
   const [loading, setLoading] = useState(true);
 
+  // always have dependencies on effect, either empty for running once, or some properties to refresh it/re-run
   useEffect(() => {
     const tokenSync = async () => {
       const token = await SecureStore.getItemAsync("token");
       setAuthUser({ uid: authUser.uid, token: token });
       setLoading(false);
     };
-  });
+  }, []);
 
+  // smaller functions, extract hook
   useEffect(() => {
     // Sync user
-    firebase.auth().onAuthStateChanged(async (user: any) => {
-      if (user) {
-        const token = await user.getIdToken();
-        const idTokenResult = await user.getIdTokenResult();
-        const hasuraClaim =
-          idTokenResult.claims["https://hasura.io/jwt/claims"];
+    // type user?
+    return firebase.auth().onAuthStateChanged(async (user: any) => {
+      if (!user) {
+        return;
+      }
 
-        if (hasuraClaim) {
+      console.log(user);
+      const token = await user.getIdToken();
+      const idTokenResult = await user.getIdTokenResult();
+      const hasuraClaim = idTokenResult.claims["https://hasura.io/jwt/claims"];
+
+      if (hasuraClaim) {
+        // save token
+        await SecureStore.setItemAsync("token", token);
+        // set uid and token
+        setAuthUser({ uid: user.uid, token: token });
+        setLoading(false);
+      } else {
+        const endpoint =
+          "http://localhost:5001/fancylingo-310003/us-central1/refreshToken";
+        const response = await fetch(`${endpoint}?uid=${user.uid}`);
+
+        if (response.status === 200) {
+          // get fresh token
+          const token = await user.getIdToken(true);
           // save token
           await SecureStore.setItemAsync("token", token);
           // set uid and token
           setAuthUser({ uid: user.uid, token: token });
           setLoading(false);
         } else {
-          const endpoint =
-            "http://localhost:5001/fancylingo-310003/us-central1/refreshToken";
-          const response = await fetch(`${endpoint}?uid=${user.uid}`);
-
-          if (response.status === 200) {
-            // get fresh token
-            const token = await user.getIdToken(true);
-            // save token
-            await SecureStore.setItemAsync("token", token);
-            // set uid and token
-            setAuthUser({ uid: user.uid, token: token });
-            setLoading(false);
-          } else {
-            return response.json().then((e) => {
-              throw e;
-            });
-          }
+          // make sure yo uhave error boundary to catch it
+          // async / await maybe
+          return response.json().then((e) => {
+            throw e;
+          });
         }
       }
     });

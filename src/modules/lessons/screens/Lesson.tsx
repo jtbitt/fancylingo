@@ -3,7 +3,7 @@ import { StyleSheet, View, Text } from "react-native";
 import { ProgressBar, Colors, ActivityIndicator } from "react-native-paper";
 import { useQuery } from "@apollo/react-hooks";
 
-import { GET_DECK } from "../../../api/graphql";
+import { getDeck } from "../graphql/lessonQueries.graphql";
 import { FlashCard } from "../components/FlashCard";
 
 interface IDefaultDeckProps {
@@ -12,7 +12,7 @@ interface IDefaultDeckProps {
 
 export const Lesson = ({ route, navigation }: any) => {
   const { lessonId } = route.params;
-  const { loading, error, data } = useQuery(GET_DECK, {
+  const { loading, error, data } = useQuery(getDeck, {
     variables: { lessonId: 1 },
   });
   const [currentCard, setCurrentCard] = useState(0);

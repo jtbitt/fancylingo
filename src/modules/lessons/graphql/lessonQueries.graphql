@@ -1,0 +1,31 @@
+query getLessons($uid: String!) {
+  user_lessons(
+    order_by: { lesson_id: asc }
+    where: { user_id: { _eq: $uid } }
+  ) {
+    status
+    lesson {
+      lesson_id
+      name
+      description
+      sales_description
+      image_url
+      price
+    }
+  }
+}
+
+query getDeck($lessonId: Int!) {
+  lesson_cards(
+    order_by: { card_position: asc }
+    where: { lesson_id: { _eq: $lessonId } }
+  ) {
+    card_id
+    card {
+      word
+      ipa
+      image_url
+      audio_url
+    }
+  }
+}

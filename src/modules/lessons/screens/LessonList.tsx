@@ -2,9 +2,10 @@ import React from "react";
 import { StyleSheet, Text, View, ScrollView } from "react-native";
 import { useQuery } from "@apollo/client";
 import { ActivityIndicator, Colors } from "react-native-paper";
+import { graphql } from "react-apollo";
 
 import { useAuth } from "../../../contexts/Auth";
-import { GET_LESSONS } from "../../../api/graphql";
+import { getLessons } from "../graphql/lessonQueries.graphql";
 import { DefaultLesson } from "../components/DefaultLesson";
 import { LessonAlert } from "../components/LessonAlert";
 import { LessonOption } from "../components/LessonOption";
@@ -15,8 +16,14 @@ import { LessonOption } from "../components/LessonOption";
 // user_decks -> user_id 1 deck_id 2
 
 export const LessonList = ({ navigation }: any) => {
+  console.log(getLessons);
   const { uid } = useAuth();
-  const { loading, error, data } = useQuery(GET_LESSONS, {
+  // Create abstraction on top of these queries
+  // 1: useQueryWithErrorBoundary(useQuery) -> if error -> throw error -> make sure you have error boundary
+  // 2: just hide UI? (if less important query, e.g. not rendering UI elements)
+  // 3: QueryHandler component useQueryHandler(useQuery(), {loadingComponent: ..., errorComponent: ...})
+  // 4. You can abstract passing user id / always attach it?
+  const { loading, error, data } = useQuery(getLessons, {
     variables: { uid: uid },
   });
 
@@ -27,6 +34,12 @@ export const LessonList = ({ navigation }: any) => {
   if (loading) {
     return <ActivityIndicator animating={true} color={Colors.red800} />;
   }
+
+  // a good practice is to create some transformator functions / utils / helpers / keep them on the module
+  // could be hook also
+
+  // const transformedLessonsData = transfomrLessonsData(data)
+  // const { ... } = useLessons(data)
 
   return (
     <View style={styles.container}>

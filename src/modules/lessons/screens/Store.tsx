@@ -5,13 +5,13 @@ import { useQuery } from "@apollo/client";
 import { ActivityIndicator, Colors } from "react-native-paper";
 
 import { useAuth } from "../../../contexts/Auth";
-import { GET_LESSONS } from "../../../api/graphql";
+import { getLessons } from "../graphql/lessonQueries.graphql";
 import { Product } from "../components/Product";
 import { Subscription } from "../components/Subscription";
 
 export const Store = ({ navigation }: any) => {
   const { uid } = useAuth();
-  const { loading, error, data } = useQuery(GET_LESSONS, {
+  const { loading, error, data } = useQuery(getLessons, {
     variables: { uid: uid },
   });
 
