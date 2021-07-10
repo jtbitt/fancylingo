@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { StyleSheet, View, Text } from "react-native";
 import { ProgressBar, Colors, ActivityIndicator } from "react-native-paper";
-import { useQuery } from "@apollo/react-hooks";
+import { graphql } from "@apollo/react-hoc";
+import { useQuery } from "@apollo/client";
 
 import { getDeck } from "../graphql/lessonQueries.graphql";
 import { FlashCard } from "../components/FlashCard";

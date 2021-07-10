@@ -1,11 +1,12 @@
 import React from "react";
 import { StyleSheet, Text, View, ScrollView } from "react-native";
-import { useQuery } from "@apollo/client";
 import { ActivityIndicator, Colors } from "react-native-paper";
-import { graphql } from "react-apollo";
+import { graphql } from "@apollo/react-hoc";
+import { useQuery } from "@apollo/client";
 
 import { useAuth } from "../../../contexts/Auth";
 import { getLessons } from "../graphql/lessonQueries.graphql";
+
 import { DefaultLesson } from "../components/DefaultLesson";
 import { LessonAlert } from "../components/LessonAlert";
 import { LessonOption } from "../components/LessonOption";

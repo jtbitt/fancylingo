@@ -1,15 +1,9 @@
 overwrite: true
 schema: "https://fancylingo.hasura.app/v1/graphql"
-documents: "./src/**"
 generates:
-  src/generate/graphql.d.ts:
-    - typescript-graphql-files-modules
-  src/generate/types.ts:
-    - typescript
-  src/generated/graphql.ts:
+  src/modules/lessons/graphql/lessonQueries.d.ts:
+    documents: src/modules/lessons/graphql/lessonQueries.graphql
     plugins:
-      - "typescript"
-      - "typescript-operations"
-      - "typescript-react-apollo"
+      - typescript-graphql-files-modules
     config:
-      withHooks: true
+      modulePathPrefix: ""

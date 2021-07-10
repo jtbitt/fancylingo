@@ -7,4 +7,3 @@ export const getDeck: DocumentNode;
 
   export default defaultDocument;
 }
-    

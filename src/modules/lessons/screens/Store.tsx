@@ -1,8 +1,9 @@
 import React from "react";
 import { StyleSheet, ScrollView, View, Text } from "react-native";
 import { Title } from "react-native-paper";
-import { useQuery } from "@apollo/client";
 import { ActivityIndicator, Colors } from "react-native-paper";
+import { graphql } from "@apollo/react-hoc";
+import { useQuery } from "@apollo/client";
 
 import { useAuth } from "../../../contexts/Auth";
 import { getLessons } from "../graphql/lessonQueries.graphql";
