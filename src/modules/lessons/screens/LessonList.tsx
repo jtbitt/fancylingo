@@ -17,7 +17,6 @@ import { LessonOption } from "../components/LessonOption";
 // user_decks -> user_id 1 deck_id 2
 
 export const LessonList = ({ navigation }: any) => {
-  console.log(getLessons);
   const { uid } = useAuth();
   // Create abstraction on top of these queries
   // 1: useQueryWithErrorBoundary(useQuery) -> if error -> throw error -> make sure you have error boundary

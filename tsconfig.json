@@ -10,7 +10,8 @@
     "noEmit": true,
     "skipLibCheck": true,
     "resolveJsonModule": true,
-    "strict": true
+    "strict": true,
+    "typeRoots": ["./node_modules/@types/graphql/", "./**/node_modules/@types/graphql/"]
   },
   "extends": "expo/tsconfig.base"
 }
