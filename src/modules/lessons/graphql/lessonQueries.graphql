@@ -1,4 +1,4 @@
-query getLessons($uid: String!) {
+query GetLessons($uid: String!) {
   user_lessons(
     order_by: { lesson_id: asc }
     where: { user_id: { _eq: $uid } }
@@ -15,7 +15,18 @@ query getLessons($uid: String!) {
   }
 }
 
-query getDeck($lessonId: Int!) {
+query GetCards($uid: String!) {
+  user_cards(where: { user_id: { _eq: $uid }, saved: { _eq: true } }) {
+    card {
+      word
+      ipa
+      image_url
+      audio_url
+    }
+  }
+}
+
+query GetDeck($lessonId: Int!) {
   lesson_cards(
     order_by: { card_position: asc }
     where: { lesson_id: { _eq: $lessonId } }

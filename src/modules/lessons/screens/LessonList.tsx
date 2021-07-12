@@ -1,11 +1,10 @@
 import React from "react";
 import { StyleSheet, Text, View, ScrollView } from "react-native";
 import { ActivityIndicator, Colors } from "react-native-paper";
-import { graphql } from "@apollo/react-hoc";
 import { useQuery } from "@apollo/client";
 
 import { useAuth } from "../../../contexts/Auth";
-import { getLessons } from "../graphql/lessonQueries.graphql";
+import { GetLessons } from "../graphql/lessonQueries.graphql";
 
 import { DefaultLesson } from "../components/DefaultLesson";
 import { LessonAlert } from "../components/LessonAlert";
@@ -23,7 +22,7 @@ export const LessonList = ({ navigation }: any) => {
   // 2: just hide UI? (if less important query, e.g. not rendering UI elements)
   // 3: QueryHandler component useQueryHandler(useQuery(), {loadingComponent: ..., errorComponent: ...})
   // 4. You can abstract passing user id / always attach it?
-  const { loading, error, data } = useQuery(getLessons, {
+  const { loading, error, data } = useQuery(GetLessons, {
     variables: { uid: uid },
   });
 
