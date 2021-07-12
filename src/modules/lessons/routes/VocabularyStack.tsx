@@ -1,11 +1,12 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 
-import { Vocabulary } from "../screens/Vocabulary";
+import { VocabularyList } from "../screens/VocabularyList";
+import { VocabularyWord } from "../screens/VocabularyWord";
 
 const Stack = createStackNavigator();
 
-export const SearchStack = () => {
+export const VocabularyStack = () => {
   return (
     <Stack.Navigator
       screenOptions={{
@@ -18,7 +19,8 @@ export const SearchStack = () => {
         headerTintColor: "#3D3C3C",
       }}
     >
-      <Stack.Screen name="Vocabulary" component={Vocabulary} />
+      <Stack.Screen name="Vocabulary" component={VocabularyList} />
+      <Stack.Screen name="Vocabulary Word" component={VocabularyWord} />
     </Stack.Navigator>
   );
 };

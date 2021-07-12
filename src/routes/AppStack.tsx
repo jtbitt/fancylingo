@@ -3,7 +3,7 @@ import { createMaterialBottomTabNavigator } from "@react-navigation/material-bot
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import { LessonStack } from "../modules/lessons/routes/LessonStack";
-import { SearchStack } from "../modules/lessons/routes/SearchStack";
+import { VocabularyStack } from "../modules/lessons/routes/VocabularyStack";
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -46,7 +46,7 @@ export const AppStack = () => {
             />
           ),
         }}
-        component={SearchStack}
+        component={VocabularyStack}
       />
     </Tab.Navigator>
   );

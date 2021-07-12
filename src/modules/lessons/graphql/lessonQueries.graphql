@@ -15,14 +15,24 @@ query GetLessons($uid: String!) {
   }
 }
 
-query GetCards($uid: String!) {
+query GetUserCards($uid: String!) {
   user_cards(where: { user_id: { _eq: $uid }, saved: { _eq: true } }) {
     card {
+      card_id
       word
       ipa
       image_url
       audio_url
     }
+  }
+}
+
+query GetCard($cardId: Int) {
+  cards(where: { card_id: { _eq: $cardId } }) {
+    word
+    ipa
+    image_url
+    audio_url
   }
 }
 

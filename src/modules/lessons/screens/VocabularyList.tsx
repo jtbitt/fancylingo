@@ -4,13 +4,13 @@ import { ActivityIndicator, Colors } from "react-native-paper";
 import { useQuery } from "@apollo/client";
 
 import { useAuth } from "../../../contexts/Auth";
-import { GetCards } from "../graphql/lessonQueries.graphql";
+import { GetUserCards } from "../graphql/lessonQueries.graphql";
 import { SavedCard } from "../components/SavedCard";
 
-export const Vocabulary = () => {
+export const VocabularyList = ({ navigation }: any) => {
   const { uid } = useAuth();
 
-  const { loading, error, data } = useQuery(GetCards, {
+  const { loading, error, data } = useQuery(GetUserCards, {
     variables: { uid: uid },
   });
 
@@ -26,15 +26,17 @@ export const Vocabulary = () => {
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.scroll}>
         <View>
-          {data.user_cards.map((card: any, i: number) =>
-            i > 0 ? (
-              <SavedCard
-                card={card.card}
-                key={i}
-                onPress={() => console.log("hi")}
-              />
-            ) : null
-          )}
+          {data.user_cards.map((card: any, i: number) => (
+            <SavedCard
+              card={card.card}
+              key={i}
+              onPress={() =>
+                navigation.navigate("Vocabulary Word", {
+                  cardId: card.card.card_id,
+                })
+              }
+            />
+          ))}
         </View>
       </ScrollView>
     </View>

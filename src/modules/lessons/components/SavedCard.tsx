@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, View, Image, Text } from "react-native";
+import { StyleSheet, View, TouchableOpacity, Image, Text } from "react-native";
 
 import { getCardImage } from "../utils/getCardImage";
 
@@ -10,12 +10,12 @@ interface IDefaultSavedCardProps {
 
 export const SavedCard = ({ card, onPress }: IDefaultSavedCardProps) => {
   return (
-    <View style={styles.card}>
+    <TouchableOpacity style={styles.card} onPress={onPress}>
       <Image style={styles.cover} source={getCardImage(card.image_url)} />
       <View style={styles.content}>
         <Text style={styles.title}>{card.word}</Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
