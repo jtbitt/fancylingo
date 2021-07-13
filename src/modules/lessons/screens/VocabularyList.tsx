@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { StyleSheet, View, ScrollView, Text, Image } from "react-native";
-import { ActivityIndicator, Colors } from "react-native-paper";
+import { ActivityIndicator, Colors, Searchbar } from "react-native-paper";
 import { useQuery } from "@apollo/client";
 
 import { useAuth } from "../../../contexts/Auth";

@@ -2,6 +2,7 @@ import React from "react";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
+import { AccountStack } from "../modules/account/routes/AccountStack";
 import { LessonStack } from "../modules/lessons/routes/LessonStack";
 import { VocabularyStack } from "../modules/lessons/routes/VocabularyStack";
 
@@ -24,7 +25,7 @@ export const AppStack = () => {
             <MaterialCommunityIcons name="account" color={color} size={26} />
           ),
         }}
-        component={LessonStack}
+        component={AccountStack}
       />
       <Tab.Screen
         name="Home"
