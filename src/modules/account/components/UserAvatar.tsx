@@ -8,7 +8,7 @@ interface IDefaultPlayProps {}
 export const UserAvatar = () => {
   return (
     <View style={styles.container}>
-      <Avatar.Text style={styles.avatar} size={100} label="JB" color="black" />
+      <Avatar.Text style={styles.avatar} size={100} label="JD" color="black" />
       <View style={styles.infoContainer}>
         <Title style={styles.name}>John Doe</Title>
         <Subheading style={styles.email}>johndoe@gmail.com</Subheading>
