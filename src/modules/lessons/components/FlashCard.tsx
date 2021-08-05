@@ -7,6 +7,9 @@ import {
   Title,
   Subheading,
 } from "react-native-paper";
+import { useDownloadURL } from "react-firebase-hooks/storage";
+import firebase from "firebase/app";
+import "firebase/storage";
 
 import { Play } from "./Play";
 import { Card } from "../interfaces/lesson.interface";
@@ -19,6 +22,13 @@ interface IDefaultFlashCardProps {
 
 export const FlashCard = ({ card, onAnswer }: IDefaultFlashCardProps) => {
   const [frontChecked, setFrontChecked] = useState(false);
+  const [downloadUrl, loading, error] = useDownloadURL(
+    firebase.storage().ref(card.image_url)
+  );
+
+  if (error || loading) {
+    console.log("loading image");
+  }
 
   const onFrontChecked = () => {
     setFrontChecked(true);
@@ -40,7 +50,7 @@ export const FlashCard = ({ card, onAnswer }: IDefaultFlashCardProps) => {
   return (
     <View>
       <View style={styles.card}>
-        <Image style={styles.image} source={getCardImage(card.image_url)} />
+        <Image style={styles.image} source={{ uri: downloadUrl }} />
         <View style={styles.content}>
           {!frontChecked && <Title style={styles.title}>¿Qué es esto?</Title>}
           {frontChecked && (

@@ -7,12 +7,8 @@ import "firebase/storage";
 import { StatusIcon } from "./StatusIcon";
 import { Play } from "./Play";
 import { Lesson } from "../interfaces/lesson.interface";
-import { getDeckImage } from "../utils/getDeckImage";
 import { getStatusMessage } from "../utils/getStatusMessage";
 import { getStatusColor } from "../utils/getStatusColor";
-
-import { getImage } from "../../../api/firebase";
-
 interface ILessonOptionProps {
   lesson: any;
   status: number;
