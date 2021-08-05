@@ -1,11 +1,11 @@
 import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/functions";
+import "firebase/storage";
 
 import { Alert } from "react-native";
 import * as Facebook from "expo-facebook";
 import * as Google from "expo-google-app-auth";
-import * as GoogleSignIn from "expo-google-sign-in";
 
 import { keys } from "../../config/keys";
 
@@ -41,7 +41,6 @@ export const signInWithGoogle = async () => {
       const googleProfileData = await firebase.auth().signInWithCredential(credential);
     }
   } catch ({ message }) {
-    console.log(message);
     alert('login: Error:' + message);
   }
 };
@@ -60,12 +59,11 @@ export const signInWithFacebook = async () => {
       const facebookProfileData = await firebase.auth().signInWithCredential(credential);
     }
   } catch ({ message }) {
-    console.log(message);
     alert(`Facebook Login Error: ${message}`);
   }
 };
 
-export const loggingOut = async () => {
+export const logOut = async () => {
   try {
     await firebase.auth().signOut();
   } catch (err) {
@@ -73,34 +71,19 @@ export const loggingOut = async () => {
   }
 };
 
-export const getLessons = async () => {
-  const db = firebase.firestore();
-  const lessons: any[] = [];
-
+export const getImage = async (image: string) => {
   try {
-    const decksSnapshots = await db.collection('decks').get();
-
-    decksSnapshots.forEach(doc => lessons.push(doc.data()))
-
-  } catch (e) {
-    console.log(e);
+    const imageRef = firebase.storage().ref(image);
+    const result = await imageRef.getDownloadURL();
+    console.log(result);
+    return result;
+  } catch ({ message }) {
+    console.log(message);
   }
+}
 
-  return lessons;
-};
-
-export const getLesson = async () => {
-  try {
-    const db = firebase.firestore();
-    db.collection("decks/colombian-slang/cards")
-      .get()
-      .then((querySnapshot) => {
-        // let lessons = [];
-        querySnapshot.forEach((doc) => {
-          console.log(`${doc.id} => ${doc.data()}`);
-        });
-      });
-  } catch (err) {
-    console.log(err);
-  }
-};
+// export const deleteUser = async (uid: string) => {
+//   try {
+//     await firebase.auth().deleteUser(uid)
+//   }
+// }

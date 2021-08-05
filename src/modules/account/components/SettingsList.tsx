@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { Button, List } from "react-native-paper";
 
+import { logOut } from "../../../api/firebase";
+
 interface IDefaultPlayProps {}
 
 export const SettingsList = () => {
@@ -49,7 +51,7 @@ export const SettingsList = () => {
         mode="contained"
         style={styles.button}
         labelStyle={styles.buttonText}
-        onPress={() => console.log("Pressed")}
+        onPress={() => logOut()}
       >
         LOG OUT
       </Button>

@@ -4,7 +4,6 @@ import {gql, GraphQLClient} from "graphql-request";
 const cors = require("cors")({ origin: true });
 
 admin.initializeApp(functions.config().firebase);
-console.log(functions.config());
 
 const client = new GraphQLClient("https://fancylingo.hasura.app/v1/graphql", {
   headers: {
@@ -35,7 +34,7 @@ exports.processSignUp = functions.auth.user().onCreate(async (user: any) => {
           { lesson_id: 4, status: 2, user_id: $uid },
           { lesson_id: 5, status: 2, user_id: $uid },
           { lesson_id: 6, status: 3, user_id: $uid },
-          { lesson_id: 1, status: 0, user_id: $uid },
+          { lesson_id: 7, status: 3, user_id: $uid },
         ], 
         on_conflict: { constraint: user_lesson_pkey, update_columns: [] }
       ) {
@@ -46,7 +45,6 @@ exports.processSignUp = functions.auth.user().onCreate(async (user: any) => {
 
   try {
     const data = await client.request(mutation, {uid: user.uid});
-    console.log(data);
 
     return data;
   } catch (e) {

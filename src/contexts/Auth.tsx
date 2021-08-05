@@ -38,7 +38,6 @@ export const AuthProvider = ({ children }: any) => {
         return;
       }
 
-      console.log(user);
       const token = await user.getIdToken();
       const idTokenResult = await user.getIdTokenResult();
       const hasuraClaim = idTokenResult.claims["https://hasura.io/jwt/claims"];

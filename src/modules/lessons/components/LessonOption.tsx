@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import { StyleSheet, View, Image, Text } from "react-native";
+import { useDownloadURL } from "react-firebase-hooks/storage";
+import firebase from "firebase/app";
+import "firebase/storage";
 
 import { StatusIcon } from "./StatusIcon";
 import { Play } from "./Play";
@@ -7,6 +10,8 @@ import { Lesson } from "../interfaces/lesson.interface";
 import { getDeckImage } from "../utils/getDeckImage";
 import { getStatusMessage } from "../utils/getStatusMessage";
 import { getStatusColor } from "../utils/getStatusColor";
+
+import { getImage } from "../../../api/firebase";
 
 interface ILessonOptionProps {
   lesson: any;
@@ -19,9 +24,17 @@ export const LessonOption = ({
   status,
   onPress,
 }: ILessonOptionProps) => {
+  const [downloadUrl, loading, error] = useDownloadURL(
+    firebase.storage().ref(lesson.image_url)
+  );
+
+  if (error || loading) {
+    console.log("loading image");
+  }
+
   return (
     <View style={styles.lesson}>
-      <Image style={styles.image} source={getDeckImage(lesson.image_url)} />
+      <Image style={styles.image} source={{ uri: downloadUrl }} />
       <View style={styles.lessonInfo}>
         <Text style={styles.lessonTitle}>{lesson.name}</Text>
         <StatusIcon
