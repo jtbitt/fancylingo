@@ -3,10 +3,13 @@ import * as SecureStore from "expo-secure-store";
 import firebase from "firebase/app";
 import "firebase/auth";
 
+import { logOut } from "../api/firebase";
+
 type AuthContextData = {
   uid: string;
   token: string | null;
   loading: boolean;
+  signOut: any;
 };
 
 type AuthUser = {
@@ -72,9 +75,20 @@ export const AuthProvider = ({ children }: any) => {
     });
   }, []);
 
+  const signOut = async () => {
+    logOut();
+    setAuthUser({ uid: "", token: "" });
+    await SecureStore.deleteItemAsync("token");
+  };
+
   return (
     <AuthContext.Provider
-      value={{ uid: authUser.uid, token: authUser.token, loading: loading }}
+      value={{
+        uid: authUser.uid,
+        token: authUser.token,
+        loading: loading,
+        signOut,
+      }}
     >
       {children}
     </AuthContext.Provider>

@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { Button, List } from "react-native-paper";
 
-import { logOut } from "../../../api/firebase";
+import { useAuth } from "../../../contexts/Auth";
 
 interface IDefaultPlayProps {}
 
 export const SettingsList = () => {
+  const { signOut } = useAuth();
+
   return (
     <View style={styles.container}>
       <List.Item
@@ -51,7 +53,7 @@ export const SettingsList = () => {
         mode="contained"
         style={styles.button}
         labelStyle={styles.buttonText}
-        onPress={() => logOut()}
+        onPress={() => signOut()}
       >
         LOG OUT
       </Button>
