@@ -19,9 +19,14 @@ export const LessonStack = () => {
           shadowRadius: 5,
         },
         headerTintColor: "#3D3C3C",
+        headerBackTitleVisible: false,
       }}
     >
-      <Stack.Screen name="LessonList" component={LessonList} />
+      <Stack.Screen
+        name="LessonList"
+        component={LessonList}
+        options={{ title: "¡Bienvenido!" }}
+      />
       <Stack.Screen name="Lesson" component={Lesson} />
       <Stack.Screen name="Congrats" component={Congrats} />
       <Stack.Screen name="Store" component={Store} />

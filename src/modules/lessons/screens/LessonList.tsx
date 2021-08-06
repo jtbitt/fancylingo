@@ -66,6 +66,7 @@ export const LessonList = ({ navigation }: any) => {
                 onPress={() =>
                   navigation.navigate("Lesson", {
                     lessonId: lesson.lesson.lesson_id,
+                    lessonName: lesson.lesson.name,
                   })
                 }
               />

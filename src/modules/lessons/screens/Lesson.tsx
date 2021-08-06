@@ -11,11 +11,13 @@ interface IDefaultDeckProps {
 }
 
 export const Lesson = ({ route, navigation }: any) => {
-  const { lessonId } = route.params;
+  const { lessonId, lessonName } = route.params;
   const { loading, error, data } = useQuery(GetDeck, {
     variables: { lessonId: 1 },
   });
   const [currentCard, setCurrentCard] = useState(0);
+  // set lesson title
+  navigation.setOptions({ title: lessonName });
 
   const onAnswerChosen = () => {
     if (currentCard === data.lesson_cards.length - 1) {
