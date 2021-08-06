@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { StyleSheet, View, TouchableOpacity, Image, Text } from "react-native";
-
-import { getCardImage } from "../utils/getCardImage";
+import { useDownloadURL } from "react-firebase-hooks/storage";
+import firebase from "firebase/app";
+import "firebase/storage";
 
 interface IDefaultSavedCardProps {
   card: any;
@@ -9,9 +10,17 @@ interface IDefaultSavedCardProps {
 }
 
 export const SavedCard = ({ card, onPress }: IDefaultSavedCardProps) => {
+  const [downloadUrl, loading, error] = useDownloadURL(
+    firebase.storage().ref(card.image_url)
+  );
+
+  if (error || loading) {
+    console.log("loading image");
+  }
+
   return (
     <TouchableOpacity style={styles.card} onPress={onPress}>
-      <Image style={styles.cover} source={getCardImage(card.image_url)} />
+      <Image style={styles.cover} source={{ uri: downloadUrl }} />
       <View style={styles.content}>
         <Text style={styles.title}>{card.word}</Text>
       </View>

@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { StyleSheet, View, Image } from "react-native";
 import { Title, Subheading, Text } from "react-native-paper";
-
-// import { ProductInfo } from "../interfaces/product.interface";
-import { getDeckImage } from "../utils/getDeckImage";
+import { useDownloadURL } from "react-firebase-hooks/storage";
+import firebase from "firebase/app";
+import "firebase/storage";
 
 interface IDefaultProductProps {
   product: any;
@@ -11,9 +11,18 @@ interface IDefaultProductProps {
 }
 
 export const Product = ({ product, onPress }: IDefaultProductProps) => {
+  const [downloadUrl, loading, error] = useDownloadURL(
+    firebase.storage().ref(product.image_url)
+  );
+
+  if (error || loading) {
+    console.log(product);
+    console.log("loading image");
+  }
+
   return (
     <View style={styles.card}>
-      <Image style={styles.image} source={getDeckImage(product.image_url)} />
+      <Image style={styles.image} source={{ uri: downloadUrl }} />
       <View style={styles.content}>
         <Title style={styles.title}>{product.name}</Title>
         <Subheading style={styles.description}>
