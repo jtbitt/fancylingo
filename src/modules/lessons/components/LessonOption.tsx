@@ -3,6 +3,7 @@ import { StyleSheet, View, Image, Text } from "react-native";
 import { useDownloadURL } from "react-firebase-hooks/storage";
 import firebase from "firebase/app";
 import "firebase/storage";
+import { ActivityIndicator, Colors } from "react-native-paper";
 
 import { StatusIcon } from "./StatusIcon";
 import { Play } from "./Play";
@@ -25,7 +26,7 @@ export const LessonOption = ({
   );
 
   if (error || loading) {
-    console.log("loading image");
+    console.log("loading");
   }
 
   return (

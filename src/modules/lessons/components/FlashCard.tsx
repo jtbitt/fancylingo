@@ -4,6 +4,7 @@ import {
   Button,
   IconButton,
   Colors,
+  ActivityIndicator,
   Title,
   Subheading,
 } from "react-native-paper";
@@ -13,7 +14,6 @@ import "firebase/storage";
 
 import { Play } from "./Play";
 import { Card } from "../interfaces/lesson.interface";
-import { getCardImage } from "../utils/getCardImage";
 
 interface IDefaultFlashCardProps {
   card: Card;
@@ -27,7 +27,7 @@ export const FlashCard = ({ card, onAnswer }: IDefaultFlashCardProps) => {
   );
 
   if (error || loading) {
-    console.log("loading image");
+    console.log("loading");
   }
 
   const onFrontChecked = () => {
