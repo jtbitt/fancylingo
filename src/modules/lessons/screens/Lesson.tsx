@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, View, Text } from "react-native";
+import { HeaderBackButton } from "@react-navigation/stack";
+import { StyleSheet, View, Text, Button } from "react-native";
 import {
   ProgressBar,
   Colors,
   ActivityIndicator,
   Provider,
+  Portal,
 } from "react-native-paper";
 import { useQuery } from "@apollo/client";
 
@@ -23,22 +25,22 @@ export const Lesson = ({ route, navigation }: any) => {
   });
   const [currentCard, setCurrentCard] = useState(0);
   const [modalVisible, setModalVisible] = useState(false);
+
+  React.useLayoutEffect(() => {
+    navigation.setOptions({
+      headerLeft: () => (
+        <HeaderBackButton onPress={() => setModalVisible(true)} />
+      ),
+    });
+  }, [navigation]);
   // set lesson title
   // navigation.setOptions({ title: lessonName });
 
-  useEffect(
-    () =>
-      navigation.addListener("beforeRemove", (e: any) => {
-        // Prevent user from automatically leaving the screen
-        e.preventDefault();
-        // Prompt the user before leaving the screen
-        setModalVisible(true);
-      }),
-    [navigation]
-  );
-
-  const onModalChecked = (visibility: boolean) => {
-    setModalVisible(visibility);
+  const onModalChecked = (exit: boolean) => {
+    setModalVisible(false);
+    if (exit) {
+      navigation.navigate("LessonList");
+    }
   };
 
   const onAnswerChosen = () => {
@@ -59,8 +61,8 @@ export const Lesson = ({ route, navigation }: any) => {
 
   return (
     <Provider>
+      <LessonModal visible={modalVisible} onDismiss={onModalChecked} />
       <View style={styles.container}>
-        <LessonModal visible={modalVisible} onDismiss={onModalChecked} />
         <View>
           <ProgressBar
             style={styles.progress}

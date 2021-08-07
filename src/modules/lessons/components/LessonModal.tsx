@@ -8,20 +8,21 @@ import {
   Title,
   Subheading,
 } from "react-native-paper";
+import { StackActions } from "@react-navigation/native";
 
 interface ILessonModalProps {
   visible: boolean;
-  onDismiss: (visible: boolean) => void;
+  onDismiss: (exit: boolean) => void;
 }
 
-export const LessonModal = ({ visible, onDismiss }: any) => {
+export const LessonModal = ({ visible, onDismiss }: ILessonModalProps) => {
   const alert = "../assets/alert.png";
   return (
     <Portal>
       <Modal
         visible={visible}
-        onDismiss={() => onDismiss(false)}
         contentContainerStyle={styles.container}
+        onDismiss={() => onDismiss(false)}
       >
         <View style={styles.content}>
           <Image
@@ -55,7 +56,7 @@ export const LessonModal = ({ visible, onDismiss }: any) => {
               ]}
               labelStyle={{ color: "white" }}
               mode="outlined"
-              onPress={() => console.log("cool")}
+              onPress={() => onDismiss(true)}
             >
               YES, CLOSE
             </Button>
@@ -70,7 +71,7 @@ export const LessonModal = ({ visible, onDismiss }: any) => {
               ]}
               labelStyle={{ color: "#A0149E" }}
               mode="outlined"
-              onPress={() => console.log("cool")}
+              onPress={() => onDismiss(false)}
             >
               DO THE LESSON
             </Button>
