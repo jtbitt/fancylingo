@@ -9,20 +9,20 @@ import * as Google from "expo-google-app-auth";
 
 import { keys } from "../../config/keys";
 
-export const registration = async (email: string, password: string, lastName: string, firstName: string) => {
+export const signUp = async (email: string, password: string) => {
   try {
     await firebase.auth().createUserWithEmailAndPassword(email, password);
     const currentUser = firebase.auth().currentUser;
-  } catch (err) {
-    Alert.alert("There is something wrong!!!!", err.message);
+  } catch ({ message }) {
+    Alert.alert("Error", message);
   }
 };
 
 export const signIn = async (email: string, password: string) => {
   try {
     await firebase.auth().signInWithEmailAndPassword(email, password);
-  } catch (err) {
-    Alert.alert("There is something wrong!", err.message);
+  } catch ({ message }) {
+    Alert.alert("Error", message);
   }
 };
 
@@ -41,7 +41,7 @@ export const signInWithGoogle = async () => {
       const googleProfileData = await firebase.auth().signInWithCredential(credential);
     }
   } catch ({ message }) {
-    alert('login: Error:' + message);
+    Alert.alert('login: Error:' + message);
   }
 };
 
@@ -59,31 +59,14 @@ export const signInWithFacebook = async () => {
       const facebookProfileData = await firebase.auth().signInWithCredential(credential);
     }
   } catch ({ message }) {
-    alert(`Facebook Login Error: ${message}`);
+    Alert.alert(`Facebook Login Error: ${message}`);
   }
 };
 
 export const logOut = async () => {
   try {
     await firebase.auth().signOut();
-  } catch (err) {
-    Alert.alert("There is something wrong!", err.message);
+  } catch ({ message }) {
+    Alert.alert("There is an issue with the system");
   }
 };
-
-export const getImage = async (image: string) => {
-  try {
-    const imageRef = firebase.storage().ref(image);
-    const result = await imageRef.getDownloadURL();
-    console.log(result);
-    return result;
-  } catch ({ message }) {
-    console.log(message);
-  }
-}
-
-// export const deleteUser = async (uid: string) => {
-//   try {
-//     await firebase.auth().deleteUser(uid)
-//   }
-// }

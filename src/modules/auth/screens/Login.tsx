@@ -2,10 +2,16 @@ import React, { useState } from "react";
 import { StyleSheet, View, Image } from "react-native";
 import { Button, HelperText, TextInput } from "react-native-paper";
 
-import { signInWithGoogle, signInWithFacebook } from "../../../api/firebase";
+import {
+  signUp,
+  signIn,
+  signInWithGoogle,
+  signInWithFacebook,
+} from "../../../api/firebase";
 
 export const Login = () => {
-  const [text, setText] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   return (
     <View style={styles.container}>
@@ -39,8 +45,8 @@ export const Login = () => {
           style={styles.input}
           mode="outlined"
           label="Email"
-          value={text}
-          onChangeText={(text) => setText(text)}
+          value={email}
+          onChangeText={(email) => setEmail(email)}
         />
         <HelperText type="error" visible={true}>
           Ex. myuser@gmail.com
@@ -49,20 +55,28 @@ export const Login = () => {
           style={[styles.input, styles.inputSpacing]}
           mode="outlined"
           label="Password"
-          value={text}
-          onChangeText={(text) => setText(text)}
+          value={password}
+          onChangeText={(password) => setPassword(password)}
         />
         <HelperText type="error" visible={true}>
           Check your password
         </HelperText>
       </View>
       <Button
-        style={styles.button}
+        style={[styles.button, { width: "80%" }]}
         labelStyle={styles.buttonText}
         mode="contained"
-        onPress={() => console.log("Pressed")}
+        onPress={() => signIn(email, password)}
       >
-        LOG IN WITH YOUR ACCOUNT
+        LOG IN
+      </Button>
+      <Button
+        style={[styles.button, { width: "80%" }]}
+        labelStyle={styles.buttonText}
+        mode="contained"
+        onPress={() => signUp(email, password)}
+      >
+        CREATE ACCOUNT
       </Button>
     </View>
   );

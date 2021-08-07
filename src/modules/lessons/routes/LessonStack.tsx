@@ -5,7 +5,6 @@ import { LessonList } from "../screens/LessonList";
 import { Lesson } from "../screens/Lesson";
 import { Congrats } from "../screens/Congrats";
 import { Store } from "../screens/Store";
-import { LessonModal } from "../components/LessonModal";
 
 const Stack = createStackNavigator();
 
