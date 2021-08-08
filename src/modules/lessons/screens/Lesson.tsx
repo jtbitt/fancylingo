@@ -8,9 +8,10 @@ import {
   Provider,
   Portal,
 } from "react-native-paper";
-import { useQuery } from "@apollo/client";
+import { useQuery, useMutation } from "@apollo/client";
+import { useAuth } from "../../../contexts/Auth";
 
-import { GetDeck } from "../graphql/lessonQueries.graphql";
+import { GetDeck, SaveCard } from "../graphql/lessonQueries.graphql";
 import { FlashCard } from "../components/FlashCard";
 import { LessonModal } from "../components/LessonModal";
 
@@ -19,10 +20,12 @@ interface IDefaultDeckProps {
 }
 
 export const Lesson = ({ route, navigation }: any) => {
+  const { uid } = useAuth();
   const { lessonId, lessonName } = route.params;
   const { loading, error, data } = useQuery(GetDeck, {
     variables: { lessonId: 1 },
   });
+  const [saveCard] = useMutation(SaveCard);
   const [currentCard, setCurrentCard] = useState(0);
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -51,6 +54,12 @@ export const Lesson = ({ route, navigation }: any) => {
     }
   };
 
+  const onCardSaved = () => {
+    saveCard({
+      variables: { uid: uid, cardId: data.lesson_cards[currentCard].card_id },
+    });
+  };
+
   if (error) {
     return <Text>Error: {JSON.stringify(error)}</Text>;
   }
@@ -72,6 +81,7 @@ export const Lesson = ({ route, navigation }: any) => {
           <FlashCard
             card={data.lesson_cards[currentCard].card}
             onAnswer={onAnswerChosen}
+            onSaved={onCardSaved}
           />
         </View>
       </View>

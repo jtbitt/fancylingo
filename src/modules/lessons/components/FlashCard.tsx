@@ -20,13 +20,13 @@ interface IDefaultFlashCardProps {
   onAnswer: (answer: boolean) => void;
 }
 
-export const FlashCard = ({ card, onAnswer }: IDefaultFlashCardProps) => {
+export const FlashCard = ({ card, onAnswer, onSaved }: any) => {
   const [frontChecked, setFrontChecked] = useState(false);
-  const [downloadUrl, loading, error] = useDownloadURL(
+  const [downloadUrl, loadingUrl, errorUrl] = useDownloadURL(
     firebase.storage().ref(card.image_url)
   );
 
-  if (error || loading) {
+  if (errorUrl || loadingUrl) {
     console.log("loading");
   }
 
@@ -41,10 +41,11 @@ export const FlashCard = ({ card, onAnswer }: IDefaultFlashCardProps) => {
 
   const onPlayAudio = () => {
     // play audio from s3
+    console.log("audio");
   };
 
-  const onBookmark = () => {
-    // save the card to review later
+  const onCardSaved = () => {
+    onSaved();
   };
 
   return (
@@ -64,7 +65,7 @@ export const FlashCard = ({ card, onAnswer }: IDefaultFlashCardProps) => {
                   icon="bookmark-outline"
                   color={Colors.red500}
                   size={40}
-                  onPress={onBookmark}
+                  onPress={onCardSaved}
                 />
               </View>
             </View>

@@ -50,3 +50,12 @@ query GetDeck($lessonId: Int!) {
     }
   }
 }
+
+mutation SaveCard($uid: String!, $cardId: Int!) {
+  insert_user_cards(
+    objects: { card_id: $cardId, saved: true, score: 0, user_id: $uid }
+    on_conflict: { constraint: user_cards_pkey, update_columns: [] }
+  ) {
+    affected_rows
+  }
+}
