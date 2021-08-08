@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { HeaderBackButton } from "@react-navigation/stack";
-import { StyleSheet, View, Text, Button } from "react-native";
+import { StyleSheet, View, Text, Button, Alert } from "react-native";
 import {
   ProgressBar,
   Colors,
@@ -58,6 +58,7 @@ export const Lesson = ({ route, navigation }: any) => {
     saveCard({
       variables: { uid: uid, cardId: data.lesson_cards[currentCard].card_id },
     });
+    Alert.alert("Success", "Card successfully saved");
   };
 
   if (error) {
