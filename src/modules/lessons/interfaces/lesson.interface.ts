@@ -1,8 +1,11 @@
 export interface Lesson {
-  id: number;
+  lesson_id: number;
   name: string;
-  status: string;
+  description: string;
+  sales_description: string;
+  price: string;
   image: string;
+  status: number;
 }
 
 export interface Card {
