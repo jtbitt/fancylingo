@@ -29,6 +29,8 @@ export const LessonOption = ({
     console.log("loading");
   }
 
+  console.log(downloadUrl);
+
   return (
     <View style={styles.lesson}>
       <Image style={styles.image} source={{ uri: downloadUrl }} />

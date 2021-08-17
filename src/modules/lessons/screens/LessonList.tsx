@@ -10,10 +10,10 @@ import { LessonAlert } from "../components/LessonAlert";
 import { LessonOption } from "../components/LessonOption";
 
 export const LessonList = ({ navigation }: any) => {
-  const { data } = useQueryHandler(GetLessons);
-  const { lessons } = useLessons(data);
+  const { queryData } = useQueryHandler(GetLessons);
+  const { lessons } = useLessons(queryData);
 
-  if (!lessons || !lessons.length) {
+  if (!lessons) {
     return <></>;
   }
 

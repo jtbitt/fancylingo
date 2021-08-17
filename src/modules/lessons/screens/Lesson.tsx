@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useLayoutEffect } from "react";
 import { HeaderBackButton } from "@react-navigation/stack";
 import { StyleSheet, View, Text, Button, Alert } from "react-native";
 import {
@@ -9,7 +9,8 @@ import {
   Portal,
 } from "react-native-paper";
 import { useQuery, useMutation } from "@apollo/client";
-import { useAuth } from "../../../contexts/Auth";
+
+import { useQueryHandler, useMutationHandler, useCards } from "../hooks";
 
 import { GetDeck, SaveCard } from "../graphql/lessonQueries.graphql";
 import { FlashCard } from "../components/FlashCard";
@@ -20,16 +21,14 @@ interface IDefaultDeckProps {
 }
 
 export const Lesson = ({ route, navigation }: any) => {
-  const { uid } = useAuth();
   const { lessonId, lessonName } = route.params;
-  const { loading, error, data } = useQuery(GetDeck, {
-    variables: { lessonId: 1 },
-  });
-  const [saveCard] = useMutation(SaveCard);
+  const { queryData } = useQueryHandler(GetDeck, { lessonId: 1 });
+  const { cards } = useCards(queryData);
+  const { mutationData, setMutation } = useMutationHandler(SaveCard);
   const [currentCard, setCurrentCard] = useState(0);
   const [modalVisible, setModalVisible] = useState(false);
 
-  React.useLayoutEffect(() => {
+  useLayoutEffect(() => {
     navigation.setOptions({
       headerLeft: () => (
         <HeaderBackButton onPress={() => setModalVisible(true)} />
@@ -39,6 +38,10 @@ export const Lesson = ({ route, navigation }: any) => {
   // set lesson title
   // navigation.setOptions({ title: lessonName });
 
+  if (!cards) {
+    return <></>;
+  }
+
   const onModalChecked = (exit: boolean) => {
     setModalVisible(false);
     if (exit) {
@@ -47,7 +50,7 @@ export const Lesson = ({ route, navigation }: any) => {
   };
 
   const onAnswerChosen = () => {
-    if (currentCard === data.lesson_cards.length - 1) {
+    if (currentCard === cards.length - 1) {
       navigation.navigate("Congrats");
     } else {
       setCurrentCard(currentCard + 1);
@@ -55,19 +58,11 @@ export const Lesson = ({ route, navigation }: any) => {
   };
 
   const onCardSaved = () => {
-    saveCard({
-      variables: { uid: uid, cardId: data.lesson_cards[currentCard].card_id },
+    setMutation({
+      variables: { cardId: cards[currentCard].card_id },
     });
     Alert.alert("Success", "Card successfully saved");
   };
-
-  if (error) {
-    return <Text>Error: {JSON.stringify(error)}</Text>;
-  }
-
-  if (loading) {
-    return <ActivityIndicator animating={true} color={Colors.red800} />;
-  }
 
   return (
     <Provider>
@@ -80,7 +75,7 @@ export const Lesson = ({ route, navigation }: any) => {
             color={Colors.red800}
           />
           <FlashCard
-            card={data.lesson_cards[currentCard].card}
+            card={cards[currentCard]}
             onAnswer={onAnswerChosen}
             onSaved={onCardSaved}
           />

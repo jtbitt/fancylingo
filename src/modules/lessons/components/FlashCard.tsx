@@ -21,6 +21,7 @@ interface IDefaultFlashCardProps {
 }
 
 export const FlashCard = ({ card, onAnswer, onSaved }: any) => {
+  console.log(card);
   const [frontChecked, setFrontChecked] = useState(false);
   const [downloadUrl, loadingUrl, errorUrl] = useDownloadURL(
     firebase.storage().ref(card.image_url)
