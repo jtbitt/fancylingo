@@ -7,7 +7,6 @@ export const useCards = (data: any) => {
     if (data) {
       const cards = [...data].map((card: any) => {
         let cardObj = {...card.card};
-        cardObj['card_id'] = card.card_id;
         return cardObj;
       });
       setCards(cards);

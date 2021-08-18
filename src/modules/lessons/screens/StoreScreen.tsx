@@ -2,34 +2,28 @@ import React from "react";
 import { StyleSheet, ScrollView, View, Text } from "react-native";
 import { Title } from "react-native-paper";
 import { ActivityIndicator, Colors } from "react-native-paper";
-import { useQuery } from "@apollo/client";
 
-import { useAuth } from "../../../contexts/Auth";
+import { useQueryHandler } from "../../.,/../../hooks";
+import { useLessons } from "../hooks";
 import { GetLessons } from "../graphql/lessonQueries.graphql";
 import { Product } from "../components/Product";
 import { Subscription } from "../components/Subscription";
 
-export const Store = ({ navigation }: any) => {
-  const { uid } = useAuth();
-  const { loading, error, data } = useQuery(GetLessons, {
-    variables: { uid: uid },
-  });
+export const StoreScreen = ({ navigation }: any) => {
+  const { queryData } = useQueryHandler(GetLessons);
+  const { lessons } = useLessons(queryData);
 
-  if (error) {
-    return <Text>Error: {JSON.stringify(error)}</Text>;
-  }
-
-  if (loading) {
-    return <ActivityIndicator animating={true} color={Colors.red800} />;
+  if (!lessons) {
+    return <></>;
   }
 
   return (
     <View style={styles.container}>
       <Title style={styles.title}>Go farther with your Spanish</Title>
       <ScrollView horizontal={true}>
-        {data.user_lessons.map((lesson: any, i: number) => (
+        {lessons.map((lesson: any, i: number) => (
           <Product
-            product={lesson.lesson}
+            product={lesson}
             key={i}
             onPress={() => console.log("cool")}
           />

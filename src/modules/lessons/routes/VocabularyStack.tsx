@@ -1,8 +1,8 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 
-import { VocabularyList } from "../screens/VocabularyList";
-import { VocabularyWord } from "../screens/VocabularyWord";
+import { VocabularyListScreen } from "../screens/VocabularyListScreen";
+import { VocabularyWordScreen } from "../screens/VocabularyWordScreen";
 
 const Stack = createStackNavigator();
 
@@ -19,8 +19,8 @@ export const VocabularyStack = () => {
         headerTintColor: "#3D3C3C",
       }}
     >
-      <Stack.Screen name="Vocabulary" component={VocabularyList} />
-      <Stack.Screen name="Vocabulary Word" component={VocabularyWord} />
+      <Stack.Screen name="Vocabulary" component={VocabularyListScreen} />
+      <Stack.Screen name="Vocabulary Word" component={VocabularyWordScreen} />
     </Stack.Navigator>
   );
 };

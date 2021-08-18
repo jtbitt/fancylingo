@@ -2,14 +2,15 @@ import React, { useEffect } from "react";
 import { StyleSheet, Text, View, ScrollView } from "react-native";
 import { ActivityIndicator, Colors } from "react-native-paper";
 
-import { useQueryHandler, useLessons } from "../hooks";
+import { useQueryHandler } from "../../.,/../../hooks";
+import { useLessons } from "../hooks";
 import { GetLessons } from "../graphql/lessonQueries.graphql";
 
 import { DefaultLesson } from "../components/DefaultLesson";
 import { LessonAlert } from "../components/LessonAlert";
 import { LessonOption } from "../components/LessonOption";
 
-export const LessonList = ({ navigation }: any) => {
+export const LessonListScreen = ({ navigation }: any) => {
   const { queryData } = useQueryHandler(GetLessons);
   const { lessons } = useLessons(queryData);
 

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { StyleSheet, View, Image } from "react-native";
 import { Title, Text, Button } from "react-native-paper";
 
-export const Congrats = ({ navigation }: any) => {
+export const CongratsScreen = ({ navigation }: any) => {
   return (
     <View style={styles.container}>
       <Title style={styles.title}>¡Felicitaciones!</Title>

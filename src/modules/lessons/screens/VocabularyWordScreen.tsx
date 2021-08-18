@@ -3,6 +3,8 @@ import { StyleSheet, View, Text } from "react-native";
 import { ProgressBar, Colors, ActivityIndicator } from "react-native-paper";
 import { useQuery } from "@apollo/client";
 
+import { useQueryHandler } from "../../.,/../../hooks";
+import { useCards } from "../hooks";
 import { GetCard } from "../graphql/lessonQueries.graphql";
 import { FlashCard } from "../components/FlashCard";
 
@@ -10,28 +12,17 @@ interface IDefaultVocabularyWordProps {
   deckId: number;
 }
 
-export const VocabularyWord = ({ route, navigation }: any) => {
-  const { cardId } = route.params;
-  const { loading, error, data } = useQuery(GetCard, {
-    variables: { cardId: cardId },
-  });
+export const VocabularyWordScreen = ({ route, navigation }: any) => {
+  const { card } = route.params;
 
   const onAnswerChosen = () => {
     navigation.navigate("Vocabulary");
   };
 
-  if (error) {
-    return <Text>Error: {JSON.stringify(error)}</Text>;
-  }
-
-  if (loading) {
-    return <ActivityIndicator animating={true} color={Colors.red800} />;
-  }
-
   return (
     <View style={styles.container}>
       <View>
-        <FlashCard card={data.cards[0]} onAnswer={onAnswerChosen} />
+        <FlashCard card={card} onAnswer={onAnswerChosen} />
       </View>
     </View>
   );

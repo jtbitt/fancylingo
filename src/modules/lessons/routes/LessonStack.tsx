@@ -1,10 +1,10 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 
-import { LessonList } from "../screens/LessonList";
-import { Lesson } from "../screens/Lesson";
-import { Congrats } from "../screens/Congrats";
-import { Store } from "../screens/Store";
+import { LessonListScreen } from "../screens/LessonListScreen";
+import { LessonScreen } from "../screens/LessonScreen";
+import { CongratsScreen } from "../screens/CongratsScreen";
+import { StoreScreen } from "../screens/StoreScreen";
 
 const Stack = createStackNavigator();
 
@@ -24,12 +24,12 @@ export const LessonStack = () => {
     >
       <Stack.Screen
         name="LessonList"
-        component={LessonList}
+        component={LessonListScreen}
         options={{ title: "¡Bienvenido!" }}
       />
-      <Stack.Screen name="Lesson" component={Lesson} />
-      <Stack.Screen name="Congrats" component={Congrats} />
-      <Stack.Screen name="Store" component={Store} />
+      <Stack.Screen name="Lesson" component={LessonScreen} />
+      <Stack.Screen name="Congrats" component={CongratsScreen} />
+      <Stack.Screen name="Store" component={StoreScreen} />
     </Stack.Navigator>
   );
 };

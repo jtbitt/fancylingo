@@ -8,11 +8,11 @@ import {
   Provider,
   Portal,
 } from "react-native-paper";
-import { useQuery, useMutation } from "@apollo/client";
 
-import { useQueryHandler, useMutationHandler, useCards } from "../hooks";
+import { useQueryHandler, useMutationHandler } from "../../.,/../../hooks";
+import { useCards } from "../hooks";
 
-import { GetDeck, SaveCard } from "../graphql/lessonQueries.graphql";
+import { GetCards, SaveCard } from "../graphql/lessonQueries.graphql";
 import { FlashCard } from "../components/FlashCard";
 import { LessonModal } from "../components/LessonModal";
 
@@ -20,9 +20,9 @@ interface IDefaultDeckProps {
   deckId: number;
 }
 
-export const Lesson = ({ route, navigation }: any) => {
+export const LessonScreen = ({ route, navigation }: any) => {
   const { lessonId, lessonName } = route.params;
-  const { queryData } = useQueryHandler(GetDeck, { lessonId: 1 });
+  const { queryData } = useQueryHandler(GetCards, { lessonId: 1 });
   const { cards } = useCards(queryData);
   const { mutationData, setMutation } = useMutationHandler(SaveCard);
   const [currentCard, setCurrentCard] = useState(0);
@@ -34,9 +34,8 @@ export const Lesson = ({ route, navigation }: any) => {
         <HeaderBackButton onPress={() => setModalVisible(true)} />
       ),
     });
+    navigation.setOptions({ title: lessonName });
   }, [navigation]);
-  // set lesson title
-  // navigation.setOptions({ title: lessonName });
 
   if (!cards) {
     return <></>;
@@ -59,7 +58,7 @@ export const Lesson = ({ route, navigation }: any) => {
 
   const onCardSaved = () => {
     setMutation({
-      variables: { cardId: cards[currentCard].card_id },
+      cardId: cards[currentCard].card_id,
     });
     Alert.alert("Success", "Card successfully saved");
   };
