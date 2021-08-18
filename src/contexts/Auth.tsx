@@ -3,7 +3,7 @@ import * as SecureStore from "expo-secure-store";
 import firebase from "firebase/app";
 import "firebase/auth";
 
-import { logOut } from "../api/firebase";
+import { useFirebase } from "../hooks";
 
 type AuthContextData = {
   uid: string;
@@ -20,6 +20,7 @@ type AuthUser = {
 export const AuthContext = React.createContext({} as AuthContextData);
 
 export const AuthProvider = ({ children }: any) => {
+  const { logOut } = useFirebase();
   const [authUser, setAuthUser] = useState<AuthUser>({ uid: "", token: "" });
   const [loading, setLoading] = useState(true);
 
@@ -65,7 +66,7 @@ export const AuthProvider = ({ children }: any) => {
           setAuthUser({ uid: user.uid, token: token });
           setLoading(false);
         } else {
-          // make sure yo uhave error boundary to catch it
+          // make sure you have error boundary to catch it
           // async / await maybe
           return response.json().then((e) => {
             throw e;

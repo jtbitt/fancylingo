@@ -2,14 +2,11 @@ import React, { useState } from "react";
 import { StyleSheet, View, Image } from "react-native";
 import { Button, HelperText, TextInput } from "react-native-paper";
 
-import {
-  signUp,
-  signIn,
-  signInWithGoogle,
-  signInWithFacebook,
-} from "../../../api/firebase";
+import { useFirebase } from "../../../hooks";
 
 export const Login = () => {
+  const { signUp, signIn, signInWithGoogle, signInWithFacebook } =
+    useFirebase();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
