@@ -4,10 +4,10 @@ import { useDownloadURL } from "react-firebase-hooks/storage";
 import firebase from "firebase/app";
 import "firebase/storage";
 
+import { useFirebase } from "../../../hooks";
 import { StatusIcon } from "./StatusIcon";
 import { Play } from "./Play";
 import { Lesson } from "../interfaces/lesson.interface";
-import { getDeckImage } from "../utils/getDeckImage";
 import { getStatusMessage } from "../utils/getStatusMessage";
 import { getStatusColor } from "../utils/getStatusColor";
 
@@ -22,17 +22,9 @@ export const DefaultLesson = ({
   onPress,
   status,
 }: IDefaultLessonProps) => {
-  const [downloadUrl, loading, error] = useDownloadURL(
-    firebase.storage().ref(lesson.image_url)
-  );
-
-  if (error || loading) {
-    console.log("loading image");
-  }
-
   return (
     <View style={styles.card}>
-      <Image style={styles.cover} source={{ uri: downloadUrl }} />
+      <Image style={styles.cover} source={{ uri: lesson.image_url }} />
       <View style={styles.content}>
         <Text style={styles.title}>{lesson.name}</Text>
         <StatusIcon

@@ -12,7 +12,7 @@ import { LessonOption } from "../components/LessonOption";
 
 export const LessonListScreen = ({ navigation }: any) => {
   const { queryData } = useQueryHandler(GetLessons);
-  const { lessons } = useLessons(queryData);
+  const { lessons } = useLessons(queryData, "lesson_images");
 
   if (!lessons) {
     return <></>;

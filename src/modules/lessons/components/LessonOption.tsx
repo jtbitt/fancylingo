@@ -21,19 +21,9 @@ export const LessonOption = ({
   status,
   onPress,
 }: ILessonOptionProps) => {
-  const [downloadUrl, loading, error] = useDownloadURL(
-    firebase.storage().ref(lesson.image_url)
-  );
-
-  if (error || loading) {
-    console.log("loading");
-  }
-
-  console.log(downloadUrl);
-
   return (
     <View style={styles.lesson}>
-      <Image style={styles.image} source={{ uri: downloadUrl }} />
+      <Image style={styles.image} source={{ uri: lesson.image_url }} />
       <View style={styles.lessonInfo}>
         <Text style={styles.lessonTitle}>{lesson.name}</Text>
         <StatusIcon

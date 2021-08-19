@@ -1,11 +1,6 @@
-import React, { useState } from "react";
+import React, { useLayoutEffect } from "react";
 import { StyleSheet, View, Text } from "react-native";
-import { ProgressBar, Colors, ActivityIndicator } from "react-native-paper";
-import { useQuery } from "@apollo/client";
 
-import { useQueryHandler } from "../../.,/../../hooks";
-import { useCards } from "../hooks";
-import { GetCard } from "../graphql/lessonQueries.graphql";
 import { FlashCard } from "../components/FlashCard";
 
 interface IDefaultVocabularyWordProps {
@@ -14,6 +9,10 @@ interface IDefaultVocabularyWordProps {
 
 export const VocabularyWordScreen = ({ route, navigation }: any) => {
   const { card } = route.params;
+
+  useLayoutEffect(() => {
+    navigation.setOptions({ title: card.word });
+  }, [navigation]);
 
   const onAnswerChosen = () => {
     navigation.navigate("Vocabulary");

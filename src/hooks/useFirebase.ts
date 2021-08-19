@@ -1,14 +1,17 @@
+import { useState } from "react";
+
 import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/functions";
 import "firebase/storage";
-import { Alert } from "react-native";
+import { Alert, OpaqueColorValue } from "react-native";
 import * as Facebook from "expo-facebook";
 import * as Google from "expo-google-app-auth";
 
 import { keys } from "../../config/keys";
 
 export const useFirebase = () => {
+  const [images, setImages] = useState<any[]>();
 
   const signUp = async (email: string, password: string) => {
     try {
@@ -72,5 +75,20 @@ export const useFirebase = () => {
     }
   };
 
-  return { signUp, signIn, signInWithGoogle, signInWithFacebook, logOut };
+  const getImages = async (imagePath: string) => {
+    try {
+      const imageRef = firebase.storage().ref().child(imagePath);
+      const imageList = await imageRef.listAll();
+      let imageUrls = imageList.items.map(async (itemRef) => {
+        return { name: itemRef.name, url: await itemRef.getDownloadURL() };
+      });
+      let imageDownloads = Promise.all(imageUrls);
+      let images = await imageDownloads;
+      setImages(images);
+    } catch ({ message }) {
+      console.log(message);
+    }
+  };
+
+  return { signUp, signIn, signInWithGoogle, signInWithFacebook, logOut, getImages, images };
 };
