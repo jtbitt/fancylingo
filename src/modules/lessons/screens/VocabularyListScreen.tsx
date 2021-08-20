@@ -9,7 +9,7 @@ import { SavedCard } from "../components/SavedCard";
 
 export const VocabularyListScreen = ({ navigation }: any) => {
   const { queryData } = useQueryHandler(GetUserCards);
-  const { cards } = useCards(queryData);
+  const { cards } = useCards(queryData, "card_images");
 
   if (!cards) {
     return <></>;

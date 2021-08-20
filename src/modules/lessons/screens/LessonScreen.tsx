@@ -23,7 +23,7 @@ interface IDefaultDeckProps {
 export const LessonScreen = ({ route, navigation }: any) => {
   const { lessonId, lessonName } = route.params;
   const { queryData } = useQueryHandler(GetCards, { lessonId: 1 });
-  const { cards } = useCards(queryData);
+  const { cards } = useCards(queryData, "card_images");
   const { mutationData, setMutation } = useMutationHandler(SaveCard);
   const [currentCard, setCurrentCard] = useState(0);
   const [modalVisible, setModalVisible] = useState(false);

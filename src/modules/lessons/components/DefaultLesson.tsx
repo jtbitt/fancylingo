@@ -1,8 +1,5 @@
 import React, { useState } from "react";
 import { StyleSheet, View, Image, Text } from "react-native";
-import { useDownloadURL } from "react-firebase-hooks/storage";
-import firebase from "firebase/app";
-import "firebase/storage";
 
 import { useFirebase } from "../../../hooks";
 import { StatusIcon } from "./StatusIcon";
