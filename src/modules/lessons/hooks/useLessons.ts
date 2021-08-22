@@ -4,11 +4,11 @@ import { useFirebase } from "../../../hooks";
 
 export const useLessons = (data: any, imagePath: string) => {
   const [lessons, setLessons] = useState<any[]>();
-  const { getImages, images } = useFirebase();
+  const { getMedia, images } = useFirebase();
 
   useEffect(() => {
     if (data) {
-      getImages(imagePath);
+      getMedia(imagePath, "image");
     }
   }, [data]);
 
