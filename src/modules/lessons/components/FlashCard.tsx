@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, View, Image } from "react-native";
 import {
   Button,
@@ -8,6 +8,7 @@ import {
   Title,
   Subheading,
 } from "react-native-paper";
+import { Audio } from "expo-av";
 
 import { Play } from "./Play";
 import { Card } from "../interfaces/lesson.interface";
@@ -19,6 +20,24 @@ interface IDefaultFlashCardProps {
 
 export const FlashCard = ({ card, onAnswer, onSaved }: any) => {
   const [frontChecked, setFrontChecked] = useState(false);
+  const [currentAudio, setCurrentAudio] = useState<any>();
+
+  useEffect(() => {
+    const getSound = async () => {
+      const { sound } = await Audio.Sound.createAsync(
+        { uri: card.audio_url },
+        { shouldPlay: false }
+      );
+      setCurrentAudio(sound);
+
+      return sound
+        ? () => {
+            sound.unloadAsync();
+          }
+        : undefined;
+    };
+    getSound();
+  }, [card]);
 
   const onFrontChecked = () => {
     setFrontChecked(true);
@@ -29,9 +48,8 @@ export const FlashCard = ({ card, onAnswer, onSaved }: any) => {
     setFrontChecked(false);
   };
 
-  const onPlayAudio = () => {
-    // play audio from s3
-    console.log("audio");
+  const onPlayAudio = async () => {
+    await currentAudio.replayAsync();
   };
 
   const onCardSaved = () => {
