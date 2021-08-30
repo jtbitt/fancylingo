@@ -159,6 +159,7 @@ const styles = StyleSheet.create({
   },
   cardOptions: {
     flexDirection: "row",
+    justifyContent: "space-between",
     alignItems: "center",
   },
   backButtons: {
@@ -166,6 +167,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   play: {
+    marginLeft: 12,
     backgroundColor: "#fc5a5e",
   },
   bookmark: {
