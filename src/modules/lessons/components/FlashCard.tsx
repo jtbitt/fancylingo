@@ -67,7 +67,7 @@ export const FlashCard = ({ card, onAnswer, onSaved }: any) => {
               <Title style={styles.title}>{card.word}</Title>
               <Subheading style={styles.ipa}>{card.ipa}</Subheading>
               <View style={styles.cardOptions}>
-                <Play size={35} onPress={onPlayAudio} />
+                <Play size={35} onPress={onPlayAudio} style={styles.play} />
                 <IconButton
                   style={styles.bookmark}
                   icon="bookmark-outline"
@@ -85,6 +85,7 @@ export const FlashCard = ({ card, onAnswer, onSaved }: any) => {
           style={[styles.button, { width: 200 }]}
           labelStyle={styles.buttonText}
           mode="contained"
+          color="#fc5a5e"
           onPress={onFrontChecked}
         >
           SEE ANSWER
@@ -96,6 +97,7 @@ export const FlashCard = ({ card, onAnswer, onSaved }: any) => {
             style={[styles.button, { width: 165 }]}
             labelStyle={styles.buttonText}
             mode="contained"
+            color="#fc5a5e"
             onPress={() => onAnswerSelected(false)}
           >
             REPEAT
@@ -104,6 +106,7 @@ export const FlashCard = ({ card, onAnswer, onSaved }: any) => {
             style={[styles.button, { width: 165 }]}
             labelStyle={styles.buttonText}
             mode="contained"
+            color="#fc5a5e"
             onPress={() => onAnswerSelected(true)}
           >
             NEXT
@@ -162,8 +165,11 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
   },
+  play: {
+    backgroundColor: "#fc5a5e",
+  },
   bookmark: {
-    width: 32,
+    width: 40,
     height: 50,
   },
   button: {
