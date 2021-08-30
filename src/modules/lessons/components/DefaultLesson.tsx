@@ -20,7 +20,7 @@ export const DefaultLesson = ({
   status,
 }: IDefaultLessonProps) => {
   return (
-    <View style={styles.card}>
+    <View style={[styles.card, styles.shadow]}>
       <Image style={styles.cover} source={{ uri: lesson.image_url }} />
       <View style={styles.content}>
         <Text style={styles.title}>{lesson.name}</Text>
@@ -40,7 +40,17 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginBottom: 20,
     borderRadius: 15,
-    backgroundColor: "rgba(255,255,255,0.48)",
+    backgroundColor: "#FFF6D7",
+  },
+  shadow: {
+    shadowColor: "rgba(0, 0, 0, 0.4)",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.23,
+    shadowRadius: 2.62,
+    elevation: 4,
   },
   cover: {
     height: 130,

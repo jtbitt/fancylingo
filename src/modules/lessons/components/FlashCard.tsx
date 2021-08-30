@@ -58,7 +58,7 @@ export const FlashCard = ({ card, onAnswer, onSaved }: any) => {
 
   return (
     <View>
-      <View style={styles.card}>
+      <View style={[styles.card, styles.shadow]}>
         <Image style={styles.image} source={{ uri: card.image_url }} />
         <View style={styles.content}>
           {!frontChecked && <Title style={styles.title}>¿Qué es esto?</Title>}
@@ -118,6 +118,17 @@ const styles = StyleSheet.create({
   card: {
     marginBottom: 30,
     borderRadius: 15,
+    backgroundColor: "#FFF6D7",
+  },
+  shadow: {
+    shadowColor: "rgba(0, 0, 0, 0.4)",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.23,
+    shadowRadius: 2.62,
+    elevation: 4,
   },
   image: {
     resizeMode: "cover",
@@ -126,7 +137,6 @@ const styles = StyleSheet.create({
     borderRadius: 15,
   },
   content: {
-    backgroundColor: "rgba(255,255,255,0.48)",
     alignItems: "center",
     justifyContent: "center",
     height: 175,

@@ -8,7 +8,7 @@ interface IDefaultSavedCardProps {
 
 export const SavedCard = ({ card, onPress }: IDefaultSavedCardProps) => {
   return (
-    <TouchableOpacity style={styles.card} onPress={onPress}>
+    <TouchableOpacity style={[styles.card, styles.shadow]} onPress={onPress}>
       <Image style={styles.cover} source={{ uri: card.image_url }} />
       <View style={styles.content}>
         <Text style={styles.title}>{card.word}</Text>
@@ -22,7 +22,17 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginBottom: 20,
     borderRadius: 15,
-    backgroundColor: "rgba(255,255,255,0.48)",
+    backgroundColor: "#FFF6D7",
+  },
+  shadow: {
+    shadowColor: "rgba(0, 0, 0, 0.4)",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.23,
+    shadowRadius: 2.62,
+    elevation: 4,
   },
   cover: {
     height: 200,

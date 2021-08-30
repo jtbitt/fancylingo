@@ -3,7 +3,7 @@ import { StyleSheet, View, Image, Text } from "react-native";
 import { useDownloadURL } from "react-firebase-hooks/storage";
 import firebase from "firebase/app";
 import "firebase/storage";
-import { ActivityIndicator, Colors } from "react-native-paper";
+import { ActivityIndicator, Colors, Card } from "react-native-paper";
 
 import { StatusIcon } from "./StatusIcon";
 import { Play } from "./Play";
@@ -22,7 +22,7 @@ export const LessonOption = ({
   onPress,
 }: ILessonOptionProps) => {
   return (
-    <View style={styles.lesson}>
+    <View style={[styles.lesson, styles.shadow]}>
       <Image style={styles.image} source={{ uri: lesson.image_url }} />
       <View style={styles.lessonInfo}>
         <Text style={styles.lessonTitle}>{lesson.name}</Text>
@@ -41,8 +41,18 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "rgba(255,255,255,0.48)",
+    backgroundColor: "#FFF6D7",
     marginBottom: 20,
+  },
+  shadow: {
+    shadowColor: "rgba(0, 0, 0, 0.4)",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.23,
+    shadowRadius: 2.62,
+    elevation: 4,
   },
   lessonInfo: {
     marginRight: "auto",
