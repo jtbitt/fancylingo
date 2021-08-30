@@ -37,7 +37,7 @@ export const AppStack = () => {
         component={LessonStack}
       />
       <Tab.Screen
-        name="Search"
+        name="Vocabulary"
         options={{
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons

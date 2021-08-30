@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import { StyleSheet, View, ScrollView, Text, Image } from "react-native";
-import { ActivityIndicator, Colors, Searchbar } from "react-native-paper";
+import {
+  ActivityIndicator,
+  Colors,
+  Searchbar,
+  Headline,
+} from "react-native-paper";
 
 import { useQueryHandler } from "../../.,/../../hooks";
 import { useCards } from "../hooks";
@@ -9,10 +14,21 @@ import { SavedCard } from "../components/SavedCard";
 
 export const VocabularyListScreen = ({ navigation }: any) => {
   const { queryData } = useQueryHandler(GetUserCards);
-  const { cards } = useCards(queryData, "card_images");
+  const { cards } = useCards(queryData, "card_images", "card_audio");
 
   if (!cards) {
     return <></>;
+  }
+
+  if (!cards.length) {
+    return (
+      <View style={styles.noCardsContainer}>
+        <Headline style={styles.noCards}>
+          There are currently no cards saved. Save a card while practicing your
+          deck if you would like to come back to it later!
+        </Headline>
+      </View>
+    );
   }
 
   return (
@@ -37,6 +53,15 @@ export const VocabularyListScreen = ({ navigation }: any) => {
 };
 
 const styles = StyleSheet.create({
+  noCardsContainer: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    padding: "10%",
+  },
+  noCards: {
+    fontSize: 20,
+  },
   container: {
     flex: 1,
   },

@@ -2,6 +2,7 @@ import React from "react";
 import { Platform } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 
+import { WelcomeScreen } from "../screens/WelcomeScreen";
 import { LessonListScreen } from "../screens/LessonListScreen";
 import { LessonScreen } from "../screens/LessonScreen";
 import { CongratsScreen } from "../screens/CongratsScreen";
@@ -23,6 +24,11 @@ export const LessonStack = () => {
         headerBackTitleVisible: false,
       }}
     >
+      <Stack.Screen
+        name="Welcome"
+        component={WelcomeScreen}
+        options={{ headerShown: false }}
+      />
       <Stack.Screen
         name="LessonList"
         component={LessonListScreen}
