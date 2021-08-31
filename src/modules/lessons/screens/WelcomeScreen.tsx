@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { StyleSheet, View, Image } from "react-native";
+import { StyleSheet, View, SafeAreaView, Image } from "react-native";
 import { Title, Text, Button } from "react-native-paper";
 
-export const WelcomeScreen = () => {
+export const WelcomeScreen = ({ navigation }: any) => {
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Title style={styles.title}>WELCOME JOHN DOE</Title>
       <Image source={require("../assets/levels.png")} style={styles.image} />
       <Text style={styles.selectLevel}>Select your level</Text>
@@ -13,7 +13,7 @@ export const WelcomeScreen = () => {
           style={[styles.button, styles.buttonSpacing]}
           labelStyle={styles.buttonText}
           mode="contained"
-          onPress={() => console.log("Pressed")}
+          onPress={() => navigation.navigate("LessonList")}
         >
           BEGINNER
         </Button>
@@ -23,7 +23,7 @@ export const WelcomeScreen = () => {
           style={[styles.button, styles.buttonSpacing]}
           labelStyle={styles.buttonText}
           mode="contained"
-          onPress={() => console.log("Pressed")}
+          onPress={() => navigation.navigate("LessonList")}
         >
           MEDIUM
         </Button>
@@ -31,12 +31,12 @@ export const WelcomeScreen = () => {
           style={styles.button}
           labelStyle={styles.buttonText}
           mode="contained"
-          onPress={() => console.log("Pressed")}
+          onPress={() => navigation.navigate("LessonList")}
         >
           EXPERT
         </Button>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -44,12 +44,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    justifyContent: "space-between",
+    justifyContent: "space-around",
     marginVertical: "15%",
   },
   title: {
     fontSize: 25,
-    fontWeight: "500",
+    fontWeight: "700",
   },
   image: {
     height: 350,
@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
     resizeMode: "contain",
   },
   selectLevel: {
-    fontWeight: "500",
+    fontWeight: "700",
     fontSize: 20,
   },
   buttons: {

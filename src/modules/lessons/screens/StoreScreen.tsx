@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, ScrollView, View, Text } from "react-native";
 import { Title } from "react-native-paper";
 import { ActivityIndicator, Colors } from "react-native-paper";
@@ -19,16 +19,19 @@ export const StoreScreen = ({ navigation }: any) => {
 
   return (
     <View style={styles.container}>
-      <Title style={styles.title}>Go farther with your Spanish</Title>
-      <ScrollView horizontal={true}>
-        {lessons.map((lesson: any, i: number) => (
-          <Product
-            product={lesson}
-            key={i}
-            onPress={() => console.log("cool")}
-          />
-        ))}
-      </ScrollView>
+      <View style={styles.scrollview}>
+        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+          {lessons.map((lesson: any, i: number) => (
+            <Product
+              product={lesson}
+              productKey={i}
+              key={i}
+              length={lessons.length}
+              onPress={() => console.log("cool")}
+            />
+          ))}
+        </ScrollView>
+      </View>
       <Subscription onPress={() => console.log("cool")} />
     </View>
   );
@@ -36,10 +39,12 @@ export const StoreScreen = ({ navigation }: any) => {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "space-around",
+    marginVertical: "5%",
   },
-  title: {
-    paddingVertical: 15,
+  scrollview: {
+    height: 305,
   },
 });

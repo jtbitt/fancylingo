@@ -1,15 +1,29 @@
 import React, { useState } from "react";
 import { StyleSheet, View, Image } from "react-native";
 import { Title, Subheading, Text } from "react-native-paper";
+import { LessonAlert } from "./LessonAlert";
 
 interface IDefaultProductProps {
   product: any;
+  productKey: number;
+  length: number;
   onPress: () => void;
 }
 
-export const Product = ({ product, onPress }: IDefaultProductProps) => {
+export const Product = ({
+  product,
+  productKey,
+  length,
+  onPress,
+}: IDefaultProductProps) => {
   return (
-    <View style={styles.card}>
+    <View
+      style={[
+        styles.card,
+        styles.shadow,
+        { marginRight: productKey === length - 1 ? 35 : 0 },
+      ]}
+    >
       <Image style={styles.image} source={{ uri: product.image_url }} />
       <View style={styles.content}>
         <Title style={styles.title}>{product.name}</Title>
@@ -27,6 +41,18 @@ const styles = StyleSheet.create({
     width: 250,
     borderRadius: 15,
     marginLeft: 35,
+    backgroundColor: "#FFF6D7",
+    marginBottom: 15,
+  },
+  shadow: {
+    shadowColor: "rgba(0, 0, 0, 0.4)",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.23,
+    shadowRadius: 2.62,
+    elevation: 4,
   },
   image: {
     height: 165,
@@ -34,7 +60,6 @@ const styles = StyleSheet.create({
     borderRadius: 15,
   },
   content: {
-    backgroundColor: "rgba(255,255,255,0.48)",
     alignItems: "center",
     justifyContent: "center",
     height: 125,

@@ -15,8 +15,8 @@ export const LessonStack = () => {
     <Stack.Navigator
       screenOptions={{
         headerStyle: {
-          height: Platform.OS === "ios" ? 60 : 120,
           backgroundColor: "#ffe881",
+          height: Platform.OS === "ios" ? 60 : 120,
           shadowColor: "rgba(101,101,101,0.5)",
           shadowRadius: 5,
         },
@@ -36,7 +36,11 @@ export const LessonStack = () => {
       />
       <Stack.Screen name="Lesson" component={LessonScreen} />
       <Stack.Screen name="Congrats" component={CongratsScreen} />
-      <Stack.Screen name="Store" component={StoreScreen} />
+      <Stack.Screen
+        name="Store"
+        component={StoreScreen}
+        options={{ title: "Premium" }}
+      />
     </Stack.Navigator>
   );
 };

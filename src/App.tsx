@@ -4,6 +4,7 @@ import { DefaultTheme, Provider as PaperProvider } from "react-native-paper";
 import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/functions";
+import { StatusBar } from "expo-status-bar";
 
 import { firebaseConfig } from "../config/keys";
 import { getEnvVars } from "../environment";
@@ -40,6 +41,7 @@ export const App = () => {
       >
         <AuthProvider>
           <SafeAreaView style={styles.container}>
+            <StatusBar translucent={true} />
             <Router theme={theme} />
           </SafeAreaView>
         </AuthProvider>

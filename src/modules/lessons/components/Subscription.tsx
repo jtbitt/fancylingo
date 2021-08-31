@@ -12,7 +12,7 @@ export const Subscription = ({ onPress }: IDefaultSubscriptionProps) => {
   const image = require("../assets/premium-subscription.png");
 
   return (
-    <View style={styles.card}>
+    <View style={[styles.card, styles.shadow]}>
       <Image style={styles.image} source={image} />
       <View style={styles.content}>
         <Title style={styles.title}>Get premium today!</Title>
@@ -21,7 +21,6 @@ export const Subscription = ({ onPress }: IDefaultSubscriptionProps) => {
         </Subheading>
         <Button
           style={styles.button}
-          contentStyle={{ width: 150 }}
           labelStyle={styles.buttonText}
           mode="contained"
           onPress={() => console.log("subscribe")}
@@ -37,8 +36,17 @@ export const Subscription = ({ onPress }: IDefaultSubscriptionProps) => {
 const styles = StyleSheet.create({
   card: {
     width: 320,
-    marginTop: 20,
     borderRadius: 15,
+  },
+  shadow: {
+    shadowColor: "rgba(0, 0, 0, 0.4)",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.23,
+    shadowRadius: 2.62,
+    elevation: 4,
   },
   image: {
     height: 70,
@@ -46,6 +54,8 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   content: {
+    borderBottomLeftRadius: 15,
+    borderBottomRightRadius: 15,
     backgroundColor: "white",
     alignItems: "center",
     justifyContent: "center",
@@ -64,7 +74,6 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     paddingVertical: 5,
     paddingHorizontal: 5,
-    width: 217,
     alignSelf: "center",
   },
   buttonText: {
