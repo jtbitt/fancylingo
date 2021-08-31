@@ -1,21 +1,24 @@
 import { useState, useEffect } from "react";
 
-import { useFirebase } from "../../../hooks";
+import { useQueryHandler, useFirebase } from "../../../hooks";
+import { GetCards } from "../graphql/lessonQueries.graphql";
 
-export const useCards = (data: any, imagePath: string, audioPath: string) => {
+export const useCards = (query: any, lessonId: any) => {
+  const { queryData } = useQueryHandler(GetCards, { lessonId: 1 });
   const [cards, setCards] = useState<any[]>();
+  const [userCards, setUserCards] = useState<any[]>();
   const { getMedia, images, audio } = useFirebase();
 
   useEffect(() => {
-    if (data) {
-      getMedia(imagePath, "image");
-      getMedia(audioPath, "audio");
+    if (queryData) {
+      getMedia("card_images", "image");
+      getMedia("card_audio", "audio");
     }
-  }, [data]);
+  }, [queryData]);
 
   useEffect(() => {
-    if (images && audio) {
-      const cards = [...data].map((card: any) => {
+    if (images && audio && queryData) {
+      const cards = [...queryData].map((card: any) => {
         let cardObj = {...card.card};
         cardObj['image_url'] = images.find(({ name }) => name === cardObj.image_url).url;
         cardObj['audio_url'] = audio.find(({ name }) => name === cardObj.audio_url).url;

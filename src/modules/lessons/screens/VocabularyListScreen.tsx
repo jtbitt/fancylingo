@@ -1,11 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { StyleSheet, View, ScrollView, Text, Image } from "react-native";
-import {
-  ActivityIndicator,
-  Colors,
-  Searchbar,
-  Headline,
-} from "react-native-paper";
+import { Headline } from "react-native-paper";
 
 import { useQueryHandler } from "../../.,/../../hooks";
 import { useCards } from "../hooks";
@@ -14,7 +9,7 @@ import { SavedCard } from "../components/SavedCard";
 
 export const VocabularyListScreen = ({ navigation }: any) => {
   const { queryData } = useQueryHandler(GetUserCards);
-  const { cards } = useCards(queryData, "card_images", "card_audio");
+  const { cards } = useCards(GetUserCards, { lessonId: 1 });
 
   if (!cards) {
     return <></>;

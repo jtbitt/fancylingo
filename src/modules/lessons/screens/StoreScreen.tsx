@@ -1,17 +1,12 @@
-import React, { useState } from "react";
-import { StyleSheet, ScrollView, View, Text } from "react-native";
-import { Title } from "react-native-paper";
-import { ActivityIndicator, Colors } from "react-native-paper";
+import React from "react";
+import { StyleSheet, ScrollView, View } from "react-native";
 
-import { useQueryHandler } from "../../.,/../../hooks";
 import { useLessons } from "../hooks";
-import { GetLessons } from "../graphql/lessonQueries.graphql";
 import { Product } from "../components/Product";
 import { Subscription } from "../components/Subscription";
 
 export const StoreScreen = ({ navigation }: any) => {
-  const { queryData } = useQueryHandler(GetLessons);
-  const { lessons } = useLessons(queryData, "lesson_images");
+  const { lessons } = useLessons();
 
   if (!lessons) {
     return <></>;

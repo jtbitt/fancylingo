@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useQuery } from "@apollo/client";
-import { ActivityIndicator, Colors} from "react-native-paper";
+import { ActivityIndicator, Colors, Text} from "react-native-paper";
 
 import { useAuth } from "../contexts/Auth";
 
@@ -20,10 +20,6 @@ export const useQueryHandler = (query: any, variables: any = {}) => {
 
   if (error) {
     console.log('error');
-  }
-
-  if (loading) {
-    console.log('loading');
   }
 
   return { queryData };
