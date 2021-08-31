@@ -10,11 +10,13 @@ export const useMutationHandler = (mutation: any) => {
 
   useEffect(() => {
     if (data) {
+      console.log(data);
       setMutationData(data);
     }
   }, [data]);
 
   const setMutation = (variables: any) => {
+    console.log(variables);
     runMutation({
       variables: { uid: uid, ...variables },
     });

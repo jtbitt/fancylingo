@@ -1,18 +1,11 @@
-import React, { useState, useEffect, useLayoutEffect } from "react";
+import React, { useState, useLayoutEffect } from "react";
 import { HeaderBackButton } from "@react-navigation/stack";
-import { StyleSheet, View, Text, Button, Alert } from "react-native";
-import {
-  ProgressBar,
-  Colors,
-  ActivityIndicator,
-  Provider,
-  Portal,
-} from "react-native-paper";
+import { StyleSheet, View, Alert } from "react-native";
+import { ProgressBar, Colors, Provider } from "react-native-paper";
 
-import { useQueryHandler, useMutationHandler } from "../../.,/../../hooks";
 import { useCards } from "../hooks";
 
-import { GetCards, SaveCard } from "../graphql/lessonQueries.graphql";
+import { GetCards } from "../graphql/lessonQueries.graphql";
 import { FlashCard } from "../components/FlashCard";
 import { LessonModal } from "../components/LessonModal";
 
@@ -22,8 +15,7 @@ interface IDefaultDeckProps {
 
 export const LessonScreen = ({ route, navigation }: any) => {
   const { lessonId, lessonName } = route.params;
-  const { cards } = useCards(GetCards, { lessonId: 1 });
-  const { mutationData, setMutation } = useMutationHandler(SaveCard);
+  const { cards, saveCard } = useCards(GetCards, lessonId);
   const [currentCard, setCurrentCard] = useState(0);
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -36,7 +28,7 @@ export const LessonScreen = ({ route, navigation }: any) => {
     navigation.setOptions({ title: lessonName });
   }, [navigation]);
 
-  if (!cards) {
+  if (!cards || !cards.length) {
     return <></>;
   }
 
@@ -56,9 +48,8 @@ export const LessonScreen = ({ route, navigation }: any) => {
   };
 
   const onCardSaved = () => {
-    setMutation({
-      cardId: cards[currentCard].card_id,
-    });
+    console.log(cards[currentCard]);
+    saveCard(cards[currentCard].card_id);
     Alert.alert("Success", "Card successfully saved");
   };
 

@@ -8,8 +8,7 @@ import { GetUserCards } from "../graphql/lessonQueries.graphql";
 import { SavedCard } from "../components/SavedCard";
 
 export const VocabularyListScreen = ({ navigation }: any) => {
-  const { queryData } = useQueryHandler(GetUserCards);
-  const { cards } = useCards(GetUserCards, { lessonId: 1 });
+  const { cards } = useCards(GetUserCards, 1);
 
   if (!cards) {
     return <></>;

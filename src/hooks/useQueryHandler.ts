@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useQuery } from "@apollo/client";
-import { ActivityIndicator, Colors, Text} from "react-native-paper";
 
 import { useAuth } from "../contexts/Auth";
 

@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 
-import { useQueryHandler, useFirebase } from "../../../hooks";
-import { GetCards } from "../graphql/lessonQueries.graphql";
+import { useQueryHandler, useMutationHandler, useFirebase } from "../../../hooks";
+import { SaveCard } from "../graphql/lessonQueries.graphql";
 
-export const useCards = (query: any, lessonId: any) => {
-  const { queryData } = useQueryHandler(GetCards, { lessonId: 1 });
+export const useCards = (query: any, lessonId: number) => {
+  const { queryData } = useQueryHandler(query, { lessonId: lessonId });
   const [cards, setCards] = useState<any[]>();
-  const [userCards, setUserCards] = useState<any[]>();
   const { getMedia, images, audio } = useFirebase();
+  const { mutationData, setMutation } = useMutationHandler(SaveCard);
 
   useEffect(() => {
     if (queryData) {
@@ -18,16 +18,24 @@ export const useCards = (query: any, lessonId: any) => {
 
   useEffect(() => {
     if (images && audio && queryData) {
-      const cards = [...queryData].map((card: any) => {
+      const cards = queryData.map((card: any) => {
         let cardObj = {...card.card};
         cardObj['image_url'] = images.find(({ name }) => name === cardObj.image_url).url;
         cardObj['audio_url'] = audio.find(({ name }) => name === cardObj.audio_url).url;
+        cardObj['card_id'] = card.card_id;
         return cardObj;
       });
       setCards(cards);
+
     }
   }, [images, audio]);
 
-  return { cards };
+  const saveCard = (cardId: number) => {
+    setMutation({
+      cardId: cardId,
+    });
+  };
+
+  return { cards, saveCard };
 
 };
