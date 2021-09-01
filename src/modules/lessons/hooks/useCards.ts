@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 
 import { useQueryHandler, useMutationHandler, useFirebase } from "../../../hooks";
 import { SaveCard } from "../graphql/lessonQueries.graphql";
+import { cleanupCards } from "../utils/cleanupCards";
 
 export const useCards = (query: any, lessonId: number) => {
   const { queryData } = useQueryHandler(query, { lessonId: lessonId });
@@ -18,15 +19,8 @@ export const useCards = (query: any, lessonId: number) => {
 
   useEffect(() => {
     if (images && audio && queryData) {
-      const cards = queryData.map((card: any) => {
-        let cardObj = {...card.card};
-        cardObj['image_url'] = images.find(({ name }) => name === cardObj.image_url).url;
-        cardObj['audio_url'] = audio.find(({ name }) => name === cardObj.audio_url).url;
-        cardObj['card_id'] = card.card_id;
-        return cardObj;
-      });
+      const cards = cleanupCards(queryData, images, audio);
       setCards(cards);
-
     }
   }, [images, audio]);
 

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 
 import { useQueryHandler, useFirebase } from "../../../hooks";
 import { GetLessons } from "../graphql/lessonQueries.graphql";
+import { cleanupLessons } from "../utils/cleanupLessons";
 
 export const useLessons = () => {
   const { queryData } = useQueryHandler(GetLessons);
@@ -16,14 +17,7 @@ export const useLessons = () => {
 
   useEffect(() => {
     if (images && queryData) {
-      const lessonList = [...queryData].map((lesson: any) => {
-        let lessonObj = {...lesson.lesson};
-        const imageUrl = images.find(({ name }) => name === lessonObj.image_url).url;
-        lessonObj['status'] = lesson.status;
-        lessonObj['image_url'] = imageUrl;
-        return lessonObj;
-      });
-
+      const lessonList = cleanupLessons(queryData, images);
       setLessons(lessonList);
     }
   }, [images]);
