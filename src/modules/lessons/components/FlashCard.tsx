@@ -8,7 +8,6 @@ import {
   Title,
   Subheading,
 } from "react-native-paper";
-import { Audio } from "expo-av";
 
 import { useAudio } from "../hooks";
 import { Play } from "./Play";

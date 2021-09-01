@@ -16,7 +16,7 @@ export const useLessons = () => {
   }, [queryData]);
 
   useEffect(() => {
-    if (images && queryData) {
+    if (images) {
       const lessonList = cleanupLessons(queryData, images);
       setLessons(lessonList);
     }

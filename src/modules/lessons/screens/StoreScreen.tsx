@@ -2,6 +2,7 @@ import React from "react";
 import { StyleSheet, ScrollView, View } from "react-native";
 
 import { useLessons } from "../hooks";
+import { LessonLoading } from "../components/LessonLoading";
 import { Product } from "../components/Product";
 import { Subscription } from "../components/Subscription";
 
@@ -9,7 +10,7 @@ export const StoreScreen = ({ navigation }: any) => {
   const { lessons } = useLessons();
 
   if (!lessons) {
-    return <></>;
+    return <LessonLoading></LessonLoading>;
   }
 
   return (

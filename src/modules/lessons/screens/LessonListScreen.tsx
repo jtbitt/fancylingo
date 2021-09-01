@@ -3,7 +3,7 @@ import { StyleSheet, View, ScrollView } from "react-native";
 import { ActivityIndicator, Colors } from "react-native-paper";
 
 import { useLessons } from "../hooks";
-
+import { LessonLoading } from "../components/LessonLoading";
 import { DefaultLesson } from "../components/DefaultLesson";
 import { LessonAlert } from "../components/LessonAlert";
 import { LessonOption } from "../components/LessonOption";
@@ -12,7 +12,7 @@ export const LessonListScreen = ({ navigation }: any) => {
   const { lessons } = useLessons();
 
   if (!lessons) {
-    return <ActivityIndicator animating={true} color={Colors.red800} />;
+    return <LessonLoading></LessonLoading>;
   }
 
   return (

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 import { useQueryHandler, useMutationHandler, useFirebase } from "../../../hooks";
-import { SaveCard } from "../graphql/lessonQueries.graphql";
+import { GetCards, SaveCard } from "../graphql/lessonQueries.graphql";
 import { cleanupCards } from "../utils/cleanupCards";
 
 export const useCards = (query: any, lessonId: number) => {
@@ -18,8 +18,9 @@ export const useCards = (query: any, lessonId: number) => {
   }, [queryData]);
 
   useEffect(() => {
-    if (images && audio && queryData) {
+    if (images && audio) {
       const cards = cleanupCards(queryData, images, audio);
+      console.log('hi', cards);
       setCards(cards);
     }
   }, [images, audio]);

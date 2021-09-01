@@ -4,8 +4,8 @@ import { StyleSheet, View, Alert } from "react-native";
 import { ProgressBar, Colors, Provider } from "react-native-paper";
 
 import { useCards } from "../hooks";
-
 import { GetCards } from "../graphql/lessonQueries.graphql";
+import { LessonLoading } from "../components/LessonLoading";
 import { FlashCard } from "../components/FlashCard";
 import { LessonModal } from "../components/LessonModal";
 
@@ -15,7 +15,7 @@ interface IDefaultDeckProps {
 
 export const LessonScreen = ({ route, navigation }: any) => {
   const { lessonId, lessonName } = route.params;
-  const { cards, saveCard } = useCards(GetCards, lessonId);
+  const { cards, saveCard } = useCards(GetCards, 1);
   const [currentCard, setCurrentCard] = useState(0);
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -28,14 +28,14 @@ export const LessonScreen = ({ route, navigation }: any) => {
     navigation.setOptions({ title: lessonName });
   }, [navigation]);
 
-  if (!cards || !cards.length) {
-    return <></>;
+  if (!cards) {
+    return <LessonLoading></LessonLoading>;
   }
 
   const onModalChecked = (exit: boolean) => {
     setModalVisible(false);
     if (exit) {
-      navigation.navigate("LessonList");
+      navigation.goBack();
     }
   };
 
@@ -52,6 +52,16 @@ export const LessonScreen = ({ route, navigation }: any) => {
     Alert.alert("Success", "Card successfully saved");
   };
 
+  const createFlashcard = () => {
+    return (
+      <FlashCard
+        card={cards[currentCard]}
+        onAnswer={onAnswerChosen}
+        onSaved={onCardSaved}
+      />
+    );
+  };
+
   return (
     <Provider>
       <LessonModal visible={modalVisible} onDismiss={onModalChecked} />
@@ -62,11 +72,7 @@ export const LessonScreen = ({ route, navigation }: any) => {
             progress={0.5}
             color={Colors.red800}
           />
-          <FlashCard
-            card={cards[currentCard]}
-            onAnswer={onAnswerChosen}
-            onSaved={onCardSaved}
-          />
+          {createFlashcard()}
         </View>
       </View>
     </Provider>
