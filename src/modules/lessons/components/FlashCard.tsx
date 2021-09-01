@@ -10,6 +10,7 @@ import {
 } from "react-native-paper";
 import { Audio } from "expo-av";
 
+import { useAudio } from "../hooks";
 import { Play } from "./Play";
 import { Card } from "../interfaces/lesson.interface";
 
@@ -19,25 +20,8 @@ interface IDefaultFlashCardProps {
 }
 
 export const FlashCard = ({ card, onAnswer, onSaved }: any) => {
+  const { audio } = useAudio(card.audio_url);
   const [frontChecked, setFrontChecked] = useState(false);
-  const [currentAudio, setCurrentAudio] = useState<any>();
-
-  useEffect(() => {
-    const getSound = async () => {
-      const { sound } = await Audio.Sound.createAsync(
-        { uri: card.audio_url },
-        { shouldPlay: false }
-      );
-      setCurrentAudio(sound);
-
-      return sound
-        ? () => {
-            sound.unloadAsync();
-          }
-        : undefined;
-    };
-    getSound();
-  }, [card]);
 
   const onFrontChecked = () => {
     setFrontChecked(true);
@@ -49,7 +33,9 @@ export const FlashCard = ({ card, onAnswer, onSaved }: any) => {
   };
 
   const onPlayAudio = async () => {
-    await currentAudio.replayAsync();
+    if (audio) {
+      await audio.replayAsync();
+    }
   };
 
   const onCardSaved = () => {

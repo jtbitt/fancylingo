@@ -48,7 +48,6 @@ export const LessonScreen = ({ route, navigation }: any) => {
   };
 
   const onCardSaved = () => {
-    console.log(cards[currentCard]);
     saveCard(cards[currentCard].card_id);
     Alert.alert("Success", "Card successfully saved");
   };
