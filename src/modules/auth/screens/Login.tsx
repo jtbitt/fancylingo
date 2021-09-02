@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { StyleSheet, View, Image } from "react-native";
+import {
+  StyleSheet,
+  KeyboardAvoidingView,
+  View,
+  Image,
+  Platform,
+  useWindowDimensions,
+} from "react-native";
 import { Button, HelperText, TextInput } from "react-native-paper";
 
 import { useFirebase } from "../../../hooks";
@@ -9,9 +16,10 @@ export const Login = () => {
     useFirebase();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const window = useWindowDimensions();
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container]}>
       <View style={styles.topContainer}>
         <Image source={require("./logo.png")} style={styles.image} />
         <View style={styles.buttons}>

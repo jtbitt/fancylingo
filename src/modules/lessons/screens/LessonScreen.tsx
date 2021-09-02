@@ -52,7 +52,7 @@ export const LessonScreen = ({ route, navigation }: any) => {
     Alert.alert("Success", "Card successfully saved");
   };
 
-  const createFlashcard = () => {
+  const createFlashCard = () => {
     return (
       <FlashCard
         card={cards[currentCard]}
@@ -72,7 +72,7 @@ export const LessonScreen = ({ route, navigation }: any) => {
             progress={0.5}
             color={Colors.red800}
           />
-          {createFlashcard()}
+          {createFlashCard()}
         </View>
       </View>
     </Provider>
