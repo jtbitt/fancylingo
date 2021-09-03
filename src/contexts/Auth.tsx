@@ -22,8 +22,8 @@ export const AuthContext = React.createContext({} as AuthContextData);
 export const AuthProvider = ({ children }: any) => {
   const { logOut } = useFirebase();
   const [authUser, setAuthUser] = useState<AuthUser>({
-    uid: "",
-    token: "",
+    uid: "sevYDH1M8Dv3oiayTiBAG4PiTpsA",
+    token: "430f03fk3f3fk03f30kfk5",
   });
   const [loading, setLoading] = useState(true);
 

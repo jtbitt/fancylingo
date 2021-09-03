@@ -1,13 +1,15 @@
 import { useState, useEffect } from "react";
 
 import { useQueryHandler, useMutationHandler, useFirebase } from "../../../hooks";
-import { GetCards, SaveCard } from "../graphql/lessonQueries.graphql";
+import { useAudio } from "../hooks";
+import { SaveCard } from "../graphql/lessonQueries.graphql";
 import { cleanupCards } from "../utils/cleanupCards";
 
 export const useCards = (query: any, lessonId: number) => {
   const { queryData } = useQueryHandler(query, { lessonId: lessonId });
   const [cards, setCards] = useState<any[]>();
-  const { getMedia, images, audio } = useFirebase();
+  const { getMedia, imageUrls, audioUrls } = useFirebase();
+  const { getAudio, audio } = useAudio();
   const { mutationData, setMutation } = useMutationHandler(SaveCard);
 
   useEffect(() => {
@@ -18,12 +20,18 @@ export const useCards = (query: any, lessonId: number) => {
   }, [queryData]);
 
   useEffect(() => {
-    if (images && audio) {
-      const cards = cleanupCards(queryData, images, audio);
-      console.log('hi', cards);
+    if (audioUrls) {
+      getAudio(audioUrls);
+    }
+  }, [audioUrls]);
+
+
+  useEffect(() => {
+    if (imageUrls && audio) {
+      const cards = cleanupCards(queryData, imageUrls, audio);
       setCards(cards);
     }
-  }, [images, audio]);
+  }, [imageUrls, audio]);
 
   const saveCard = (cardId: number) => {
     setMutation({

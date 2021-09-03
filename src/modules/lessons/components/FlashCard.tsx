@@ -9,7 +9,7 @@ import {
   Subheading,
 } from "react-native-paper";
 
-import { useAudio } from "../hooks";
+// import { useAudio } from "../hooks";
 import { Play } from "./Play";
 import { Card } from "../interfaces/lesson.interface";
 
@@ -19,7 +19,7 @@ interface IDefaultFlashCardProps {
 }
 
 export const FlashCard = ({ card, onAnswer, onSaved }: any) => {
-  const { audio } = useAudio(card.audio_url);
+  // const { audio } = useAudio(card.audio_url);
   const [frontChecked, setFrontChecked] = useState(false);
 
   const onFrontChecked = () => {
@@ -32,9 +32,8 @@ export const FlashCard = ({ card, onAnswer, onSaved }: any) => {
   };
 
   const onPlayAudio = async () => {
-    if (audio) {
-      await audio.replayAsync();
-    }
+    console.log(card);
+    await card.audio.replayAsync();
   };
 
   const onCardSaved = () => {

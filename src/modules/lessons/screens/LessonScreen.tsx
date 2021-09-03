@@ -15,8 +15,8 @@ interface IDefaultDeckProps {
 
 export const LessonScreen = ({ route, navigation }: any) => {
   const { lessonId, lessonName } = route.params;
-  const { cards, saveCard } = useCards(GetCards, 1);
   const [currentCard, setCurrentCard] = useState(0);
+  const { cards, saveCard } = useCards(GetCards, 1);
   const [modalVisible, setModalVisible] = useState(false);
 
   useLayoutEffect(() => {

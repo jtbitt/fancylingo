@@ -11,8 +11,8 @@ import * as Google from "expo-google-app-auth";
 import { keys } from "../../config/keys";
 
 export const useFirebase = () => {
-  const [images, setImages] = useState<any[]>();
-  const [audio, setAudio] = useState<any[]>();
+  const [imageUrls, setImageUrls] = useState<any[]>();
+  const [audioUrls, setAudioUrls] = useState<any[]>();
 
   const signUp = async (email: string, password: string) => {
     try {
@@ -85,11 +85,11 @@ export const useFirebase = () => {
       });
       let mediaDownloads = Promise.all(mediaUrls);
       let media = await mediaDownloads;
-      mediaType === 'image' ? setImages(media) : setAudio(media);
+      mediaType === 'image' ? setImageUrls(media) : setAudioUrls(media);
     } catch ({ message }) {
       console.log(message);
     }
   };
 
-  return { signUp, signIn, signInWithGoogle, signInWithFacebook, logOut, getMedia, images, audio };
+  return { signUp, signIn, signInWithGoogle, signInWithFacebook, logOut, getMedia, imageUrls, audioUrls };
 };

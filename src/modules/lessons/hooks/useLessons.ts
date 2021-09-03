@@ -7,7 +7,7 @@ import { cleanupLessons } from "../utils/cleanupLessons";
 export const useLessons = () => {
   const { queryData } = useQueryHandler(GetLessons);
   const [lessons, setLessons] = useState<any[]>();
-  const { getMedia, images } = useFirebase();
+  const { getMedia, imageUrls } = useFirebase();
 
   useEffect(() => {
     if (queryData) {
@@ -16,11 +16,11 @@ export const useLessons = () => {
   }, [queryData]);
 
   useEffect(() => {
-    if (images) {
-      const lessonList = cleanupLessons(queryData, images);
+    if (imageUrls) {
+      const lessonList = cleanupLessons(queryData, imageUrls);
       setLessons(lessonList);
     }
-  }, [images]);
+  }, [imageUrls]);
 
   return { lessons };
 

@@ -1,26 +1,28 @@
 import { useState, useEffect } from "react";
 import { Audio } from "expo-av";
 
-export const useAudio = (url: string) => {
+export const useAudio = () => {
   const [audio, setAudio] = useState<any>();
 
-  useEffect(() => {
-    const getSound = async () => {
-      const { sound } = await Audio.Sound.createAsync(
-        { uri: url },
-        { shouldPlay: false }
-      );
-      setAudio(sound);
+  const getAudio = async (audioUrls: any) => {
+    let audioPending = audioUrls.map(async (audio: any) => {
+      return { 
+        name: audio.name, 
+        file: await Audio.Sound.createAsync(
+          { uri: audio.url },
+          { shouldPlay: false }
+        )
+      };
+    });
+    let audioLoading = Promise.all(audioPending);
+    let audioLoaded = await audioLoading;
+    setAudio(audioLoaded);
 
-      return sound
-        ? () => {
-            sound.unloadAsync();
-          }
-        : undefined;
-    };
-    getSound();
-  }, [url]);
+    return audioLoaded ? audioLoaded.forEach((audio: any) => {
+      audio.unloadAsync();
+    }) : undefined;
+  };
 
-  return { audio };
+  return { getAudio, audio };
 
 };

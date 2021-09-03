@@ -1,10 +1,10 @@
 import { IMediaObject } from "../interfaces/media.interface";
 
-export const cleanupCards = (cards: any, images: IMediaObject[], audio: IMediaObject[]) => {
+export const cleanupCards = (cards: any, images: IMediaObject[], audio: any) => {
   return [...cards].map((card: any) => {
     let cardObj = {...card.card};
-    cardObj['image_url'] = images.find(({ name }) => name === cardObj.image_url).url;
-    cardObj['audio_url'] = audio.find(({ name }) => name === cardObj.audio_url).url;
+    cardObj['image_url'] = images.find(({ name }: any) => name === cardObj.image_url).url;
+    cardObj['audio'] = audio.find(({ name }: any) => name === cardObj.audio_url).file.sound;
     cardObj['card_id'] = card.card_id;
     return cardObj;
   });
