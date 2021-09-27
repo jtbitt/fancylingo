@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { StyleSheet, View, TouchableOpacity, Image, Text } from "react-native";
 
+import { ICard } from "../interfaces/lesson.interface";
+
 interface IDefaultSavedCardProps {
-  card: any;
+  card: ICard;
   onPress: () => void;
 }
 

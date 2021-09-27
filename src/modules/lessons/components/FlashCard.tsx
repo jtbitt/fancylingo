@@ -1,25 +1,27 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { StyleSheet, View, Image } from "react-native";
 import {
   Button,
   IconButton,
   Colors,
-  ActivityIndicator,
   Title,
   Subheading,
 } from "react-native-paper";
 
-// import { useAudio } from "../hooks";
 import { Play } from "./Play";
-import { Card } from "../interfaces/lesson.interface";
+import { ICard } from "../interfaces/lesson.interface";
 
 interface IDefaultFlashCardProps {
-  card: Card;
+  card: ICard;
   onAnswer: (answer: boolean) => void;
+  onSaved: () => void;
 }
 
-export const FlashCard = ({ card, onAnswer, onSaved }: any) => {
-  // const { audio } = useAudio(card.audio_url);
+export const FlashCard = ({
+  card,
+  onAnswer,
+  onSaved,
+}: IDefaultFlashCardProps) => {
   const [frontChecked, setFrontChecked] = useState(false);
 
   const onFrontChecked = () => {

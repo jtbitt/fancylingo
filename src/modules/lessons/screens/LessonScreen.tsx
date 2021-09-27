@@ -9,10 +9,6 @@ import { LessonLoading } from "../components/LessonLoading";
 import { FlashCard } from "../components/FlashCard";
 import { LessonModal } from "../components/LessonModal";
 
-interface IDefaultDeckProps {
-  deckId: number;
-}
-
 export const LessonScreen = ({ route, navigation }: any) => {
   const { lessonId, lessonName } = route.params;
   const [currentCard, setCurrentCard] = useState(0);

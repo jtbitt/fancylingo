@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import { StyleSheet, View, Image } from "react-native";
 import { Title, Subheading, Text } from "react-native-paper";
-import { LessonAlert } from "./LessonAlert";
+
+import { ILesson } from "../interfaces/lesson.interface";
 
 interface IDefaultProductProps {
-  product: any;
+  product: ILesson;
   productKey: number;
   length: number;
   onPress: () => void;

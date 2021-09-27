@@ -1,14 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { StyleSheet, View, Image } from "react-native";
-import {
-  Portal,
-  Modal,
-  Text,
-  Button,
-  Title,
-  Subheading,
-} from "react-native-paper";
-import { StackActions } from "@react-navigation/native";
+import { Portal, Modal, Button, Title, Subheading } from "react-native-paper";
 
 interface ILessonModalProps {
   visible: boolean;

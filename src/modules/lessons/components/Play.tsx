@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
 import { Avatar } from "react-native-paper";
 
 interface IDefaultPlayProps {
-  style?: any;
+  style?: {};
   size: number;
   onPress: () => void;
 }

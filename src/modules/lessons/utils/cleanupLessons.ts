@@ -1,4 +1,5 @@
 import { IMediaObject } from "../interfaces/media.interface";
+import { ILessonData } from "../interfaces/lesson.interface";
 
 export const cleanupLessons = (lessons: any, images: IMediaObject[]) => {
   return [...lessons].map((lesson: any) => {

@@ -1,6 +1,6 @@
-import { IMediaObject } from "../interfaces/media.interface";
+import { IMediaObject, IAudioObject } from "../interfaces/media.interface";
 
-export const cleanupCards = (cards: any, images: IMediaObject[], audio: any) => {
+export const cleanupCards = (cards: any, images: IMediaObject[], audio: IAudioObject[]) => {
   return [...cards].map((card: any) => {
     let cardObj = {...card.card};
     cardObj['image_url'] = images.find(({ name }: any) => name === cardObj.image_url).url;

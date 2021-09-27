@@ -10,9 +10,14 @@ import * as Google from "expo-google-app-auth";
 
 import { keys } from "../../config/keys";
 
+interface IFirebaseMedia {
+  name: string;
+  url: string
+}
+
 export const useFirebase = () => {
-  const [imageUrls, setImageUrls] = useState<any[]>();
-  const [audioUrls, setAudioUrls] = useState<any[]>();
+  const [imageUrls, setImageUrls] = useState<IFirebaseMedia[]>();
+  const [audioUrls, setAudioUrls] = useState<IFirebaseMedia[]>();
 
   const signUp = async (email: string, password: string) => {
     try {

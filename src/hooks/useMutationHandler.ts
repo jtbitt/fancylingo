@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
-import { useMutation } from "@apollo/client";
+import { DocumentNode, useMutation } from "@apollo/client";
 import { Alert } from "react-native";
 
-import { useAuth } from "../contexts/Auth";
+import { useAuth } from "../contexts";
 
-export const useMutationHandler = (mutation: any) => {
+export const useMutationHandler = (mutation: DocumentNode) => {
   const { uid } = useAuth();
   const [runMutation, { data, error }] = useMutation(mutation);
   const [mutationData, setMutationData] = useState<any[]>();

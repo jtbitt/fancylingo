@@ -1,15 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import { StyleSheet, View, Image, Text } from "react-native";
 
-import { useFirebase } from "../../../hooks";
 import { StatusIcon } from "./StatusIcon";
 import { Play } from "./Play";
-import { Lesson } from "../interfaces/lesson.interface";
+import { ILesson } from "../interfaces/lesson.interface";
 import { getStatusMessage } from "../utils/getStatusMessage";
 import { getStatusColor } from "../utils/getStatusColor";
 
 interface IDefaultLessonProps {
-  lesson: any;
+  lesson: ILesson;
   status: number;
   onPress: () => void;
 }

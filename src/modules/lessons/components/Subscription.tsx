@@ -3,8 +3,6 @@ import { StyleSheet, View, Text, Image } from "react-native";
 import { Title, Subheading, Button } from "react-native-paper";
 
 interface IDefaultSubscriptionProps {
-  // style?: any;
-  // size: number;
   onPress: () => void;
 }
 

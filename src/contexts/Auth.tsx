@@ -9,7 +9,7 @@ type AuthContextData = {
   uid: string;
   token: string | null;
   loading: boolean;
-  signOut: any;
+  signOut: () => void;
 };
 
 type AuthUser = {
@@ -17,17 +17,24 @@ type AuthUser = {
   token: string | null;
 };
 
+type IFirebaseUser = firebase.User | null;
+
+interface IHasuraClaim {
+  "x-hasura-allowed-role": string[];
+  "x-hasura-default-role": string;
+  "x-hasura-user-id": string;
+}
+
 export const AuthContext = React.createContext({} as AuthContextData);
 
 export const AuthProvider = ({ children }: any) => {
   const { logOut } = useFirebase();
   const [authUser, setAuthUser] = useState<AuthUser>({
-    uid: "sevYDH1M8Dv3oiayTiBAG4PiTpsA",
-    token: "430f03fk3f3fk03f30kfk",
+    uid: "",
+    token: "",
   });
   const [loading, setLoading] = useState(true);
 
-  // always have dependencies on effect, either empty for running once, or some properties to refresh it/re-run
   useEffect(() => {
     const tokenSync = async () => {
       const token = await SecureStore.getItemAsync("token");
@@ -36,18 +43,16 @@ export const AuthProvider = ({ children }: any) => {
     };
   }, []);
 
-  // smaller functions, extract hook
   useEffect(() => {
-    // Sync user
-    // type user?
-    return firebase.auth().onAuthStateChanged(async (user: any) => {
+    return firebase.auth().onAuthStateChanged(async (user: IFirebaseUser) => {
       if (!user) {
         return;
       }
 
       const token = await user.getIdToken();
       const idTokenResult = await user.getIdTokenResult();
-      const hasuraClaim = idTokenResult.claims["https://hasura.io/jwt/claims"];
+      const hasuraClaim: IHasuraClaim =
+        idTokenResult.claims["https://hasura.io/jwt/claims"];
 
       if (hasuraClaim) {
         // save token

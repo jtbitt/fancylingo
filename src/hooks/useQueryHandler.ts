@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { useQuery } from "@apollo/client";
+import { DocumentNode, useQuery } from "@apollo/client";
 
-import { useAuth } from "../contexts/Auth";
+import { useAuth } from "../contexts";
 
-export const useQueryHandler = (query: any, variables = {}) => {
+export const useQueryHandler = (query: DocumentNode, variables = {}) => {
   const { uid } = useAuth();
   const { error, data, refetch } = useQuery(query, {
     variables: { uid: uid, ...variables },

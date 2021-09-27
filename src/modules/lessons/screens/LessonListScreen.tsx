@@ -6,6 +6,7 @@ import { LessonLoading } from "../components/LessonLoading";
 import { DefaultLesson } from "../components/DefaultLesson";
 import { LessonAlert } from "../components/LessonAlert";
 import { LessonOption } from "../components/LessonOption";
+import { ILesson } from "../interfaces/lesson.interface";
 
 export const LessonListScreen = ({ navigation }: any) => {
   const { lessons } = useLessons();
@@ -31,7 +32,7 @@ export const LessonListScreen = ({ navigation }: any) => {
             message="-50% discount - Premium lessons!"
             onPress={() => navigation.navigate("Store")}
           />
-          {lessons.map((lesson: any, i: number) =>
+          {lessons.map((lesson: ILesson, i: number) =>
             i > 0 ? (
               <LessonOption
                 lesson={lesson}

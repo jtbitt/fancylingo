@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Audio } from "expo-av";
 
+import { IAudioObject } from "../interfaces/media.interface";
+
 export const useAudio = () => {
   const [audio, setAudio] = useState<any>();
 

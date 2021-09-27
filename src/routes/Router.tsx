@@ -10,11 +10,9 @@ import { useAuth } from "../contexts/Auth";
 export const Router = ({ theme }: any) => {
   const { loading, token } = useAuth();
 
-  // if (error) {
-  // }
-
   if (loading) {
     console.log("loading");
+    // <ActivityIndicator animating={true} color={Colors.red800} />
   }
 
   return (

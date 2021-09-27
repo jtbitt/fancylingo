@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import { StyleSheet, View } from "react-native";
+import React from "react";
+import { StyleSheet } from "react-native";
 import { Button } from "react-native-paper";
 
 interface IStatusIconProps {
-  style?: any;
+  style?: {};
   message: string;
   color: string;
 }
