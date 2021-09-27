@@ -1,17 +1,18 @@
 import React from "react";
-import { StyleSheet, View, ScrollView, Text, Image } from "react-native";
+import { StyleSheet, View, ScrollView, RefreshControl } from "react-native";
 import { Headline } from "react-native-paper";
 
-import { useQueryHandler } from "../../.,/../../hooks";
 import { useCards } from "../hooks";
+import { LessonLoading } from "../components/LessonLoading";
 import { GetUserCards } from "../graphql/lessonQueries.graphql";
 import { SavedCard } from "../components/SavedCard";
 
 export const VocabularyListScreen = ({ navigation }: any) => {
-  const { cards } = useCards(GetUserCards, 1);
+  const { cards, refetch } = useCards(GetUserCards, 1);
+  const [refreshing, setRefreshing] = React.useState(false);
 
   if (!cards) {
-    return <></>;
+    return <LessonLoading></LessonLoading>;
   }
 
   if (!cards.length) {
@@ -27,7 +28,12 @@ export const VocabularyListScreen = ({ navigation }: any) => {
 
   return (
     <View style={styles.container}>
-      <ScrollView contentContainerStyle={styles.scroll}>
+      <ScrollView
+        contentContainerStyle={styles.scroll}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={refetch} />
+        }
+      >
         <View>
           {cards.map((card: any, i: number) => (
             <SavedCard

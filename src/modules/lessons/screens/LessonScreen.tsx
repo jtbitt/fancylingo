@@ -1,6 +1,6 @@
 import React, { useState, useLayoutEffect } from "react";
 import { HeaderBackButton } from "@react-navigation/stack";
-import { StyleSheet, View, Alert } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { ProgressBar, Colors, Provider } from "react-native-paper";
 
 import { useCards } from "../hooks";
@@ -49,7 +49,6 @@ export const LessonScreen = ({ route, navigation }: any) => {
 
   const onCardSaved = () => {
     saveCard(cards[currentCard].card_id);
-    Alert.alert("Success", "Card successfully saved");
   };
 
   const createFlashCard = () => {

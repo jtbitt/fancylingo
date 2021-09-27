@@ -41,7 +41,6 @@ query GetCards($lessonId: Int!) {
     order_by: { card_position: asc }
     where: { lesson_id: { _eq: $lessonId } }
   ) {
-    card_id
     card {
       word
       ipa

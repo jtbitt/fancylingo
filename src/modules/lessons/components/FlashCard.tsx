@@ -32,7 +32,6 @@ export const FlashCard = ({ card, onAnswer, onSaved }: any) => {
   };
 
   const onPlayAudio = async () => {
-    console.log(card);
     await card.audio.replayAsync();
   };
 

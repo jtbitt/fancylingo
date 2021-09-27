@@ -23,7 +23,7 @@ export const AuthProvider = ({ children }: any) => {
   const { logOut } = useFirebase();
   const [authUser, setAuthUser] = useState<AuthUser>({
     uid: "sevYDH1M8Dv3oiayTiBAG4PiTpsA",
-    token: "430f03fk3f3fk03f30kfk5",
+    token: "430f03fk3f3fk03f30kfk",
   });
   const [loading, setLoading] = useState(true);
 

@@ -10,6 +10,7 @@ import { firebaseConfig } from "../config/keys";
 import { getEnvVars } from "../environment";
 import { Router } from "./routes/Router";
 import { AuthProvider } from "./contexts/Auth";
+import { ErrorBoundary } from "./ErrorBoundary";
 
 const theme = {
   ...DefaultTheme,
@@ -42,7 +43,9 @@ export const App = () => {
         <AuthProvider>
           <SafeAreaView style={styles.container}>
             <StatusBar translucent={true} />
-            <Router theme={theme} />
+            <ErrorBoundary>
+              <Router theme={theme} />
+            </ErrorBoundary>
           </SafeAreaView>
         </AuthProvider>
       </ImageBackground>

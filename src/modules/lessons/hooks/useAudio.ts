@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Audio } from "expo-av";
 
 export const useAudio = () => {
@@ -18,9 +18,9 @@ export const useAudio = () => {
     let audioLoaded = await audioLoading;
     setAudio(audioLoaded);
 
-    return audioLoaded ? audioLoaded.forEach((audio: any) => {
-      audio.unloadAsync();
-    }) : undefined;
+    // return audioLoaded ? audioLoaded.forEach((audio: any) => {
+    //   audio.file.sound.unloadAsync();
+    // }) : undefined;
   };
 
   return { getAudio, audio };

@@ -8314,6 +8314,11 @@ react-native-auth0@^2.8.2:
     jwt-decode "^2.2.0"
     url "^0.11.0"
 
+react-native-error-boundary@^1.1.11:
+  version "1.1.11"
+  resolved "https://registry.yarnpkg.com/react-native-error-boundary/-/react-native-error-boundary-1.1.11.tgz#547c77f76e9dc19a83dd79db56a9558a97f1cd8d"
+  integrity sha512-aSrFwM0ow4yKNDWOCGPqpC0FBQ+km3ntlMU+0k7MB5RxhSvHo6itnXKRQuU9wPN0j4uM6sZ1bdKK5tnvlT/YQA==
+
 react-native-gesture-handler@~1.10.2:
   version "1.10.3"
   resolved "https://registry.yarnpkg.com/react-native-gesture-handler/-/react-native-gesture-handler-1.10.3.tgz#942bbf2963bbf49fa79593600ee9d7b5dab3cfc0"

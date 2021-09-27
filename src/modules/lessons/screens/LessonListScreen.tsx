@@ -10,7 +10,7 @@ import { LessonOption } from "../components/LessonOption";
 export const LessonListScreen = ({ navigation }: any) => {
   const { lessons } = useLessons();
 
-  if (!lessons) {
+  if (!lessons || !lessons.length) {
     return <LessonLoading></LessonLoading>;
   }
 

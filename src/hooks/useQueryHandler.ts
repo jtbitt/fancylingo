@@ -1,11 +1,11 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useQuery } from "@apollo/client";
 
 import { useAuth } from "../contexts/Auth";
 
 export const useQueryHandler = (query: any, variables = {}) => {
   const { uid } = useAuth();
-  const { loading, error, data } = useQuery(query, {
+  const { error, data, refetch } = useQuery(query, {
     variables: { uid: uid, ...variables },
   });
   const [queryData, setQueryData] = useState<any[]>();
@@ -18,8 +18,8 @@ export const useQueryHandler = (query: any, variables = {}) => {
   }, [data]);
 
   if (error) {
-    console.log('error');
+    throw new Error('Failed fetching data from the API');
   }
 
-  return { queryData };
+  return { queryData, refetch };
 };
