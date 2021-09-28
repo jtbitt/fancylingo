@@ -7,8 +7,9 @@ import { DefaultLesson } from "../components/DefaultLesson";
 import { LessonAlert } from "../components/LessonAlert";
 import { LessonOption } from "../components/LessonOption";
 import { ILesson } from "../interfaces/lesson.interface";
+import { LessonListProps } from "../routes/LessonStack";
 
-export const LessonListScreen = ({ navigation }: any) => {
+export const LessonListScreen = ({ navigation }: LessonListProps) => {
   const { lessons } = useLessons();
 
   if (!lessons || !lessons.length) {
@@ -25,6 +26,7 @@ export const LessonListScreen = ({ navigation }: any) => {
             onPress={() =>
               navigation.navigate("Lesson", {
                 lessonId: lessons[0].lesson_id,
+                lessonName: lessons[0].name,
               })
             }
           />

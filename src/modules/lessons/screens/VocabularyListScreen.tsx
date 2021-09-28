@@ -6,8 +6,9 @@ import { useCards } from "../hooks";
 import { LessonLoading } from "../components/LessonLoading";
 import { GetUserCards } from "../graphql/lessonQueries.graphql";
 import { SavedCard } from "../components/SavedCard";
+import { VocabularyListProps } from "../routes/VocabularyStack";
 
-export const VocabularyListScreen = ({ navigation }: any) => {
+export const VocabularyListScreen = ({ navigation }: VocabularyListProps) => {
   const { cards, refetch } = useCards(GetUserCards, 1);
   const [refreshing, setRefreshing] = React.useState(false);
 
@@ -40,7 +41,7 @@ export const VocabularyListScreen = ({ navigation }: any) => {
               card={card}
               key={i}
               onPress={() =>
-                navigation.navigate("Vocabulary Word", {
+                navigation.navigate("VocabularyWord", {
                   card: card,
                 })
               }

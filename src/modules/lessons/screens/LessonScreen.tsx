@@ -8,8 +8,9 @@ import { GetCards } from "../graphql/lessonQueries.graphql";
 import { LessonLoading } from "../components/LessonLoading";
 import { FlashCard } from "../components/FlashCard";
 import { LessonModal } from "../components/LessonModal";
+import { LessonProps } from "../routes/LessonStack";
 
-export const LessonScreen = ({ route, navigation }: any) => {
+export const LessonScreen = ({ route, navigation }: LessonProps) => {
   const { lessonId, lessonName } = route.params;
   const [currentCard, setCurrentCard] = useState(0);
   const { cards, saveCard } = useCards(GetCards, 1);

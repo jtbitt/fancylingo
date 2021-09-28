@@ -1,6 +1,9 @@
 import React from "react";
 import { Platform } from "react-native";
-import { createStackNavigator } from "@react-navigation/stack";
+import {
+  createStackNavigator,
+  StackScreenProps,
+} from "@react-navigation/stack";
 
 import { WelcomeScreen } from "../screens/WelcomeScreen";
 import { LessonListScreen } from "../screens/LessonListScreen";
@@ -8,7 +11,24 @@ import { LessonScreen } from "../screens/LessonScreen";
 import { CongratsScreen } from "../screens/CongratsScreen";
 import { StoreScreen } from "../screens/StoreScreen";
 
-const Stack = createStackNavigator();
+type LessonStackParamList = {
+  Welcome: undefined;
+  LessonList: undefined;
+  Lesson: { lessonId: string; lessonName: string };
+  Congrats: undefined;
+  Store: undefined;
+};
+
+export type WelcomeProps = StackScreenProps<LessonStackParamList, "Welcome">;
+export type LessonListProps = StackScreenProps<
+  LessonStackParamList,
+  "LessonList"
+>;
+export type LessonProps = StackScreenProps<LessonStackParamList, "Lesson">;
+export type CongratsProps = StackScreenProps<LessonStackParamList, "Congrats">;
+export type StoreProps = StackScreenProps<LessonStackParamList, "Store">;
+
+const Stack = createStackNavigator<LessonStackParamList>();
 
 export const LessonStack = () => {
   return (

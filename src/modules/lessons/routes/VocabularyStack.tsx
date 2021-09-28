@@ -1,11 +1,29 @@
 import React from "react";
 import { Platform } from "react-native";
-import { createStackNavigator } from "@react-navigation/stack";
+import {
+  createStackNavigator,
+  StackScreenProps,
+} from "@react-navigation/stack";
 
 import { VocabularyListScreen } from "../screens/VocabularyListScreen";
 import { VocabularyWordScreen } from "../screens/VocabularyWordScreen";
+import { ICard } from "../interfaces/lesson.interface";
 
-const Stack = createStackNavigator();
+type VocabularyStackParamList = {
+  Vocabulary: undefined;
+  VocabularyWord: { card: ICard };
+};
+
+export type VocabularyListProps = StackScreenProps<
+  VocabularyStackParamList,
+  "Vocabulary"
+>;
+export type VocabularyWordProps = StackScreenProps<
+  VocabularyStackParamList,
+  "VocabularyWord"
+>;
+
+const Stack = createStackNavigator<VocabularyStackParamList>();
 
 export const VocabularyStack = () => {
   return (
@@ -21,7 +39,7 @@ export const VocabularyStack = () => {
       }}
     >
       <Stack.Screen name="Vocabulary" component={VocabularyListScreen} />
-      <Stack.Screen name="Vocabulary Word" component={VocabularyWordScreen} />
+      <Stack.Screen name="VocabularyWord" component={VocabularyWordScreen} />
     </Stack.Navigator>
   );
 };

@@ -1,13 +1,13 @@
 import React, { useLayoutEffect } from "react";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View } from "react-native";
 
 import { FlashCard } from "../components/FlashCard";
+import { VocabularyWordProps } from "../routes/VocabularyStack";
 
-interface IDefaultVocabularyWordProps {
-  deckId: number;
-}
-
-export const VocabularyWordScreen = ({ route, navigation }: any) => {
+export const VocabularyWordScreen = ({
+  route,
+  navigation,
+}: VocabularyWordProps) => {
   const { card } = route.params;
 
   useLayoutEffect(() => {
@@ -18,10 +18,16 @@ export const VocabularyWordScreen = ({ route, navigation }: any) => {
     navigation.navigate("Vocabulary");
   };
 
+  const onCardSaved = () => {};
+
   return (
     <View style={styles.container}>
       <View>
-        <FlashCard card={card} onAnswer={onAnswerChosen} />
+        <FlashCard
+          card={card}
+          onAnswer={onAnswerChosen}
+          onSaved={onCardSaved}
+        />
       </View>
     </View>
   );

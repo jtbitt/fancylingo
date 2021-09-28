@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { StyleSheet, View, SafeAreaView, Image } from "react-native";
 import { Title, Text, Button } from "react-native-paper";
 
-export const WelcomeScreen = ({ navigation }: any) => {
+import { WelcomeProps } from "../routes/LessonStack";
+
+export const WelcomeScreen = ({ navigation }: WelcomeProps) => {
   return (
     <SafeAreaView style={styles.container}>
       <Title style={styles.title}>WELCOME JOHN DOE</Title>

@@ -5,11 +5,13 @@ import { useLessons } from "../hooks";
 import { LessonLoading } from "../components/LessonLoading";
 import { Product } from "../components/Product";
 import { Subscription } from "../components/Subscription";
+import { ILesson } from "../interfaces/lesson.interface";
+import { StoreProps } from "../routes/LessonStack";
 
-export const StoreScreen = ({ navigation }: any) => {
+export const StoreScreen = ({ navigation }: StoreProps) => {
   const { lessons } = useLessons();
 
-  if (!lessons) {
+  if (!lessons || !lessons.length) {
     return <LessonLoading></LessonLoading>;
   }
 
@@ -17,7 +19,7 @@ export const StoreScreen = ({ navigation }: any) => {
     <View style={styles.container}>
       <View style={styles.scrollview}>
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-          {lessons.map((lesson: any, i: number) => (
+          {lessons.map((lesson: ILesson, i: number) => (
             <Product
               product={lesson}
               productKey={i}

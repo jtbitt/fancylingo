@@ -17,13 +17,13 @@ type AuthUser = {
   token: string | null;
 };
 
-type IFirebaseUser = firebase.User | null;
+type FirebaseUser = firebase.User | null;
 
-interface IHasuraClaim {
+type HasuraClaim = {
   "x-hasura-allowed-role": string[];
   "x-hasura-default-role": string;
   "x-hasura-user-id": string;
-}
+};
 
 export const AuthContext = React.createContext({} as AuthContextData);
 
@@ -44,14 +44,14 @@ export const AuthProvider = ({ children }: any) => {
   }, []);
 
   useEffect(() => {
-    return firebase.auth().onAuthStateChanged(async (user: IFirebaseUser) => {
+    return firebase.auth().onAuthStateChanged(async (user: FirebaseUser) => {
       if (!user) {
         return;
       }
 
       const token = await user.getIdToken();
       const idTokenResult = await user.getIdTokenResult();
-      const hasuraClaim: IHasuraClaim =
+      const hasuraClaim: HasuraClaim =
         idTokenResult.claims["https://hasura.io/jwt/claims"];
 
       if (hasuraClaim) {

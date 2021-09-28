@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { StyleSheet, View, Image } from "react-native";
 import { Title, Text, Button } from "react-native-paper";
 
-export const CongratsScreen = ({ navigation }: any) => {
+import { CongratsProps } from "../routes/LessonStack";
+
+export const CongratsScreen = ({ navigation }: CongratsProps) => {
   return (
     <View style={styles.container}>
       <Title style={styles.title}>¡Felicitaciones!</Title>
