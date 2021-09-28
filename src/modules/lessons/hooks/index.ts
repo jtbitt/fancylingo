@@ -1,3 +1,4 @@
 export * from "./useLessons";
-export * from "./useCards";
+export * from "./useLessonCards";
+export * from "./useUserCards";
 export * from "./useAudio";

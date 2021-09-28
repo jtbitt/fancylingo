@@ -2,14 +2,13 @@ import React from "react";
 import { StyleSheet, View, ScrollView, RefreshControl } from "react-native";
 import { Headline } from "react-native-paper";
 
-import { useCards } from "../hooks";
+import { useUserCards } from "../hooks";
 import { LessonLoading } from "../components/LessonLoading";
-import { GetUserCards } from "../graphql/lessonQueries.graphql";
 import { SavedCard } from "../components/SavedCard";
 import { VocabularyListProps } from "../routes/VocabularyStack";
 
 export const VocabularyListScreen = ({ navigation }: VocabularyListProps) => {
-  const { cards, refetch } = useCards(GetUserCards, 1);
+  const { cards, refetch } = useUserCards();
   const [refreshing, setRefreshing] = React.useState(false);
 
   if (!cards) {

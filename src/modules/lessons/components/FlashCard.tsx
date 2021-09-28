@@ -9,7 +9,7 @@ import {
 } from "react-native-paper";
 
 import { Play } from "./Play";
-import { ICard } from "../interfaces/lesson.interface";
+import { ICard } from "../interfaces/card.interface";
 
 interface IDefaultFlashCardProps {
   card: ICard;

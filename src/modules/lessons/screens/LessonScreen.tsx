@@ -3,8 +3,7 @@ import { HeaderBackButton } from "@react-navigation/stack";
 import { StyleSheet, View } from "react-native";
 import { ProgressBar, Colors, Provider } from "react-native-paper";
 
-import { useCards } from "../hooks";
-import { GetCards } from "../graphql/lessonQueries.graphql";
+import { useLessonCards } from "../hooks";
 import { LessonLoading } from "../components/LessonLoading";
 import { FlashCard } from "../components/FlashCard";
 import { LessonModal } from "../components/LessonModal";
@@ -13,7 +12,7 @@ import { LessonProps } from "../routes/LessonStack";
 export const LessonScreen = ({ route, navigation }: LessonProps) => {
   const { lessonId, lessonName } = route.params;
   const [currentCard, setCurrentCard] = useState(0);
-  const { cards, saveCard } = useCards(GetCards, 1);
+  const { cards, saveCard } = useLessonCards(1); // put lesson id here, set as 1 for now
   const [modalVisible, setModalVisible] = useState(false);
 
   useLayoutEffect(() => {

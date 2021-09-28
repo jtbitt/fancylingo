@@ -1,6 +1,4 @@
-import { Audio } from "expo-av";
-
-export interface ILessonData {
+export interface ILessonDataObject {
   __typename: string;
   lesson: {
     __typename: string;
@@ -14,6 +12,10 @@ export interface ILessonData {
   status: number,
 }
 
+export interface ILessonData {
+  user_lessons: ILessonDataObject[];
+}
+
 export interface ILesson {
   __typename: string;
   description: string;
@@ -23,13 +25,4 @@ export interface ILesson {
   price: string;
   sales_description: string;
   status: number;
-}
-
-export interface ICard {
-  __typename: string;
-  audio: Audio.Sound;
-  image_url: string;
-  ipa: string;
-  word: string;
-  card_id: number;
 }
