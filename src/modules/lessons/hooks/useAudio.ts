@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { Audio } from "expo-av";
 
-import { IAudioObject } from "../interfaces/media.interface";
+import { IMediaObject, IAudioObject } from "../interfaces/media.interface";
 
 export const useAudio = () => {
-  const [audio, setAudio] = useState<any>();
+  const [audio, setAudio] = useState<IAudioObject[]>();
 
-  const getAudio = async (audioUrls: any) => {
-    let audioPending = audioUrls.map(async (audio: any) => {
+  const getAudio = async (audioUrls: IMediaObject[]) => {
+    let audioPending = audioUrls.map(async (audio: IMediaObject) => {
       return { 
         name: audio.name, 
         file: await Audio.Sound.createAsync(

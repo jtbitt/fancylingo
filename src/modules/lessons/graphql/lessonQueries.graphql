@@ -42,6 +42,7 @@ query GetCards($lessonId: Int!) {
     where: { lesson_id: { _eq: $lessonId } }
   ) {
     card {
+      card_id
       word
       ipa
       image_url

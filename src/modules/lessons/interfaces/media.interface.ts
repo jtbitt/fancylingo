@@ -1,4 +1,4 @@
-import { Audio } from "expo-av";
+import { Audio, AVPlaybackStatus } from "expo-av";
 
 export interface IMediaObject {
   name: string;
@@ -8,5 +8,8 @@ export interface IMediaObject {
 
 export interface IAudioObject {
   name: string;
-  file: Audio.Sound;
+  file: {
+    sound: Audio.Sound;
+    status: AVPlaybackStatus;
+  };
 }

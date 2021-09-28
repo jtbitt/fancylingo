@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
 import { useQuery, useMutation } from "@apollo/client";
+import { Alert } from "react-native";
 
 import { useFirebase } from "../../../hooks";
 import { useAuth } from "../../../contexts";
 import { useAudio } from "../hooks";
 import { GetCards, SaveCard } from "../graphql/lessonQueries.graphql";
 import { cleanupCards } from "../utils/cleanupCards";
-import { ICardData, ICard } from "../interfaces/card.interface";
+import { ILessonCardData, ICard } from "../interfaces/card.interface";
 
 interface LessonCardVars {
   uid: string;
@@ -20,7 +21,7 @@ interface SaveCardVars {
 
 export const useLessonCards = (lessonId: number) => {
   const { uid } = useAuth();
-  const { error, data } = useQuery<ICardData, LessonCardVars>(GetCards, {
+  const { error, data } = useQuery<ILessonCardData, LessonCardVars>(GetCards, {
     variables: { uid: uid, lessonId: lessonId },
   });
   const { imageUrls, audioUrls, getMedia } = useFirebase();
@@ -38,6 +39,12 @@ export const useLessonCards = (lessonId: number) => {
       getMedia("card_audio", "audio");
     }
   }, [data]);
+
+  useEffect(() => {
+    if (result.data) {
+      Alert.alert("Success", 'Card saved successfully!');
+    }
+  }, [result]);
 
   useEffect(() => {
     if (audioUrls) {

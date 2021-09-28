@@ -24,7 +24,7 @@ export const useFirebase = () => {
       await firebase.auth().createUserWithEmailAndPassword(email, password);
       const currentUser = firebase.auth().currentUser;
     } catch ({ message }) {
-      Alert.alert("Error", message);
+      Alert.alert(`Signup Error: ${message}`);
     }
   };
   
@@ -32,7 +32,7 @@ export const useFirebase = () => {
     try {
       await firebase.auth().signInWithEmailAndPassword(email, password);
     } catch ({ message }) {
-      Alert.alert("Error", message);
+      Alert.alert(`Login Error: ${message}`);
     }
   };
   
@@ -51,7 +51,7 @@ export const useFirebase = () => {
         const googleProfileData = await firebase.auth().signInWithCredential(credential);
       }
     } catch ({ message }) {
-      Alert.alert('login: Error:' + message);
+      Alert.alert(`Google Login Error: ${message}`);
     }
   };
   

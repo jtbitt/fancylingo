@@ -6,7 +6,7 @@ import { useAuth } from "../../../contexts";
 import { useAudio } from "../hooks";
 import { GetUserCards } from "../graphql/lessonQueries.graphql";
 import { cleanupCards } from "../utils/cleanupCards";
-import { ICardData, ICard } from "../interfaces/card.interface";
+import { IUserCardData, ICard } from "../interfaces/card.interface";
 
 interface UserCardVars {
   uid: string;
@@ -14,7 +14,7 @@ interface UserCardVars {
 
 export const useUserCards = () => {
   const { uid } = useAuth();
-  const { error, data, refetch } = useQuery<ICardData, UserCardVars>(GetUserCards, {
+  const { error, data, refetch } = useQuery<IUserCardData, UserCardVars>(GetUserCards, {
     variables: { uid: uid },
   });
   const { imageUrls, audioUrls, getMedia } = useFirebase();

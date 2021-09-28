@@ -18,10 +18,16 @@ export const VocabularyListScreen = ({ navigation }: VocabularyListProps) => {
   if (!cards.length) {
     return (
       <View style={styles.noCardsContainer}>
-        <Headline style={styles.noCards}>
-          There are currently no cards saved. Save a card while practicing your
-          deck if you would like to come back to it later!
-        </Headline>
+        <ScrollView
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={refetch} />
+          }
+        >
+          <Headline style={styles.noCards}>
+            There are currently no cards saved. Save a card while practicing
+            your deck if you would like to come back to it later!
+          </Headline>
+        </ScrollView>
       </View>
     );
   }
