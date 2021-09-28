@@ -1,8 +1,17 @@
 import React from "react";
 import { Platform } from "react-native";
-import { createStackNavigator } from "@react-navigation/stack";
+import {
+  createStackNavigator,
+  StackScreenProps,
+} from "@react-navigation/stack";
 
 import { Settings } from "../screens/Settings";
+
+type AccountStackParamList = {
+  Settings: undefined;
+};
+
+export type SettingsProps = StackScreenProps<AccountStackParamList, "Settings">;
 
 const Stack = createStackNavigator();
 

@@ -1,7 +1,16 @@
 import React from "react";
-import { createStackNavigator } from "@react-navigation/stack";
+import {
+  createStackNavigator,
+  StackScreenProps,
+} from "@react-navigation/stack";
 
 import { Login } from "../screens/Login";
+
+type AuthStackParamList = {
+  Login: undefined;
+};
+
+export type LoginProps = StackScreenProps<AuthStackParamList, "Login">;
 
 const Stack = createStackNavigator();
 

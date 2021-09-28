@@ -1,10 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { StyleSheet, View } from "react-native";
 import { Button, List } from "react-native-paper";
 
 import { useAuth } from "../../../contexts/Auth";
-
-interface IDefaultPlayProps {}
 
 export const SettingsList = () => {
   const { signOut } = useAuth();

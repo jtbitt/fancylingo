@@ -1,10 +1,11 @@
 import React from "react";
-import { StyleSheet, ScrollView, View, Text } from "react-native";
+import { StyleSheet, View } from "react-native";
 
 import { UserAvatar } from "../components/UserAvatar";
 import { SettingsList } from "../components/SettingsList";
+import { SettingsProps } from "../routes/AccountStack";
 
-export const Settings = ({ navigation }: any) => {
+export const Settings = ({ navigation }: SettingsProps) => {
   return (
     <View style={styles.container}>
       <UserAvatar />

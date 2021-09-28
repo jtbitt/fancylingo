@@ -3,7 +3,11 @@ import { StyleSheet, View } from "react-native";
 import { Avatar } from "react-native-paper";
 import { Title, Subheading } from "react-native-paper";
 
-interface IDefaultPlayProps {}
+interface IDefaultUserAvatarProps {
+  avatar: string;
+  name: string;
+  email: string;
+}
 
 export const UserAvatar = () => {
   return (
