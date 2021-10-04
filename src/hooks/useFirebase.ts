@@ -43,6 +43,8 @@ export const useFirebase = () => {
         behavior: 'web',
         scopes: ['profile', 'email']
       });
+
+      console.log(result);
       
       if (result.type  === 'success') {
         await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
