@@ -12,7 +12,6 @@ export const Router = ({ theme }: any) => {
 
   if (loading) {
     console.log("loading");
-    // <ActivityIndicator animating={true} color={Colors.red800} />
   }
 
   return (

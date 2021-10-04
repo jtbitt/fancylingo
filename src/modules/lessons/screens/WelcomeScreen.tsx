@@ -47,11 +47,12 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "space-around",
-    marginVertical: "15%",
+    marginVertical: "10%",
   },
   title: {
     fontSize: 25,
     fontWeight: "700",
+    marginBottom: 15,
   },
   image: {
     height: 350,
@@ -61,6 +62,7 @@ const styles = StyleSheet.create({
   selectLevel: {
     fontWeight: "700",
     fontSize: 20,
+    marginVertical: 15,
   },
   buttons: {
     flexDirection: "row",
@@ -69,8 +71,8 @@ const styles = StyleSheet.create({
   },
   button: {
     borderRadius: 30,
-    paddingVertical: 5,
-    paddingHorizontal: 5,
+    paddingVertical: 8,
+    paddingHorizontal: 8,
   },
   buttonSpacing: {
     marginRight: 10,

@@ -29,10 +29,10 @@ export const App = () => {
   }
   const env = getEnvVars();
 
-  if (env?.apiUrl === "localhost:8080") {
-    firebase.auth().useEmulator("http://localhost:9099/");
-    firebase.functions().useEmulator("http://localhost", 5001);
-  }
+  // if (env?.apiUrl === "localhost:8080") {
+  //   firebase.auth().useEmulator("http://localhost:9099/");
+  //   firebase.functions().useEmulator("http://localhost", 5001);
+  // }
 
   return (
     <PaperProvider theme={theme}>

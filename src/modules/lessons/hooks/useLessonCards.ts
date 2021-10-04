@@ -41,12 +41,6 @@ export const useLessonCards = (lessonId: number) => {
   }, [data]);
 
   useEffect(() => {
-    if (result.data) {
-      Alert.alert("Success", 'Card saved successfully!');
-    }
-  }, [result]);
-
-  useEffect(() => {
     if (audioUrls) {
       getAudio(audioUrls);
     }
@@ -59,6 +53,12 @@ export const useLessonCards = (lessonId: number) => {
       setCards(cards);
     }
   }, [imageUrls, audio]);
+
+  useEffect(() => {
+    if (result.data) {
+      Alert.alert("Success", 'Card saved successfully!');
+    }
+  }, [result]);
 
   const saveCard = (cardId: number) => {
     setSavedCard({

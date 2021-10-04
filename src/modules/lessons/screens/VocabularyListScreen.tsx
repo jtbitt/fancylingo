@@ -17,8 +17,9 @@ export const VocabularyListScreen = ({ navigation }: VocabularyListProps) => {
 
   if (!cards.length) {
     return (
-      <View style={styles.noCardsContainer}>
+      <View style={styles.container}>
         <ScrollView
+          contentContainerStyle={styles.noCardsContainer}
           refreshControl={
             <RefreshControl refreshing={refreshing} onRefresh={refetch} />
           }

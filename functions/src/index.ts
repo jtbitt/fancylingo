@@ -1,7 +1,8 @@
-const functions = require("firebase-functions");
-const admin = require("firebase-admin");
+import * as functions from "firebase-functions";
+import admin = require("firebase-admin");
 import {gql, GraphQLClient} from "graphql-request";
-const cors = require("cors")({ origin: true });
+import * as cors from "cors";
+const corsHandler = cors({origin: true});
 
 admin.initializeApp(functions.config().firebase);
 
@@ -12,7 +13,7 @@ const client = new GraphQLClient("https://fancylingo.hasura.app/v1/graphql", {
   },
 });
 
-const updateClaims = (uid: string) => admin.auth().setCustomUserClaims(uid, {
+const updateClaims = (uid: any) => admin.auth().setCustomUserClaims(uid, {
   "https://hasura.io/jwt/claims": {
     "x-hasura-default-role": "user",
     "x-hasura-allowed-roles": ["user"],
@@ -20,7 +21,8 @@ const updateClaims = (uid: string) => admin.auth().setCustomUserClaims(uid, {
   },
 });
 
-exports.processSignUp = functions.auth.user().onCreate(async (user: any) => {
+// eslint-disable-next-line max-len
+export const processSignup = functions.auth.user().onCreate(async (user: admin.auth.UserRecord) => {
   updateClaims(user.uid);
   // add user lessons
   const mutation = gql`
@@ -47,17 +49,18 @@ exports.processSignUp = functions.auth.user().onCreate(async (user: any) => {
     const data = await client.request(mutation, {uid: user.uid});
 
     return data;
-  } catch (e) {
+  } catch (e: any) {
     throw new functions.https.HttpsError("invalid-argument", e.message);
   }
-},
+});
 
-exports.refreshToken = functions.https.onRequest((req: any, res: any) => {
-  cors(req, res, () => {
+// eslint-disable-next-line max-len
+export const refreshToken = functions.https.onRequest((req: functions.https.Request, res: functions.Response) => {
+  corsHandler(req, res, () => {
     updateClaims(req.query.uid).then(() => {
       res.status(200).send("success");
     }).catch((error: any) => {
       res.status(400).send(error);
     });
   });
-}));
+});
