@@ -62,7 +62,7 @@ export const AuthProvider = ({ children }: any) => {
         setLoading(false);
       } else {
         const endpoint =
-          "http://localhost:5001/fancylingo-310003/us-central1/refreshToken";
+          "https://us-central1-fancylingo-310003.cloudfunctions.net/refreshToken";
         const response = await fetch(`${endpoint}?uid=${user.uid}`);
 
         if (response.status === 200) {

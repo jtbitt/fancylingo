@@ -20,6 +20,7 @@ export const useLessons = () => {
   const [lessons, setLessons] = useState<ILesson[]>();
 
   if (error) {
+    console.log(error);
     throw new Error('Failed fetching lessons from the API');
   }
 

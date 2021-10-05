@@ -27,7 +27,7 @@ export const App = () => {
   if (!firebase.apps.length) {
     firebase.initializeApp(firebaseConfig);
   }
-  const env = getEnvVars();
+  // const env = getEnvVars();
 
   // if (env?.apiUrl === "localhost:8080") {
   //   firebase.auth().useEmulator("http://localhost:9099/");
