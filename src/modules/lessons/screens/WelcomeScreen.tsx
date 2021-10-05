@@ -1,6 +1,7 @@
 import React from "react";
 import { StyleSheet, View, SafeAreaView, Image } from "react-native";
 import { Title, Text, Button } from "react-native-paper";
+import { Platform } from "react-native";
 
 import { WelcomeProps } from "../routes/LessonStack";
 
@@ -48,6 +49,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-around",
     marginVertical: "10%",
+    marginTop: Platform.OS === "ios" ? "10%" : 90,
   },
   title: {
     fontSize: 25,
