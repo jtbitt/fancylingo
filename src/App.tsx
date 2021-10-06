@@ -1,5 +1,10 @@
 import React from "react";
-import { StyleSheet, ImageBackground, SafeAreaView } from "react-native";
+import {
+  StyleSheet,
+  ImageBackground,
+  SafeAreaView,
+  LogBox,
+} from "react-native";
 import { DefaultTheme, Provider as PaperProvider } from "react-native-paper";
 import firebase from "firebase/app";
 import "firebase/auth";
@@ -27,6 +32,8 @@ export const App = () => {
   if (!firebase.apps.length) {
     firebase.initializeApp(firebaseConfig);
   }
+
+  LogBox.ignoreAllLogs(true);
   // const env = getEnvVars();
 
   // if (env?.apiUrl === "localhost:8080") {

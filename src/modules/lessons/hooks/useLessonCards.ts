@@ -58,7 +58,7 @@ export const useLessonCards = (lessonId: number) => {
     if (result.data) {
       Alert.alert("Success", 'Card saved successfully!');
     }
-  }, [result]);
+  }, [result.data]);
 
   const saveCard = (cardId: number) => {
     setSavedCard({

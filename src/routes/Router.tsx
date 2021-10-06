@@ -11,7 +11,6 @@ export const Router = ({ theme }: any) => {
   const { loading, token } = useAuth();
 
   if (loading) {
-    console.log("loading");
   }
 
   return (

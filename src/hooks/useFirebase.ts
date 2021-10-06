@@ -91,7 +91,7 @@ export const useFirebase = () => {
       let media = await mediaDownloads;
       mediaType === 'image' ? setImageUrls(media) : setAudioUrls(media);
     } catch ({ message }) {
-      console.log(message);
+      //
     }
   };
 
