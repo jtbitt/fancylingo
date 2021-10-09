@@ -24,7 +24,6 @@ export const StatusIcon = ({ style, message, color }: IStatusIconProps) => {
 const styles = StyleSheet.create({
   progress: {
     borderRadius: 20,
-    width: 140,
   },
   progressText: {
     fontSize: 16,

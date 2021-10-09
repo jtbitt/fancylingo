@@ -16,7 +16,7 @@ const ENV = {
  }
 };
 
-export const getEnvVars = (env = Constants.manifest.releaseChannel) => {
+export const getEnvVars = (env = Constants.manifest?.releaseChannel) => {
   if (__DEV__) {
     return ENV.dev;
   } else if (env === 'staging') {

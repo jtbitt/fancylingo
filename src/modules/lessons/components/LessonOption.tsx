@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
     height: 105,
     width: 140,
     borderRadius: 15,
-    marginRight: 20,
+    marginRight: 15,
   },
   play: {
     marginRight: 15,

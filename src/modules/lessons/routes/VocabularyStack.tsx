@@ -31,7 +31,6 @@ export const VocabularyStack = () => {
       screenOptions={{
         headerStyle: {
           backgroundColor: "#ffe881",
-          height: Platform.OS === "ios" ? 60 : 120,
           shadowColor: "rgba(101,101,101,0.5)",
           shadowRadius: 5,
         },

@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View, SafeAreaView, Image } from "react-native";
+import { StyleSheet, View, Image } from "react-native";
 import { Title, Text, Button } from "react-native-paper";
 import { Platform } from "react-native";
 
@@ -7,7 +7,7 @@ import { WelcomeProps } from "../routes/LessonStack";
 
 export const WelcomeScreen = ({ navigation }: WelcomeProps) => {
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <Title style={styles.title}>WELCOME JOHN DOE</Title>
       <Image source={require("../assets/levels.png")} style={styles.image} />
       <Text style={styles.selectLevel}>Select your level</Text>
@@ -39,7 +39,7 @@ export const WelcomeScreen = ({ navigation }: WelcomeProps) => {
           EXPERT
         </Button>
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 
@@ -47,29 +47,30 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    justifyContent: "space-around",
+    justifyContent: "center",
     marginVertical: "10%",
-    marginTop: Platform.OS === "ios" ? "10%" : 90,
+    marginTop: Platform.OS === "ios" ? "10%" : "20%",
   },
   title: {
     fontSize: 25,
     fontWeight: "700",
-    marginBottom: 15,
   },
   image: {
     height: 350,
     marginLeft: 20,
     resizeMode: "contain",
+    marginTop: 20,
   },
   selectLevel: {
     fontWeight: "700",
     fontSize: 20,
-    marginVertical: 15,
+    marginTop: 20,
   },
   buttons: {
     flexDirection: "row",
     justifyContent: "center",
     width: "80%",
+    marginTop: 20,
   },
   button: {
     borderRadius: 30,

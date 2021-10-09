@@ -14,10 +14,9 @@ export const Login = () => {
     <View style={[styles.container]}>
       <View style={styles.topContainer}>
         <Image source={require("../assets/logo.png")} style={styles.image} />
-        <View style={styles.buttons}>
+        <View style={styles.socialButtons}>
           <Button
-            style={[styles.button, styles.buttonSpacing]}
-            contentStyle={{ width: 150 }}
+            style={[styles.button, { width: "50%" }, styles.buttonSpacing]}
             labelStyle={styles.buttonText}
             icon="facebook"
             mode="contained"
@@ -26,8 +25,7 @@ export const Login = () => {
             FACEBOOK
           </Button>
           <Button
-            style={styles.button}
-            contentStyle={{ width: 150 }}
+            style={[styles.button, { width: "50%" }]}
             labelStyle={styles.buttonText}
             icon="google"
             mode="contained"
@@ -39,7 +37,7 @@ export const Login = () => {
       </View>
       <View style={styles.inputs}>
         <TextInput
-          style={styles.input}
+          style={[styles.input, styles.inputSpacing]}
           mode="outlined"
           label="Email"
           value={email}
@@ -58,23 +56,23 @@ export const Login = () => {
         <HelperText type="error" visible={true}>
           Check your password
         </HelperText>
+        <Button
+          style={[styles.button, { width: "100%" }, styles.inputSpacing]}
+          labelStyle={styles.buttonText}
+          mode="contained"
+          onPress={() => signIn(email, password)}
+        >
+          LOG IN
+        </Button>
+        <Button
+          style={[styles.button, { width: "100%" }, styles.inputSpacing]}
+          labelStyle={styles.buttonText}
+          mode="contained"
+          onPress={() => signUp(email, password)}
+        >
+          CREATE ACCOUNT
+        </Button>
       </View>
-      <Button
-        style={[styles.button, { width: "80%" }]}
-        labelStyle={styles.buttonText}
-        mode="contained"
-        onPress={() => signIn(email, password)}
-      >
-        LOG IN
-      </Button>
-      <Button
-        style={[styles.button, { width: "80%" }]}
-        labelStyle={styles.buttonText}
-        mode="contained"
-        onPress={() => signUp(email, password)}
-      >
-        CREATE ACCOUNT
-      </Button>
     </View>
   );
 };
@@ -83,7 +81,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    justifyContent: "space-around",
+    justifyContent: "center",
     marginTop: "20%",
     marginBottom: "20%",
   },
@@ -96,7 +94,7 @@ const styles = StyleSheet.create({
     marginBottom: 50,
     resizeMode: "contain",
   },
-  buttons: {
+  socialButtons: {
     flexDirection: "row",
     justifyContent: "space-between",
   },
