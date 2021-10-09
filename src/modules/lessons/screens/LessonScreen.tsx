@@ -77,13 +77,13 @@ export const LessonScreen = ({ route, navigation }: LessonProps) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingVertical: "10%",
+    paddingVertical: "15%",
     paddingHorizontal: "5%",
     justifyContent: "center",
   },
   progress: {
     height: 15,
     borderRadius: 20,
-    marginBottom: 30,
+    marginBottom: 15,
   },
 });

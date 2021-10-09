@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     fontWeight: "700",
   },
   image: {
-    height: 350,
+    height: 325,
     marginLeft: 20,
     resizeMode: "contain",
     marginTop: 20,

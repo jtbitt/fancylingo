@@ -79,7 +79,7 @@ export const FlashCard = ({
       {frontChecked && (
         <View style={styles.backButtons}>
           <Button
-            style={[styles.button, { width: 165 }]}
+            style={[styles.button, { width: "48%" }]}
             labelStyle={styles.buttonText}
             mode="contained"
             color="#fc5a5e"
@@ -88,7 +88,7 @@ export const FlashCard = ({
             REPEAT
           </Button>
           <Button
-            style={[styles.button, { width: 165 }]}
+            style={[styles.button, { width: "48%" }]}
             labelStyle={styles.buttonText}
             mode="contained"
             color="#fc5a5e"
@@ -104,7 +104,7 @@ export const FlashCard = ({
 
 const styles = StyleSheet.create({
   card: {
-    marginBottom: 30,
+    marginBottom: 15,
     borderRadius: 15,
     backgroundColor: "#FFF6D7",
   },

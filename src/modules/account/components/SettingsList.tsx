@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
   },
   button: {
     alignSelf: "center",
-    marginTop: 80,
+    marginTop: 50,
     width: 150,
     borderRadius: 30,
     paddingVertical: 10,

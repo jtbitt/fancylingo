@@ -17,6 +17,7 @@ export const AppStack = () => {
       }}
       activeColor={"#fc5a5e"}
       inactiveColor={"black"}
+      initialRouteName="Home"
     >
       <Tab.Screen
         name="Settings"

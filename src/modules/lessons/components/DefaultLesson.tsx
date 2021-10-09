@@ -58,17 +58,17 @@ const styles = StyleSheet.create({
   },
   content: {
     flexDirection: "row",
+    justifyContent: "space-between",
     paddingTop: 20,
     paddingBottom: 20,
-    paddingLeft: "10%",
+    paddingLeft: 15,
   },
   title: {
     fontSize: 25,
-    marginRight: 25,
     fontWeight: "500",
   },
   statusIcon: {
-    marginRight: "auto",
+    width: 140,
   },
   play: {
     marginRight: 15,

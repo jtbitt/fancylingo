@@ -26,6 +26,7 @@ export const LessonOption = ({
         <StatusIcon
           message={getStatusMessage(status)}
           color={getStatusColor(status)}
+          style={styles.statusIcon}
         />
       </View>
       <Play style={styles.play} size={40} onPress={onPress} />
@@ -37,6 +38,7 @@ const styles = StyleSheet.create({
   lesson: {
     borderRadius: 15,
     flexDirection: "row",
+    justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#FFF6D7",
     marginBottom: 20,
@@ -52,19 +54,23 @@ const styles = StyleSheet.create({
     elevation: 4,
   },
   lessonInfo: {
+    marginLeft: "auto",
     marginRight: "auto",
   },
   lessonTitle: {
-    fontSize: 20,
+    fontSize: 18,
     marginBottom: 10,
   },
   image: {
-    height: 105,
-    width: 140,
+    height: 95,
+    width: 130,
     borderRadius: 15,
-    marginRight: 15,
+    marginRight: 10,
+  },
+  statusIcon: {
+    width: 140,
   },
   play: {
-    marginRight: 15,
+    marginRight: 10,
   },
 });

@@ -39,10 +39,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    justifyContent: "space-around",
-    marginVertical: "5%",
+    justifyContent: "center",
   },
   scrollview: {
     height: 305,
+    marginBottom: 10,
   },
 });

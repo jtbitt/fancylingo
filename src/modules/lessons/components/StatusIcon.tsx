@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
   },
   progressText: {
-    fontSize: 16,
+    fontSize: 14,
     color: "white",
   },
 });

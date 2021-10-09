@@ -22,7 +22,7 @@ export const LessonModal = ({ visible, onDismiss }: ILessonModalProps) => {
               width: "100%",
               height: 250,
               resizeMode: "contain",
-              marginRight: 48,
+              marginRight: 25,
             }}
             source={require(alert)}
           />
@@ -46,7 +46,7 @@ export const LessonModal = ({ visible, onDismiss }: ILessonModalProps) => {
                   marginRight: 10,
                 },
               ]}
-              labelStyle={{ color: "white" }}
+              labelStyle={{ color: "white", fontSize: 13 }}
               mode="outlined"
               onPress={() => onDismiss(true)}
             >
@@ -61,7 +61,7 @@ export const LessonModal = ({ visible, onDismiss }: ILessonModalProps) => {
                   borderWidth: 1,
                 },
               ]}
-              labelStyle={{ color: "#A0149E" }}
+              labelStyle={{ color: "#A0149E", fontSize: 13 }}
               mode="outlined"
               onPress={() => onDismiss(false)}
             >
@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
   },
   content: {
     paddingVertical: 30,
-    paddingHorizontal: 20,
+    paddingHorizontal: 10,
     alignItems: "center",
   },
   title: {
@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
   },
   button: {
     paddingVertical: 12,
-    width: 160,
+    width: "48%",
     borderRadius: 30,
     fontSize: 15,
   },
