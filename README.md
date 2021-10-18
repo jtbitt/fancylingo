@@ -6,7 +6,7 @@ It utilitizes Expo, React Native, Apollo, GraphQL, Hasura, and Firebase.
 
 ## Structure
 
-- /functions/src -> firebase cloud functions for authentication
+- /functions/src -> Firebase cloud functions for authentication
 - /src/api -> Communication with Hasura DB using Apollo
 - /src/contexts -> Auth context handler
 - /src/hooks -> Custom firebase hooks
